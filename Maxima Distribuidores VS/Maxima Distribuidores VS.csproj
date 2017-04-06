@@ -1,0 +1,518 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BD96A6D4-FF16-4EE5-8702-7756E349C87D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Maxima_Distribuidores_VS</RootNamespace>
+    <AssemblyName>Maxima Distribuidores VS</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\Jorge\Desktop\Maxima SETUP final\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>true</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <TargetCulture>es-MX</TargetCulture>
+    <ProductName>Maxima PDV</ProductName>
+    <PublisherName>Maxima Distribuidores</PublisherName>
+    <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>temp.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>D4715E92270BBF19470F179D42FB673ABDFE72E1</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Maxima Distribuidores VS_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.11.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\iTextSharp.5.5.11\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\MySQL\MySQL Connector Net 6.8.3\Assemblies\v4.5\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySqlBackup">
+      <HintPath>..\..\..\Binaries\v4.5\MySqlBackup.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Windows.Forms.Ribbon35">
+      <HintPath>..\..\System.Windows.Forms.Ribbon35.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="acercaDe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="acercaDe.Designer.cs">
+      <DependentUpon>acercaDe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GuardarCotizacion.cs" />
+    <Compile Include="ImpresionTickets.cs" />
+    <Compile Include="PDFFile.cs" />
+    <Compile Include="PDFInvoice.cs" />
+    <Compile Include="ReActivarClientes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ReActivarClientes.Designer.cs">
+      <DependentUpon>ReActivarClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ticket.cs" />
+    <Compile Include="uscAgregarCotizacion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscAgregarCotizacion.Designer.cs">
+      <DependentUpon>uscAgregarCotizacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscAgregarVenta.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscAgregarVenta.Designer.cs">
+      <DependentUpon>uscAgregarVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogAbonar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogAbonar.Designer.cs">
+      <DependentUpon>dialogAbonar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogBusquedaClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogBusquedaClientes.Designer.cs">
+      <DependentUpon>dialogBusquedaClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogCantidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogCantidad.Designer.cs">
+      <DependentUpon>dialogCantidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogBaseDatos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogBaseDatos.Designer.cs">
+      <DependentUpon>dialogBaseDatos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogInfoReporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogInfoReporte.Designer.cs">
+      <DependentUpon>dialogInfoReporte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogServidor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogServidor.Designer.cs">
+      <DependentUpon>dialogServidor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogVenta.Designer.cs">
+      <DependentUpon>dialogVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Encriptacion.cs" />
+    <Compile Include="Enumeraciones.cs" />
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrincipal.Designer.cs">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSplash.Designer.cs">
+      <DependentUpon>frmSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmValidacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmValidacion.Designer.cs">
+      <DependentUpon>frmValidacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GuardarInfoReporte.cs" />
+    <Compile Include="GuardarServidor.cs" />
+    <Compile Include="GuardarVenta.cs" />
+    <Compile Include="InfoReporte.cs" />
+    <Compile Include="InformacionServidor.cs" />
+    <Compile Include="InformacionVenta.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Redimension.cs" />
+    <Compile Include="Sql.cs" />
+    <Compile Include="SqlValidacion.cs" />
+    <Compile Include="uscCliente.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscCliente.Designer.cs">
+      <DependentUpon>uscCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscCotizaciones.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscCotizaciones.Designer.cs">
+      <DependentUpon>uscCotizaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscDescuentoClientes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscDescuentoClientes.Designer.cs">
+      <DependentUpon>uscDescuentoClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscReActivarProductos.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscReActivarProductos.Designer.cs">
+      <DependentUpon>uscReActivarProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscVentasPendientes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscVentasPendientes.Designer.cs">
+      <DependentUpon>uscVentasPendientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscProductos.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscProductos.Designer.cs">
+      <DependentUpon>uscProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscBuscarCliente.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscBuscarCliente.Designer.cs">
+      <DependentUpon>uscBuscarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscReporte.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscReporte.Designer.cs">
+      <DependentUpon>uscReporte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscTipoProductos.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscTipoProductos.Designer.cs">
+      <DependentUpon>uscTipoProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscUsuarios.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscUsuarios.Designer.cs">
+      <DependentUpon>uscUsuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscUsuariosLog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscUsuariosLog.Designer.cs">
+      <DependentUpon>uscUsuariosLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscUsuariosPass.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscUsuariosPass.Designer.cs">
+      <DependentUpon>uscUsuariosPass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscVentasRealizadas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscVentasRealizadas.Designer.cs">
+      <DependentUpon>uscVentasRealizadas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscVerCliente.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscVerCliente.Designer.cs">
+      <DependentUpon>uscVerCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscVerProductos.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscVerProductos.Designer.cs">
+      <DependentUpon>uscVerProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscVerUsuarios.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscVerUsuarios.Designer.cs">
+      <DependentUpon>uscVerUsuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario.cs" />
+    <Compile Include="verCotizacion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="verCotizacion.Designer.cs">
+      <DependentUpon>verCotizacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="verVentas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="verVentas.Designer.cs">
+      <DependentUpon>verVentas.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="acercaDe.resx">
+      <DependentUpon>acercaDe.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReActivarClientes.resx">
+      <DependentUpon>ReActivarClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscAgregarCotizacion.resx">
+      <DependentUpon>uscAgregarCotizacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscAgregarVenta.resx">
+      <DependentUpon>uscAgregarVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogAbonar.resx">
+      <DependentUpon>dialogAbonar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogBusquedaClientes.resx">
+      <DependentUpon>dialogBusquedaClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogCantidad.resx">
+      <DependentUpon>dialogCantidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogBaseDatos.resx">
+      <DependentUpon>dialogBaseDatos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogInfoReporte.resx">
+      <DependentUpon>dialogInfoReporte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogServidor.resx">
+      <DependentUpon>dialogServidor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogVenta.resx">
+      <DependentUpon>dialogVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSplash.resx">
+      <DependentUpon>frmSplash.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmValidacion.resx">
+      <DependentUpon>frmValidacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="uscCliente.resx">
+      <DependentUpon>uscCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscCotizaciones.resx">
+      <DependentUpon>uscCotizaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscDescuentoClientes.resx">
+      <DependentUpon>uscDescuentoClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscReActivarProductos.resx">
+      <DependentUpon>uscReActivarProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscVentasPendientes.resx">
+      <DependentUpon>uscVentasPendientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscProductos.resx">
+      <DependentUpon>uscProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscBuscarCliente.resx">
+      <DependentUpon>uscBuscarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscReporte.resx">
+      <DependentUpon>uscReporte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscTipoProductos.resx">
+      <DependentUpon>uscTipoProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscUsuarios.resx">
+      <DependentUpon>uscUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscUsuariosLog.resx">
+      <DependentUpon>uscUsuariosLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscUsuariosPass.resx">
+      <DependentUpon>uscUsuariosPass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscVentasRealizadas.resx">
+      <DependentUpon>uscVentasRealizadas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscVerCliente.resx">
+      <DependentUpon>uscVerCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscVerProductos.resx">
+      <DependentUpon>uscVerProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscVerUsuarios.resx">
+      <DependentUpon>uscVerUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="verCotizacion.resx">
+      <DependentUpon>verCotizacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="verVentas.resx">
+      <DependentUpon>verVentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Maxima Distribuidores VS_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="bin\Debug\tarjeta.bmp" />
+    <Content Include="Resources\tarjeta.png" />
+    <Content Include="Resources\tarjetamx.bmp" />
+    <Content Include="Resources\ticket.png" />
+    <Content Include="temp.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="MySql.Data">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\tarjeta.png">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\tarjetamx.bmp">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="PDFSHELLSERVERLib">
+      <Guid>{41C5FFFE-36DD-415D-9ED0-2976A342A1C8}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
