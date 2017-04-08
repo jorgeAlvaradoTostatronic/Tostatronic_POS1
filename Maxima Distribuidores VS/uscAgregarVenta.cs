@@ -17,6 +17,7 @@ namespace Maxima_Distribuidores_VS
 {
     public partial class uscAgregarVenta : UserControl
     {
+        private float impuesto = 1f;
         private Redimension redimension;
         private int id_cliente;
         private int tipoCliente;
@@ -37,6 +38,7 @@ namespace Maxima_Distribuidores_VS
         {
             InitializeComponent();
             redimension = new Redimension(this);
+            chkImpuesto.Enabled = false;
             dgvVentas.Columns[IndexColumna(dgvVentas, "codigo")].DefaultCellStyle.BackColor = Color.LightGreen;
             dgvVentas.Columns[IndexColumna(dgvVentas, "subtotal")].DefaultCellStyle.BackColor = Color.LightGreen;
             dgvVentas.Columns[IndexColumna(dgvVentas, "codigo")].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -98,8 +100,8 @@ namespace Maxima_Distribuidores_VS
             for (int i = 0; i < dgvVentas.RowCount; i++)
                 total += float.Parse(ValorCelda(dgvVentas, i, "subtotal"));
             txtSubTotal.Text = total.ToString("$0.00");
-            yxyIva.Text = (total * 0.16).ToString("$0.00");
-            total *= 1.16f;
+            yxyIva.Text = (total * (impuesto-1)).ToString("$0.00");
+            total *= impuesto;
             txtTotal.Text = total.ToString("$0.00");
         }
 
@@ -182,6 +184,7 @@ namespace Maxima_Distribuidores_VS
                     Cancelar();
                     Total();
                     btnVenta.Enabled = false;
+                    chkImpuesto.Enabled = false;
                     btnBuscarCliente_Click(sender, new EventArgs());
                 }
             }
@@ -196,6 +199,7 @@ namespace Maxima_Distribuidores_VS
             txtBusqueda.Enabled = true;
             btnVenta.Enabled = true;
             btnEliminar.Enabled = true;
+            chkImpuesto.Enabled = true;
             if (txtRfc.Text == "xxxxxxxxxxxxx")
             {
                 txtNombre.Enabled = true;
@@ -221,6 +225,7 @@ namespace Maxima_Distribuidores_VS
             txtNombre.Enabled = false;
             txtRfc.Enabled = false;
             txtApellidoPaterno.Enabled = false;
+            chkImpuesto.Enabled = false;
             Limpiar();
         }
 
@@ -354,8 +359,6 @@ namespace Maxima_Distribuidores_VS
                 {
                     string id_cliente = Sql.BuscarDatos("SELECT id_cliente FROM clientes WHERE rfc = '" + txtRfc.Text + "'")[0][0];
                     string fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    //Este es un contador de productos para la división de los mismos
-                    int contadorProductos = 0;
                     //Aquí va una variable para el costo parcial en caso de que la venta lleve mas de 10 productos
                     float pago = dgVenta.Pago;
                     float totalParcial = 0;
@@ -369,7 +372,7 @@ namespace Maxima_Distribuidores_VS
                         productos.Add(producto);
                         totalParcial += float.Parse(dgvVentas.Rows[i].Cells["subtotal"].Value.ToString());
                     }
-                    totalParcial *= 1.16f;
+                    totalParcial *= impuesto;
                     if (pago < totalParcial)
                     {
                         Sql.InsertarVenta(productos, Usuario.Instancia().Id.ToString(), id_cliente, false);
@@ -383,8 +386,10 @@ namespace Maxima_Distribuidores_VS
                         Sql.InsertarVenta(productos, Usuario.Instancia().Id.ToString(), id_cliente, true);
                     string folio = Sql.ObtenerFolio();
                     string date=DateTime.Now.ToShortDateString() + " " +DateTime.Now.ToShortTimeString();
-                    ImpresionTickets.ImprimeTicket(folio, productos, pago, totalParcial,date,txtNombre.Text,txtApellidoPaterno.Text);
-                    PDFFile.Imprimir(this);
+                    if (impuesto != 1)
+                        totalParcial /= impuesto;
+                    ImpresionTickets.ImprimeTicket(folio, productos, pago, totalParcial,date,txtNombre.Text,txtApellidoPaterno.Text,impuesto);
+                    PDFFile.Ver(Application.StartupPath + "\\Ticket.pdf");
                     DesactivarVenta();
                     BorrarXML();
                     Limpiar();
@@ -574,6 +579,15 @@ namespace Maxima_Distribuidores_VS
             if(tipoCliente==1)
                 return float.Parse(Sql.BuscarDatos("SELECT precio_distribuidor FROM productos WHERE codigo ='"+codigo+"'")[0][0]);
             return float.Parse(Sql.BuscarDatos("SELECT precio_publico FROM productos WHERE codigo ='" + codigo + "'")[0][0]);
+        }
+
+        private void chkImpuesto_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkImpuesto.Checked)
+                impuesto = 1.16f;
+            else
+                impuesto = 1;
+            Total();
         }
     }
 }

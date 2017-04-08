@@ -14,7 +14,7 @@ namespace Maxima_Distribuidores_VS
     {
 
         private Redimension redimension;
-
+        private float impuesto = 1;
         public uscReporte()
         {
             InitializeComponent();
@@ -106,7 +106,6 @@ namespace Maxima_Distribuidores_VS
         {
             return dgvDatos.Rows[fila].Cells[columna].Value.ToString();
         }
-        string nom, ap,rf;
         private void dgvDatos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -115,12 +114,12 @@ namespace Maxima_Distribuidores_VS
                 {
                     if (cmbTipo.Text == "Ventas")
                     {
-                        PDFInvoice.CreatePDF(TipoInvoice.Venta, ValorCelda(e.RowIndex, "clmFolio"), ValorCelda(e.RowIndex, "clmFecha"), obtenerProductos(ValorCelda(e.RowIndex, "clmFolio")), nom, ap);
+                        PDFInvoice.CreatePDF(TipoInvoice.Venta, ValorCelda(e.RowIndex, "clmFolio"), ValorCelda(e.RowIndex, "clmFecha"), obtenerProductos(ValorCelda(e.RowIndex, "clmFolio")),c,impuesto );
                         PDFFile.Ver(Application.StartupPath + "\\Invoice.pdf");
                     }
                     else
                     {
-                        PDFInvoice.CreatePDF(TipoInvoice.Cotizacions, ValorCelda(e.RowIndex, "clmFolio"), ValorCelda(e.RowIndex, "clmFecha"), obtenerProductosCo(ValorCelda(e.RowIndex, "clmFolio")), nom, ap);
+                        PDFInvoice.CreatePDF(TipoInvoice.Cotizacions, ValorCelda(e.RowIndex, "clmFolio"), ValorCelda(e.RowIndex, "clmFecha"), obtenerProductosCo(ValorCelda(e.RowIndex, "clmFolio")),c,impuesto);
                         PDFFile.Ver(Application.StartupPath + "\\Invoice.pdf");
                     }
                 }
@@ -128,12 +127,12 @@ namespace Maxima_Distribuidores_VS
                 {
                     if (cmbTipo.Text == "Ventas")
                     {
-                        PDFInvoice.CreatePDF(TipoInvoice.Venta, ValorCelda(e.RowIndex, "clmFolio"), ValorCelda(e.RowIndex, "clmFecha"), obtenerProductos(ValorCelda(e.RowIndex, "clmFolio")), nom, ap);
+                        PDFInvoice.CreatePDF(TipoInvoice.Venta, ValorCelda(e.RowIndex, "clmFolio"), ValorCelda(e.RowIndex, "clmFecha"), obtenerProductos(ValorCelda(e.RowIndex, "clmFolio")),c,impuesto);
                         PDFFile.Imprimir(this, Application.StartupPath + "\\Invoice.pdf");
                     }
                     else
                     {
-                        PDFInvoice.CreatePDF(TipoInvoice.Cotizacions, ValorCelda(e.RowIndex, "clmFolio"), ValorCelda(e.RowIndex, "clmFecha"), obtenerProductosCo(ValorCelda(e.RowIndex, "clmFolio")), nom, ap);
+                        PDFInvoice.CreatePDF(TipoInvoice.Cotizacions, ValorCelda(e.RowIndex, "clmFolio"), ValorCelda(e.RowIndex, "clmFecha"), obtenerProductosCo(ValorCelda(e.RowIndex, "clmFolio")),c,impuesto);
                         PDFFile.Imprimir(this, Application.StartupPath + "\\Invoice.pdf");
                     }
                 }
@@ -142,6 +141,7 @@ namespace Maxima_Distribuidores_VS
             catch (Exception) { }
 
         }
+        Clientes c;
         private List<ProductoCompleto> obtenerProductosCo(string folio)
         {
             List<string[]> productos;
@@ -150,15 +150,21 @@ namespace Maxima_Distribuidores_VS
                 "FROM productos_de_cotizacion, productos " +
                 "WHERE productos_de_cotizacion.id_cotizacion=" + folio + " AND productos.codigo=productos_de_cotizacion.id_producto;";
             productos = Sql.BuscarDatos(consulta);
-            consulta = "SELECT clientes.rfc, clientes.nombres,clientes.apellido_paterno, clientes.id_cliente " +
+            consulta = "SELECT clientes.rfc, clientes.nombres,clientes.apellido_paterno, clientes.apellido_materno, clientes.telefono, clientes.domicilio, clientes.correo_electronico " +
                 "FROM cotizacion, clientes " +
                 "WHERE (cotizacion.id_cotizacion=" + folio + ") " +
                 "AND clientes.id_cliente=cotizacion.id_cliente " +
                 "GROUP BY cotizacion.id_cotizacion;";
             venta = Sql.BuscarDatos(consulta);
-            rf = venta[0][0];
-            nom = venta[0][1];
-            ap = venta[0][2];
+            c.rfc = venta[0][0];
+            c.nombre = venta[0][1];
+            c.paterno = venta[0][2];
+            c.materno = venta[0][3];
+            c.telefono = venta[0][4];
+            c.domicilio = venta[0][5];
+            c.correo = venta[0][6];
+            consulta = "SELECT impuesto FROM cotizacion WHERE id_cotizacion="+folio+";";
+            impuesto = float.Parse(Sql.BuscarDatos(consulta)[0][0]);
             float sub;
             List<ProductoCompleto> prod = new List<ProductoCompleto>();
             for (int i = 0; i < productos.Count; i++)
@@ -178,15 +184,21 @@ namespace Maxima_Distribuidores_VS
                 "FROM productos_de_venta, productos " +
                 "WHERE productos_de_venta.id_venta=" + folio + " AND productos.codigo=productos_de_venta.id_producto;";
             productos = Sql.BuscarDatos(consulta);
-            consulta = "SELECT clientes.rfc, clientes.nombres,clientes.apellido_paterno, clientes.id_cliente " +
+            consulta = "SELECT clientes.rfc, clientes.nombres,clientes.apellido_paterno, clientes.apellido_materno, clientes.telefono, clientes.domicilio, clientes.correo_electronico  " +
                 "FROM venta, clientes " +
                 "WHERE (venta.id_venta=" + folio + " AND venta.cancelada=0) " +
                 "AND clientes.id_cliente=venta.id_cliente " +
                 "GROUP BY venta.id_venta;";
             venta = Sql.BuscarDatos(consulta);
-            rf = venta[0][0];
-            nom = venta[0][1];
-            ap = venta[0][2];
+            c.rfc = venta[0][0];
+            c.nombre = venta[0][1];
+            c.paterno = venta[0][2];
+            c.materno = venta[0][3];
+            c.telefono = venta[0][4];
+            c.domicilio = venta[0][5];
+            c.correo = venta[0][6];
+            consulta = "SELECT impuesto FROM venta WHERE id_venta=" + folio + ";";
+            impuesto = float.Parse(Sql.BuscarDatos(consulta)[0][0]);
             float sub;
             List<ProductoCompleto> prod = new List<ProductoCompleto>();
             for (int i = 0; i < productos.Count; i++)

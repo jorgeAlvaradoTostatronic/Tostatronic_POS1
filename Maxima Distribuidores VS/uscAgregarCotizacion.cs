@@ -22,10 +22,11 @@ namespace Maxima_Distribuidores_VS
         private int tipoCliente;
         private string buscador;
         private float total;
-
+        private float impuesto = 1;
         public uscAgregarCotizacion()
         {
             InitializeComponent();
+            chkImpuesto.Enabled = false;
             redimension = new Redimension(this);
             dgvCotizacion.Columns[IndexColumna(dgvCotizacion, "codigo")].DefaultCellStyle.BackColor = Color.LightGreen;
             dgvCotizacion.Columns[IndexColumna(dgvCotizacion, "subtotal")].DefaultCellStyle.BackColor = Color.LightGreen;
@@ -82,8 +83,8 @@ namespace Maxima_Distribuidores_VS
             for (int i = 0; i < dgvCotizacion.RowCount; i++)
                 total += float.Parse(ValorCelda(dgvCotizacion, i, "subtotal"));
             txtSubTotal.Text = total.ToString("$0.00");
-            yxyIva.Text = (total * 0.16).ToString("$0.00");
-            total *= 1.16f;
+            yxyIva.Text = (total * (impuesto-1)).ToString("$0.00");
+            total *= impuesto;
             txtTotal.Text = total.ToString("$0.00");
         }
 
@@ -166,6 +167,7 @@ namespace Maxima_Distribuidores_VS
                 {
                     Cancelar();
                     Total();
+                    chkImpuesto.Enabled = false;
                     btnCotizacion.Enabled = false;
                     btnBuscarCliente_Click(sender, new EventArgs());
                 }
@@ -181,6 +183,7 @@ namespace Maxima_Distribuidores_VS
             txtBusqueda.Enabled = true;
             btnEliminar.Enabled = true;
             btnCotizacion.Enabled = true;
+            chkImpuesto.Enabled = true;
             if (txtRfc.Text == "xxxxxxxxxxxxx")
             {
                 txtNombre.Enabled = true;
@@ -206,6 +209,7 @@ namespace Maxima_Distribuidores_VS
             txtNombre.Enabled = false;
             txtRfc.Enabled = false;
             txtApellidoPaterno.Enabled = false;
+            chkImpuesto.Enabled = false;
             Limpiar();
         }
 
@@ -285,7 +289,6 @@ namespace Maxima_Distribuidores_VS
                 string id_cliente = Sql.BuscarDatos("SELECT id_cliente FROM clientes WHERE rfc = '" + txtRfc.Text + "'")[0][0];
                 string fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 //este es un contador de productos para la divicion de los mismos
-                int contadorProductos = 0;
                 float subTotal = 0;
                 ProductoCompleto producto;
                 List<ProductoCompleto> productos = new List<ProductoCompleto>();
@@ -299,8 +302,8 @@ namespace Maxima_Distribuidores_VS
                 }
                 if(productos.Count>0)
                 {
-                    subTotal *= 1.16f;
-                    Sql.InsertarCotizacion(productos, Usuario.Instancia().Id.ToString(), id_cliente);
+                    subTotal *= impuesto;
+                    Sql.InsertarCotizacion(productos, Usuario.Instancia().Id.ToString(), id_cliente, impuesto);
                 }
                 BorrarXML();
                 Cancelar();
@@ -453,6 +456,15 @@ namespace Maxima_Distribuidores_VS
         {
             if (File.Exists(Application.StartupPath + "\\Tostatronic_Cotizacion.xml"))
                 File.Delete(Application.StartupPath + "\\Tostatronic_Cotizacion.xml");
+        }
+
+        private void chkImpuesto_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkImpuesto.Checked)
+                impuesto = 1.16f;
+            else
+                impuesto = 1;
+            Total();
         }
     }
 }

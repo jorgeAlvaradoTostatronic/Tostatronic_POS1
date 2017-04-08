@@ -9,7 +9,7 @@ namespace Maxima_Distribuidores_VS
 {
     public static class PDFInvoice
     {
-        public static MemoryStream CreatePDF(TipoInvoice t, string folio, string fecha, List<ProductoCompleto> productos, string nombre, string patenro)
+        public static MemoryStream CreatePDF(TipoInvoice t, string folio, string fecha, List<ProductoCompleto> productos, Clientes cliente, float impuesto)
         {
             // Create a Document object
             string tv;
@@ -26,6 +26,7 @@ namespace Maxima_Distribuidores_VS
 
             // First, create our fonts
             var titleFont = FontFactory.GetFont("Arial", 14, Font.BOLD);
+            var titleFontNegro = FontFactory.GetFont("Arial", 14, Font.BOLD,BaseColor.WHITE);
             var boldTableFont = FontFactory.GetFont("Arial", 10, Font.BOLD);
             var bodyFont = FontFactory.GetFont("Arial", 10, Font.NORMAL);
             Rectangle pageSize = writer.PageSize;
@@ -34,25 +35,21 @@ namespace Maxima_Distribuidores_VS
             document.Open();
             //Add elements to the document here
 
-            PdfPTable title = new PdfPTable(1);
-            title.HorizontalAlignment = 0;
-            title.WidthPercentage = 200;
-            title.SetWidths(new float[] { 20 });  // then set the column's __relative__ widths
-            title.DefaultCell.Border = Rectangle.NO_BORDER;
-            PdfPCell tileName = new PdfPCell(new Phrase(tv, titleFont));
-            tileName.HorizontalAlignment = 2;
-            tileName.Border = Rectangle.NO_BORDER;
-            title.AddCell(tileName);
-            document.Add(title);
+            PdfPTable sp = new PdfPTable(1);
+            sp.HorizontalAlignment = 2;
+            sp.WidthPercentage = 200;
+            sp.SetWidths(new float[] { 20 });  // then set the column's __relative__ widths
+            sp.DefaultCell.Border = Rectangle.NO_BORDER;
+            sp.SpacingAfter = 20;
+            PdfPCell space = new PdfPCell(new Phrase(" ", titleFontNegro));
+            space.HorizontalAlignment = 1;
+            space.Border = Rectangle.NO_BORDER;
+            space.BackgroundColor = BaseColor.WHITE;
+            sp.AddCell(space);
+            document.Add(sp);
 
             // Create the header table 
-            PdfPTable headertable = new PdfPTable(3);
-            headertable.HorizontalAlignment = 0;
-            headertable.WidthPercentage = 200;
-            headertable.SetWidths(new float[] { 10, 10, 10 });  // then set the column's __relative__ widths
-            headertable.DefaultCell.Border = Rectangle.NO_BORDER;
-            //headertable.DefaultCell.Border = Rectangle.BOX; //for testing
-            headertable.SpacingAfter = 30;
+
             iTextSharp.text.Image logo;
             //Agregando la imagen
             if (File.Exists(Application.StartupPath + "\\Resources\\ticket.png"))
@@ -64,26 +61,77 @@ namespace Maxima_Distribuidores_VS
             logo.SetAbsolutePosition(80,document.PageSize.Height-100);
             logo.ScaleToFit(logo.Width/2, 200);
             document.Add(logo);
-            PdfPCell invoiceCell = new PdfPCell(new Phrase(tv, titleFont));
-            invoiceCell.HorizontalAlignment = 2;
-            invoiceCell.Border = Rectangle.NO_BORDER;
-            headertable.AddCell(invoiceCell);
 
-            PdfPCell sp = new PdfPCell(new Phrase("", titleFont));
-            sp.HorizontalAlignment = 2;
-            sp.Border = Rectangle.NO_BORDER;
-            headertable.AddCell(sp);
-            sp = new PdfPCell(new Phrase("", titleFont));
-            sp.HorizontalAlignment = 2;
-            sp.Border = Rectangle.NO_BORDER;
-            headertable.AddCell(sp);
+            PdfPTable title = new PdfPTable(2);
+            title.HorizontalAlignment = 2;
+            title.WidthPercentage = 40;
+            title.SetWidths(new float[] { 20, 20 });  // then set the column's __relative__ widths
+            title.DefaultCell.Border = Rectangle.NO_BORDER;
+            title.SpacingAfter = 20;
+            PdfPCell tileName = new PdfPCell(new Phrase(tv, titleFontNegro));
+            tileName.HorizontalAlignment = 1;
+            tileName.Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER | Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER; ; ;
+            tileName.BackgroundColor = BaseColor.BLACK;
+            title.AddCell(tileName);
+            tileName = new PdfPCell(new Phrase("Fecha", titleFontNegro));
+            tileName.HorizontalAlignment = 1;
+            tileName.Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER | Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER; ;
+            tileName.BackgroundColor = BaseColor.BLACK;
+            title.AddCell(tileName);
+            //Adicion del numero de venta y/o cotizacion
+            tileName = new PdfPCell(new Phrase(folio, bodyFont));
+            tileName.HorizontalAlignment = 1;
+            tileName.Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER | Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER; ;
+            title.AddCell(tileName);
+            tileName = new PdfPCell(new Phrase(fecha, bodyFont));
+            tileName.HorizontalAlignment = 1;
+            tileName.Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER | Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER; ;
+            title.AddCell(tileName);
+            document.Add(title);
+            //Añadimos a quien va dirigida la nota e la informacion de la empresa
+            PdfPTable clienteYEmpresa = new PdfPTable(2);
+            clienteYEmpresa.HorizontalAlignment = 0;
+            clienteYEmpresa.WidthPercentage = 100;
+            clienteYEmpresa.SetWidths(new float[] { 50, 50 });  // then set the column's __relative__ widths
+            clienteYEmpresa.DefaultCell.Border = Rectangle.NO_BORDER;
+            clienteYEmpresa.SpacingAfter = 10;
 
-            PdfPCell noCell = new PdfPCell(new Phrase("No :", bodyFont));
-            noCell.HorizontalAlignment = 2;
-            noCell.Border = Rectangle.NO_BORDER;
-            headertable.AddCell(noCell);
-            headertable.AddCell(new Phrase(folio, bodyFont));
+            string clientData=cliente.nombre+" "+cliente.paterno+" "+cliente.materno+"\n"+
+                   "Domicilio: "+cliente.domicilio+"\n"+
+                   "Telefono: "+cliente.telefono+"\n"+
+                   "R.F.C.: " + cliente.rfc + "\n" +
+                   "Correo: " + cliente.correo;
+            PdfPCell client = new PdfPCell(new Phrase("Cliente", titleFontNegro));
+            client.HorizontalAlignment = 1;
+            client.Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER | Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER; ; ;
+            client.BackgroundColor = BaseColor.BLACK;
+            clienteYEmpresa.AddCell(client);
 
+            PdfPCell empresa = new PdfPCell(new Phrase("Datos empresa", titleFontNegro));
+            empresa.HorizontalAlignment = 1;
+            empresa.Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER | Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER; ;
+            empresa.BackgroundColor = BaseColor.BLACK;
+            clienteYEmpresa.AddCell(empresa);
+
+            client = new PdfPCell(new Phrase(clientData, bodyFont));
+            client.HorizontalAlignment = 1;
+            client.Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER | Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER; ; ;
+            client.BackgroundColor = BaseColor.WHITE;
+            clienteYEmpresa.AddCell(client);
+
+
+            InfoReporte rep = GuardarInfoReporte.Leer();
+            string empresaData = "Tienda: Tostatronic\n" +
+                               "R.F.C.: " + rep.Reporte.rfc + "\n" +
+                               "Direccion: " + rep.Reporte.direccion + "\n" +
+                               "Telefono: " + rep.Reporte.telefono + "\n";
+            empresa = new PdfPCell(new Phrase(empresaData, bodyFont));
+            empresa.HorizontalAlignment = 1;
+            empresa.Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER | Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER; ;
+            empresa.BackgroundColor = BaseColor.WHITE;
+            clienteYEmpresa.AddCell(empresa);
+            document.Add(clienteYEmpresa);
+            /*
             sp = new PdfPCell(new Phrase("", titleFont));
             sp.HorizontalAlignment = 2;
             sp.Border = Rectangle.NO_BORDER;
@@ -109,7 +157,7 @@ namespace Maxima_Distribuidores_VS
             
 
             
-            document.Add(headertable);
+            document.Add(headertable);*/
             //Create body table
             PdfPTable itemTable = new PdfPTable(5);
             itemTable.HorizontalAlignment = 0;
@@ -209,7 +257,7 @@ namespace Maxima_Distribuidores_VS
             iva.Border = Rectangle.LEFT_BORDER | Rectangle.TOP_BORDER | Rectangle.BOTTOM_BORDER | Rectangle.RIGHT_BORDER;   //Rectangle.NO_BORDER; //Rectangle.TOP_BORDER;
             iva.HorizontalAlignment = 1;
             itemTable.AddCell(iva);
-            PdfPCell ivaV = new PdfPCell(new Phrase((total*0.16).ToString("$0.00"), boldTableFont));
+            PdfPCell ivaV = new PdfPCell(new Phrase((total*(impuesto-1)).ToString("$0.00"), boldTableFont));
             ivaV.Border = Rectangle.LEFT_BORDER | Rectangle.TOP_BORDER | Rectangle.BOTTOM_BORDER | Rectangle.RIGHT_BORDER;
             ivaV.HorizontalAlignment = 1;
             itemTable.AddCell(ivaV);
@@ -226,7 +274,7 @@ namespace Maxima_Distribuidores_VS
             totalV.Border = Rectangle.LEFT_BORDER | Rectangle.TOP_BORDER | Rectangle.BOTTOM_BORDER | Rectangle.RIGHT_BORDER;   //Rectangle.NO_BORDER; //Rectangle.TOP_BORDER;
             totalV.HorizontalAlignment = 1;
             itemTable.AddCell(totalV);
-            PdfPCell totalVV = new PdfPCell(new Phrase((total * 1.16).ToString("$0.00"), boldTableFont));
+            PdfPCell totalVV = new PdfPCell(new Phrase((total * impuesto).ToString("$0.00"), boldTableFont));
             totalVV.Border = Rectangle.RIGHT_BORDER | Rectangle.BOTTOM_BORDER;
             totalVV.HorizontalAlignment = 1;
             itemTable.AddCell(totalVV);

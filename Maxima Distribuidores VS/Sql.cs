@@ -150,13 +150,13 @@ namespace Maxima_Distribuidores_VS
             }
             catch (Exception) { transaccion.Rollback(); }
         }
-        public static void InsertarCotizacion(List<ProductoCompleto> productos, string idUsuario, string idCliente)
+        public static void InsertarCotizacion(List<ProductoCompleto> productos, string idUsuario, string idCliente, float impuesto)
         {
             MySqlConnection conexion;
             MySqlCommand cmd;
             MySqlTransaction transaccion = null;
             string fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            string consulta = "INSERT INTO `salepoint`.`cotizacion` (`id_cotizacion`, `id_usuario`, `id_cliente`, `fecha_cotizacion`) VALUES (NULL, '"+idUsuario+"', '"+idCliente+"', '"+fecha+"');";
+            string consulta = "INSERT INTO `salepoint`.`cotizacion` (`id_cotizacion`, `id_usuario`, `id_cliente`, `fecha_cotizacion`, `impuesto`) VALUES (NULL, '" + idUsuario+"', '"+idCliente+"', '"+fecha+"', "+impuesto+");";
             try
             {
                 InsertarDatos(consulta);

@@ -51,6 +51,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_C9D860C51C6A44DC81EE5CE21683E7F7"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_966ACF254A46DF7E2056FCB7BCB3556E"
         "MsmSig" = "8:_UNDEFINED"
@@ -286,6 +292,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C9D860C51C6A44DC81EE5CE21683E7F7"
+            {
+            "SourcePath" = "8:..\\Maxima Distribuidores VS\\bin\\Debug\\ticket.png"
+            "TargetName" = "8:ticket.png"
+            "Tag" = "8:"
+            "Folder" = "8:_A926E1B343294C5D9E9983B8BA003DBF"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -354,7 +380,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Tostatronic - Punto de Venta 1.0.0"
         "ProductCode" = "8:{797F2B42-2C66-4A7B-B82E-8F216027D6E4}"
-        "PackageCode" = "8:{D88F745C-94B4-4379-A12F-0FBF61C2C36F}"
+        "PackageCode" = "8:{C4CEBD2A-D32E-478B-B880-35D26086F498}"
         "UpgradeCode" = "8:{9108EEEB-1F76-46EA-B509-D808928DCA4B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

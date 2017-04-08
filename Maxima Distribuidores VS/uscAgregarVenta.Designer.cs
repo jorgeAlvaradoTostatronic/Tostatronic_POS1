@@ -31,14 +31,22 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uscAgregarVenta));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnVenta = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.dgvVentas = new System.Windows.Forms.DataGridView();
+            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.existencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descuentoPro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.seleccionador = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.clmCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,14 +67,7 @@
             this.lblSubTotal = new System.Windows.Forms.Label();
             this.lblIva = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
-            this.codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.existencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descuentoPro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.seleccionador = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.chkImpuesto = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
@@ -159,6 +160,70 @@
             this.dgvVentas.Size = new System.Drawing.Size(558, 339);
             this.dgvVentas.TabIndex = 56;
             this.dgvVentas.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentas_CellEndEdit);
+            // 
+            // codigo
+            // 
+            this.codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.codigo.FillWeight = 80F;
+            this.codigo.HeaderText = "Código";
+            this.codigo.Name = "codigo";
+            this.codigo.ReadOnly = true;
+            this.codigo.Visible = false;
+            // 
+            // descripcion
+            // 
+            this.descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.descripcion.FillWeight = 220F;
+            this.descripcion.HeaderText = "Descripción";
+            this.descripcion.Name = "descripcion";
+            this.descripcion.ReadOnly = true;
+            // 
+            // cantidad
+            // 
+            this.cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.cantidad.FillWeight = 80F;
+            this.cantidad.HeaderText = "Cantidad";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            // 
+            // precio
+            // 
+            this.precio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.precio.DefaultCellStyle = dataGridViewCellStyle2;
+            this.precio.FillWeight = 90F;
+            this.precio.HeaderText = "Precio";
+            this.precio.Name = "precio";
+            // 
+            // subtotal
+            // 
+            this.subtotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.subtotal.FillWeight = 90F;
+            this.subtotal.HeaderText = "Subtotal";
+            this.subtotal.Name = "subtotal";
+            this.subtotal.ReadOnly = true;
+            this.subtotal.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // existencia
+            // 
+            this.existencia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.existencia.FillWeight = 85F;
+            this.existencia.HeaderText = "Existencia";
+            this.existencia.Name = "existencia";
+            this.existencia.ReadOnly = true;
+            // 
+            // descuentoPro
+            // 
+            this.descuentoPro.HeaderText = "Descuento";
+            this.descuentoPro.Name = "descuentoPro";
+            // 
+            // seleccionador
+            // 
+            this.seleccionador.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.seleccionador.FillWeight = 25F;
+            this.seleccionador.HeaderText = "";
+            this.seleccionador.Name = "seleccionador";
             // 
             // dgvProductos
             // 
@@ -385,75 +450,23 @@
             this.lblTotal.TabIndex = 106;
             this.lblTotal.Text = "Total";
             // 
-            // codigo
+            // chkImpuesto
             // 
-            this.codigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.codigo.FillWeight = 80F;
-            this.codigo.HeaderText = "Código";
-            this.codigo.Name = "codigo";
-            this.codigo.ReadOnly = true;
-            this.codigo.Visible = false;
-            // 
-            // descripcion
-            // 
-            this.descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.descripcion.FillWeight = 220F;
-            this.descripcion.HeaderText = "Descripción";
-            this.descripcion.Name = "descripcion";
-            this.descripcion.ReadOnly = true;
-            // 
-            // cantidad
-            // 
-            this.cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.cantidad.FillWeight = 80F;
-            this.cantidad.HeaderText = "Cantidad";
-            this.cantidad.Name = "cantidad";
-            this.cantidad.ReadOnly = true;
-            // 
-            // precio
-            // 
-            this.precio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.precio.DefaultCellStyle = dataGridViewCellStyle2;
-            this.precio.FillWeight = 90F;
-            this.precio.HeaderText = "Precio";
-            this.precio.Name = "precio";
-            // 
-            // subtotal
-            // 
-            this.subtotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.subtotal.FillWeight = 90F;
-            this.subtotal.HeaderText = "Subtotal";
-            this.subtotal.Name = "subtotal";
-            this.subtotal.ReadOnly = true;
-            this.subtotal.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // existencia
-            // 
-            this.existencia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.existencia.FillWeight = 85F;
-            this.existencia.HeaderText = "Existencia";
-            this.existencia.Name = "existencia";
-            this.existencia.ReadOnly = true;
-            // 
-            // descuentoPro
-            // 
-            this.descuentoPro.HeaderText = "Descuento";
-            this.descuentoPro.Name = "descuentoPro";
-            // 
-            // seleccionador
-            // 
-            this.seleccionador.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.seleccionador.FillWeight = 25F;
-            this.seleccionador.HeaderText = "";
-            this.seleccionador.Name = "seleccionador";
+            this.chkImpuesto.AutoSize = true;
+            this.chkImpuesto.Location = new System.Drawing.Point(3, 435);
+            this.chkImpuesto.Name = "chkImpuesto";
+            this.chkImpuesto.Size = new System.Drawing.Size(105, 17);
+            this.chkImpuesto.TabIndex = 107;
+            this.chkImpuesto.Text = "Incluir impuesto?";
+            this.chkImpuesto.UseVisualStyleBackColor = true;
+            this.chkImpuesto.CheckedChanged += new System.EventHandler(this.chkImpuesto_CheckedChanged);
             // 
             // uscAgregarVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.chkImpuesto);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.lblIva);
             this.Controls.Add(this.lblSubTotal);
@@ -520,5 +533,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn existencia;
         private System.Windows.Forms.DataGridViewTextBoxColumn descuentoPro;
         private System.Windows.Forms.DataGridViewCheckBoxColumn seleccionador;
+        private System.Windows.Forms.CheckBox chkImpuesto;
     }
 }

@@ -10,7 +10,7 @@ namespace Maxima_Distribuidores_VS
 {
     public static class ImpresionTickets
     {
-        public static bool ImprimeTicket(string prmFolioTicket, List<ProductoCompleto> productos, float pagoCon, float totalL, string date, string nombre, string apellido)
+        public static bool ImprimeTicket(string prmFolioTicket, List<ProductoCompleto> productos, float pagoCon, float totalL, string date, string nombre, string apellido, float impuesto)
         {
             try
             {
@@ -41,9 +41,8 @@ namespace Maxima_Distribuidores_VS
                     ticket.AddItem(a.Cantidad.ToString(), a.Descripcion, a.Precio.ToString(), (a.Cantidad * a.Precio).ToString());
                 }
                 varTOTAL += Convert.ToDouble(totalL);
-                varTOTAL /= 1.16;
                 varIVA +=
-                    Convert.ToDouble(varTOTAL * 0.16);
+                    Convert.ToDouble(varTOTAL * (impuesto-1));
                 varCAMBIO = ((varTOTAL + varIVA) - varEFECTIVO) * -1;
 
                 //El metodo AddTotal requiere 2 parametros, 

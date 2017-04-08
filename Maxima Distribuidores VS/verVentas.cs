@@ -14,6 +14,7 @@ namespace Maxima_Distribuidores_VS
     {
         string fechaT="";
         string fol="";
+        float impuesto = 1;
         public verVentas()
         {
             InitializeComponent();
@@ -43,6 +44,8 @@ namespace Maxima_Distribuidores_VS
                 "AND clientes.id_cliente=venta.id_cliente "+
                 "GROUP BY venta.id_venta;";
             venta = Sql.BuscarDatos(consulta);
+            consulta = "SELECT impuesto FROM venta WHERE id_venta="+folio+";";
+            impuesto = float.Parse(Sql.BuscarDatos(consulta)[0][0]);
             txtRfc.Text = venta[0][0];
             txtNombre.Text = venta[0][1];
             txtApellidoPaterno.Text = venta[0][2];
@@ -74,8 +77,8 @@ namespace Maxima_Distribuidores_VS
             for (int i = 0; i < dgvVentas.RowCount; i++)
                 total += float.Parse(ValorCelda(i, "subtotal"));
             txtSubTotal.Text = total.ToString("$0.00");
-            yxyIva.Text = (total * 0.16).ToString("$0.00");
-            total *= 1.16f;
+            yxyIva.Text = (total * (impuesto-1)).ToString("$0.00");
+            total *= impuesto;
             txtTotal.Text = total.ToString("$0.00");
         }
         private string ValorCelda(int fila, string columna)
@@ -133,8 +136,8 @@ namespace Maxima_Distribuidores_VS
                     productos.Add(producto);
                     totalParcial += float.Parse(dgvVentas.Rows[i].Cells["subtotal"].Value.ToString());
                 }
-                totalParcial *= 1.16f;
-                ImpresionTickets.ImprimeTicket(fol, productos, totalParcial, totalParcial, fechaT, txtNombre.Text, txtApellidoPaterno.Text);
+                ImpresionTickets.ImprimeTicket(fol, productos, totalParcial, totalParcial, fechaT, txtNombre.Text, txtApellidoPaterno.Text,impuesto);
+                PDFFile.Ver(Application.StartupPath + "\\Ticket.pdf");
             }
         }
     }

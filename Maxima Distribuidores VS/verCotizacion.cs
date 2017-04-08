@@ -12,6 +12,9 @@ namespace Maxima_Distribuidores_VS
 {
     public partial class verCotizacion : UserControl
     {
+        float impuesto = 1;
+        string fechaT = "";
+        string fol = "";
         public verCotizacion()
         {
             InitializeComponent();
@@ -41,6 +44,8 @@ namespace Maxima_Distribuidores_VS
                 "AND clientes.id_cliente=cotizacion.id_cliente " +
                 "GROUP BY cotizacion.id_cotizacion;";
             venta = Sql.BuscarDatos(consulta);
+            consulta = "SELECT impuesto FROM cotizacion WHERE id_cotizacion=" + folio + ";";
+            impuesto = float.Parse(Sql.BuscarDatos(consulta)[0][0]);
             txtRfc.Text = venta[0][0];
             txtNombre.Text = venta[0][1];
             txtApellidoPaterno.Text = venta[0][2];
@@ -72,8 +77,8 @@ namespace Maxima_Distribuidores_VS
             for (int i = 0; i < dgvVentas.RowCount; i++)
                 total += float.Parse(ValorCelda(i, "subtotal"));
             txtSubTotal.Text = total.ToString("$0.00");
-            yxyIva.Text = (total * 0.16).ToString("$0.00");
-            total *= 1.16f;
+            yxyIva.Text = (total * (impuesto-1)).ToString("$0.00");
+            total *= impuesto;
             txtTotal.Text = total.ToString("$0.00");
         }
         private string ValorCelda(int fila, string columna)
@@ -110,7 +115,31 @@ namespace Maxima_Distribuidores_VS
             if (dgvVerVentas.RowCount > 0)
             {
                 dgvVentas.Rows.Clear();
+                fechaT = dgvVerVentas.Rows[e.RowIndex].Cells[2].Value.ToString();
+                fol = dgvVerVentas.Rows[e.RowIndex].Cells[0].Value.ToString();
                 LlenaVenta(dgvVerVentas.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
+            }
+        }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            if (dgvVentas.RowCount > 1)
+            {
+                string id_cliente = Sql.BuscarDatos("SELECT id_cliente FROM clientes WHERE rfc = '" + txtRfc.Text + "'")[0][0];
+                string fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                float totalParcial = 0;
+                List<ProductoCompleto> productos = new List<ProductoCompleto>();
+                ProductoCompleto producto;
+                for (int i = 0; i < dgvVentas.RowCount; i++)
+                {
+                    producto = new ProductoCompleto(dgvVentas.Rows[i].Cells["codigo"].Value.ToString(), dgvVentas.Rows[i].Cells["descripcion"].Value.ToString(),
+                        float.Parse(dgvVentas.Rows[i].Cells["cantidad"].Value.ToString()), int.Parse(dgvVentas.Rows[i].Cells["descuentoPro"].Value.ToString()),
+                        float.Parse(dgvVentas.Rows[i].Cells["subtotal"].Value.ToString()));
+                    productos.Add(producto);
+                    totalParcial += float.Parse(dgvVentas.Rows[i].Cells["subtotal"].Value.ToString());
+                }
+                ImpresionTickets.ImprimeTicket(fol, productos, totalParcial, totalParcial, fechaT, txtNombre.Text, txtApellidoPaterno.Text, impuesto);
+                PDFFile.Ver(Application.StartupPath + "\\Ticket.pdf");
             }
         }
     }
