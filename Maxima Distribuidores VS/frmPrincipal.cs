@@ -443,7 +443,7 @@ namespace Maxima_Distribuidores_VS
         {
             List<string[]> p = Sql.BuscarDatos("SELECT SUM(precio_minimo*existencia) FROM productos ORDER BY codigo");
             float total=float.Parse(p[0][0]);
-            MessageBox.Show("Total: " + total.ToString("$0.00"));
+            MessageBox.Show("Total mejorado: " + total.ToString("$0.00"));
         }
     }
 }
