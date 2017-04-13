@@ -45,6 +45,8 @@ namespace Maxima_Distribuidores_VS
                     txtTelefono.Enabled = false;
                     txtCelular.Enabled = false;
                     txtDireccion.Enabled = false;
+                    txtCP.Enabled = false;
+                    txtColonia.Enabled = false;
                     gboTipoCliente.Enabled = false;
                     txtCorreo.Enabled = false;
                     btnAccion.Text = "Eliminar Cliente";
@@ -98,7 +100,7 @@ namespace Maxima_Distribuidores_VS
                         Sql.InsertarDatos("UPDATE `clientes` SET `id_tipo_cliente`=" + tipoCliente + ",`nombres`='"
                             + txtNombre.Text + "',`apellido_paterno`='" + txtApellidoPaterno.Text + "',`apellido_materno`='"
                             + txtApellidoMaterno.Text + "',`rfc`='" + txtRfc.Text + "',`telefono`='"
-                            + txtTelefono.Text + "',`domicilio`='" + txtDireccion.Text + "',`correo_electronico`='"
+                            + txtTelefono.Text + "',`domicilio`='" + txtDireccion.Text + "',`codigo_postal`='" + txtCP.Text + "', `colonia`='" + txtColonia.Text + "',`correo_electronico`='"
                             + txtCorreo.Text + "',`celular`='" + txtCelular.Text + "', descripcion= '" + txtDescripcion.Text + "' WHERE id_cliente="
                             + dgvClientes.SelectedCells[0].Value + "");
                         //"+dgvClientes.SelectedCells[0].Value+"
@@ -149,7 +151,7 @@ namespace Maxima_Distribuidores_VS
                     else
                         tipoCliente = 2;
                     Sql.InsertarDatos("Insert into clientes VALUES(NULL,'" + tipoCliente + "','" + txtNombre.Text + "','" +
-                        txtApellidoPaterno.Text + "','" + txtApellidoMaterno.Text + "','" + txtRfc.Text + "','" + txtTelefono.Text + "','" + txtDireccion.Text + "','" + txtCorreo.Text + "','" + txtCelular.Text + "', '" + txtDescripcion.Text + "',0)");
+                        txtApellidoPaterno.Text + "','" + txtApellidoMaterno.Text + "','" + txtRfc.Text + "','" + txtTelefono.Text + "','" + txtDireccion.Text + "', '"+txtCP.Text+"', '"+txtColonia.Text+"','" + txtCorreo.Text + "','" + txtCelular.Text + "', '" + txtDescripcion.Text + "',0)");
                     MessageBox.Show("Se agrego correctamente el registro", "Agregado", MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
                     Limpiar();
@@ -259,7 +261,7 @@ namespace Maxima_Distribuidores_VS
                 {
                     int tipo;
                     List<string[]> lista = Sql.BuscarDatos("SELECT id_cliente, rfc, nombres, " +
-                        "apellido_paterno, apellido_materno,telefono,domicilio,correo_electronico,celular, descripcion,id_tipo_cliente FROM clientes WHERE id_cliente = " +
+                        "apellido_paterno, apellido_materno,telefono,domicilio,codigo_postal,colonia,correo_electronico,celular, descripcion,id_tipo_cliente FROM clientes WHERE id_cliente = " +
                         dgvClientes.Rows[e.RowIndex].Cells["id_cliente"].Value + "");
                     idCliente = int.Parse(lista[0][0]);
                     txtRfc.Text = lista[0][1];
@@ -268,10 +270,12 @@ namespace Maxima_Distribuidores_VS
                     txtApellidoMaterno.Text = lista[0][4];
                     txtTelefono.Text = lista[0][5];
                     txtDireccion.Text = lista[0][6];
-                    txtCorreo.Text = lista[0][7];
-                    txtCelular.Text = lista[0][8];
-                    txtDescripcion.Text = lista[0][9];
-                    tipo = int.Parse(lista[0][10]);
+                    txtCP.Text = lista[0][7];
+                    txtColonia.Text = lista[0][8];
+                    txtCorreo.Text = lista[0][9];
+                    txtCelular.Text = lista[0][10];
+                    txtDescripcion.Text = lista[0][11];
+                    tipo = int.Parse(lista[0][12]);
                     if (tipo == 1)
                         rdbDistribuidor.Checked = true;
                     else
@@ -318,6 +322,11 @@ namespace Maxima_Distribuidores_VS
                 if (!Char.IsLetterOrDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
                     e.Handled = true;
             }
+        }
+
+        private void btnAccion_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

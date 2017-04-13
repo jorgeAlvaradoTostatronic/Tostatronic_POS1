@@ -9,7 +9,7 @@ namespace Maxima_Distribuidores_VS
 {
     public static class PDFInvoice
     {
-        public static MemoryStream CreatePDF(TipoInvoice t, string folio, string fecha, List<ProductoCompleto> productos, Clientes cliente, float impuesto)
+        public static MemoryStream CreatePDF(TipoInvoice t, string folio, string fecha, List<ProductoCompleto> productos, ClienteCompleto cliente, float impuesto)
         {
             // Create a Document object
             string tv;
@@ -98,7 +98,9 @@ namespace Maxima_Distribuidores_VS
 
             string clientData=cliente.nombre+" "+cliente.paterno+" "+cliente.materno+"\n"+
                    "Domicilio: "+cliente.domicilio+"\n"+
-                   "Telefono: "+cliente.telefono+"\n"+
+                   "Colonia: " + cliente.colonia + "\n" +
+                   "CP: " + cliente.cp + "\n" +
+                   "Telefono: " +cliente.telefono+"\n"+
                    "R.F.C.: " + cliente.rfc + "\n" +
                    "Correo: " + cliente.correo;
             PdfPCell client = new PdfPCell(new Phrase("Cliente", titleFontNegro));

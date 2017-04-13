@@ -162,7 +162,34 @@ namespace Maxima_Distribuidores_VS
                 throw (ex);
             }
         }
-        
+
+        public bool PrintAbono()
+        {
+            try
+            {
+                //aqui para generar el PDF
+                writer = PdfWriter.GetInstance(myDocument,
+                    new FileStream(path + file_name, FileMode.Create));
+                myDocument.Open();
+                cb = writer.DirectContent;
+                cb.SetFontAndSize(font.BaseFont, fontSize);
+                cb.BeginText();
+                DrawImage();
+                AlignCenterText(11);
+                DrawHeader();
+                DrawSubHeader();
+                DrawTotales();
+                DrawFooter();
+                cb.EndText();
+                myDocument.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+
         private float YPosition(){
             return (myDocument.PageSize.Height - 
                 (topMargin + (count * font.CalculatedSize + imageHeight)));

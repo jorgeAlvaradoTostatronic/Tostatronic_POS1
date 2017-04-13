@@ -111,17 +111,17 @@ namespace Maxima_Distribuidores_VS
             }
             catch (Exception) { }
         }
-        public static void InsertarVenta(List<ProductoCompleto> productos,string idUsuario,string idCliente,bool pagada)
+        public static void InsertarVenta(List<ProductoCompleto> productos,string idUsuario,string idCliente,bool pagada, float impuesto)
         {
             MySqlConnection conexion;
             MySqlCommand cmd;
             MySqlTransaction transaccion = null;
             string fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            string consulta = "INSERT INTO venta (NULL,'" + idUsuario + "','" + idCliente + "','1','" + fecha + "','0');";
+            string consulta = "INSERT INTO venta (NULL,'" + idUsuario + "','" + idCliente + "','1','" + fecha + "','0', " + impuesto + ");";
             if(pagada)
-                consulta = "INSERT INTO `salepoint`.`venta` (`id_venta`, `id_usuario`, `id_cliente`, `pagada`, `fecha_de_venta`, `cancelada`) VALUES (NULL, '"+idUsuario+"', '"+idCliente+"', '1', '"+fecha+"', '0');";
+                consulta = "INSERT INTO `salepoint`.`venta` (`id_venta`, `id_usuario`, `id_cliente`, `pagada`, `fecha_de_venta`, `cancelada`,`impuesto` ) VALUES (NULL, '" + idUsuario+"', '"+idCliente+"', '1', '"+fecha+"', '0', "+impuesto+");";
             else
-                consulta = "INSERT INTO `salepoint`.`venta` (`id_venta`, `id_usuario`, `id_cliente`, `pagada`, `fecha_de_venta`, `cancelada`) VALUES (NULL, '" + idUsuario + "', '" + idCliente + "', '0', '" + fecha + "', '0');";
+                consulta = "INSERT INTO `salepoint`.`venta` (`id_venta`, `id_usuario`, `id_cliente`, `pagada`, `fecha_de_venta`, `cancelada`,`impuesto`) VALUES (NULL, '" + idUsuario + "', '" + idCliente + "', '0', '" + fecha + "', '0', " + impuesto + ");";
             try
             {
                 InsertarDatos(consulta);

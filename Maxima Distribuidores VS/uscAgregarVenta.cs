@@ -375,7 +375,7 @@ namespace Maxima_Distribuidores_VS
                     totalParcial *= impuesto;
                     if (pago < totalParcial)
                     {
-                        Sql.InsertarVenta(productos, Usuario.Instancia().Id.ToString(), id_cliente, false);
+                        Sql.InsertarVenta(productos, Usuario.Instancia().Id.ToString(), id_cliente, false,impuesto);
                         List<string[]> idList = Sql.BuscarDatos("SELECT id_venta FROM venta;");
                         string id = idList[idList.Count - 1][0];
                         long idVenta = long.Parse(id);
@@ -383,7 +383,7 @@ namespace Maxima_Distribuidores_VS
                         Sql.InsertarDatos(comando);
                     }
                     else
-                        Sql.InsertarVenta(productos, Usuario.Instancia().Id.ToString(), id_cliente, true);
+                        Sql.InsertarVenta(productos, Usuario.Instancia().Id.ToString(), id_cliente, true,impuesto);
                     string folio = Sql.ObtenerFolio();
                     string date=DateTime.Now.ToShortDateString() + " " +DateTime.Now.ToShortTimeString();
                     if (impuesto != 1)

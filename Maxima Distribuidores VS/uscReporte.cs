@@ -141,7 +141,7 @@ namespace Maxima_Distribuidores_VS
             catch (Exception) { }
 
         }
-        Clientes c;
+        ClienteCompleto c;
         private List<ProductoCompleto> obtenerProductosCo(string folio)
         {
             List<string[]> productos;
@@ -150,7 +150,7 @@ namespace Maxima_Distribuidores_VS
                 "FROM productos_de_cotizacion, productos " +
                 "WHERE productos_de_cotizacion.id_cotizacion=" + folio + " AND productos.codigo=productos_de_cotizacion.id_producto;";
             productos = Sql.BuscarDatos(consulta);
-            consulta = "SELECT clientes.rfc, clientes.nombres,clientes.apellido_paterno, clientes.apellido_materno, clientes.telefono, clientes.domicilio, clientes.correo_electronico " +
+            consulta = "SELECT clientes.rfc, clientes.nombres,clientes.apellido_paterno, clientes.apellido_materno, clientes.telefono, clientes.domicilio, clientes.codigo_postal, clientes.colonia, clientes.correo_electronico " +
                 "FROM cotizacion, clientes " +
                 "WHERE (cotizacion.id_cotizacion=" + folio + ") " +
                 "AND clientes.id_cliente=cotizacion.id_cliente " +
@@ -162,7 +162,9 @@ namespace Maxima_Distribuidores_VS
             c.materno = venta[0][3];
             c.telefono = venta[0][4];
             c.domicilio = venta[0][5];
-            c.correo = venta[0][6];
+            c.cp = venta[0][6];
+            c.colonia = venta[0][7];
+            c.correo = venta[0][8];
             consulta = "SELECT impuesto FROM cotizacion WHERE id_cotizacion="+folio+";";
             impuesto = float.Parse(Sql.BuscarDatos(consulta)[0][0]);
             float sub;

@@ -66,7 +66,61 @@ namespace Maxima_Distribuidores_VS
                 if (ticket.Print()) { return (true); }
                 else { return false; }
             }
+            catch (Exception ) { return false; }
+        }
+        public static bool ImprimeTicketPago(string prmFolioTicket, float pagoCon, float totalL, string date, string nombre)
+        {
+            try
+            {
+                double cantidadPagada = 0;
+                double restante = 0;
+                double varTOTAL = 0;                Ticket ticket = new Ticket();
+                ticket.Path = Application.StartupPath;
+                ticket.FileName = "\\Pago.pdf";
+                if (File.Exists(Application.StartupPath + "\\Resources\\ticket.png"))
+                    ticket.HeaderImage = Application.StartupPath + "\\Resources\\ticket.png";
+                else
+                    ticket.HeaderImage = Application.StartupPath + "\\ticket.png";
+                ticket.AddHeaderLine("              TOSTATRONIC");
+                ticket.AddHeaderLine("    Venta de componentes electronicos");
+                ticket.AddSubHeaderLine("\n");
+                ticket.AddSubHeaderLine("Folio: " + prmFolioTicket);
+                ticket.AddSubHeaderLine("Le atendió: " +
+                    Usuario.Instancia().Nombre + " " + Usuario.Instancia().Paterno);
+                ticket.AddSubHeaderLine("Fecha y Hora: " +
+                    date + " ");
+                ticket.AddSubHeaderLine("Cliente: " +
+                    nombre);
+                ticket.AddSubHeaderLine("          Abono a deuda");
+                ticket.AddTotal("","");
+                ticket.AddTotal("","");
+                
+                cantidadPagada = Convert.ToDouble(pagoCon);
+                varTOTAL += Convert.ToDouble(totalL);
+                varTOTAL += pagoCon;
+                restante = varTOTAL - pagoCon ;
+                ticket.AddTotal("PENDIENTE", varTOTAL.ToString("$0.00"));
+                ticket.AddTotal("RECIBIDO", cantidadPagada.ToString("$0.00"));
+                restante = varTOTAL - cantidadPagada;
+                if (restante < 0)
+                    restante = 0;
+                ticket.AddTotal("RESTANTE: ", restante.ToString("$0.00"));
+               
+                ticket.AddTotal("", "");//Ponemos un total 
+                //en blanco que sirve de espacio 
+                //El metodo AddFooterLine funciona igual que la cabecera 
+                ticket.AddFooterLine("    *******GRACIAS POR SU PAGO*******");
+                ticket.AddFooterLine(" ");
+                ticket.AddFooterLine("  --Tostatronic le desea un buen dia--");
+                //Generamos
+                if (ticket.PrintAbono())
+                {
+                    PDFFile.Ver(Application.StartupPath + "\\Pago.pdf");
+                    return (true);
+                }
+                else { return false; }
+            }
             catch (Exception ex) { throw (ex); }
-        } 
+        }
     }
 }

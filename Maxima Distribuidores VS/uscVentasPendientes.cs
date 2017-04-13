@@ -35,7 +35,7 @@ namespace Maxima_Distribuidores_VS
         {
             Buscador("SELECT venta.id_venta, clientes.nombres,clientes.apellido_paterno,clientes.apellido_materno, venta.fecha_de_venta," +
            "SUM(productos_de_venta.cantidad_comprada*productos_de_venta.precio_al_momento)-(SUM(productos_de_venta.cantidad_comprada*productos_de_venta.precio_al_momento*(productos_de_venta.descuento/100)))," +
-           " venta.cancelada FROM venta,clientes,productos_de_venta" +
+           " venta.cancelada, venta.impuesto FROM venta,clientes,productos_de_venta" +
            " WHERE (venta.cancelada=0 AND (venta.fecha_de_venta LIKE '%" + dtpFecha.Value.ToString("yyyy-MM-dd") + "%' OR venta.id_venta LIKE '%"+txtBusqueda.Text+"%')) AND venta.pagada=0" +
            " AND (clientes.id_cliente=venta.id_cliente) AND (productos_de_venta.id_venta=venta.id_venta) " +
            "GROUP BY venta.id_venta ");
@@ -54,7 +54,7 @@ namespace Maxima_Distribuidores_VS
                     abonos = Sql.BuscarDatos("SELECT SUM(cantidad_abonada) FROM abonos WHERE id_venta='"+lista[i][0]+"' ");
                 }
                 catch (Exception) { }
-                float total = float.Parse(lista[i][5]) * 1.16f;
+                float total = float.Parse(lista[i][5]) * float.Parse(lista[i][7]);
                 float faltante = total - float.Parse(abonos[0][0]);
                 dgvPendientes.Rows.Add(lista[i][0], lista[0][1] + " " + lista[0][2] + " " + lista[0][3],
                     lista[i][4].Split(new char[] { ' ' })[0], total, abonos[0][0], faltante.ToString());
@@ -86,6 +86,7 @@ namespace Maxima_Distribuidores_VS
                     {
                         Sql.InsertarDatos("INSERT INTO abonos VALUES ('NULL','" + ValorCelda(e.RowIndex, "id_pedido") + "','" + dgvPendientes.Rows[e.RowIndex].Cells["faltante"].Value.ToString() + "','" + fecha1 + "' )");
                         Sql.InsertarDatos("UPDATE venta SET pagada=1 WHERE id_venta='" + ValorCelda(e.RowIndex, "id_pedido") + "';");
+                        ImpresionTickets.ImprimeTicketPago(ValorCelda(e.RowIndex, "id_pedido"), dgAbonar.Abonado, 0, fecha1, dgvPendientes.Rows[e.RowIndex].Cells[1].Value.ToString());
                         dgvPendientes.Rows.RemoveAt(e.RowIndex);
                     }
                     else
@@ -94,7 +95,10 @@ namespace Maxima_Distribuidores_VS
                         dgvPendientes.Rows[e.RowIndex].Cells["abono"].Value = dgAbonar.Abono.ToString();
                         dgvPendientes.Rows[e.RowIndex].Cells["faltante"].Value = (float.Parse(ValorCelda(e.RowIndex, "total")) -
                             float.Parse(ValorCelda(e.RowIndex, "abono"))).ToString();
+                        ImpresionTickets.ImprimeTicketPago(ValorCelda(e.RowIndex, "id_pedido"), dgAbonar.Abonado, float.Parse(ValorCelda(e.RowIndex, "faltante")), fecha1, dgvPendientes.Rows[e.RowIndex].Cells[1].Value.ToString());
                     }
+                    
+                    //PDFFile.Ver(Application.StartupPath + "\\Pago.pdf");
                 }
                 dgAbonar.Dispose();
             }

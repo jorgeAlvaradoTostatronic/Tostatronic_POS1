@@ -63,6 +63,10 @@
             this.btnBusqueda = new System.Windows.Forms.Button();
             this.lblDescripcion = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
+            this.txtCP = new System.Windows.Forms.TextBox();
+            this.txtColonia = new System.Windows.Forms.TextBox();
+            this.lblCP = new System.Windows.Forms.Label();
+            this.lblColonia = new System.Windows.Forms.Label();
             this.gboTipoCliente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
@@ -83,9 +87,10 @@
             this.btnAccion.Location = new System.Drawing.Point(17, 439);
             this.btnAccion.Name = "btnAccion";
             this.btnAccion.Size = new System.Drawing.Size(161, 31);
-            this.btnAccion.TabIndex = 42;
+            this.btnAccion.TabIndex = 11;
             this.btnAccion.Text = "Guardar Cliente";
             this.btnAccion.UseVisualStyleBackColor = true;
+            this.btnAccion.Click += new System.EventHandler(this.btnAccion_Click);
             // 
             // btnCancelar
             // 
@@ -105,7 +110,7 @@
             this.gboTipoCliente.Controls.Add(this.rdbDistribuidor);
             this.gboTipoCliente.Controls.Add(this.rdbPublico);
             this.gboTipoCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.gboTipoCliente.Location = new System.Drawing.Point(17, 324);
+            this.gboTipoCliente.Location = new System.Drawing.Point(17, 352);
             this.gboTipoCliente.Name = "gboTipoCliente";
             this.gboTipoCliente.Size = new System.Drawing.Size(185, 82);
             this.gboTipoCliente.TabIndex = 9;
@@ -147,7 +152,7 @@
             // txtCelular
             // 
             this.txtCelular.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtCelular.Location = new System.Drawing.Point(354, 280);
+            this.txtCelular.Location = new System.Drawing.Point(354, 317);
             this.txtCelular.Name = "txtCelular";
             this.txtCelular.ShortcutsEnabled = false;
             this.txtCelular.Size = new System.Drawing.Size(155, 23);
@@ -157,7 +162,7 @@
             // txtTelefono
             // 
             this.txtTelefono.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtTelefono.Location = new System.Drawing.Point(119, 280);
+            this.txtTelefono.Location = new System.Drawing.Point(119, 317);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.ShortcutsEnabled = false;
             this.txtTelefono.Size = new System.Drawing.Size(156, 23);
@@ -171,7 +176,7 @@
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.ShortcutsEnabled = false;
             this.txtDireccion.Size = new System.Drawing.Size(390, 23);
-            this.txtDireccion.TabIndex = 6;
+            this.txtDireccion.TabIndex = 5;
             this.txtDireccion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCorreo_KeyPress);
             // 
             // txtApellidoPaterno
@@ -181,7 +186,7 @@
             this.txtApellidoPaterno.Name = "txtApellidoPaterno";
             this.txtApellidoPaterno.ShortcutsEnabled = false;
             this.txtApellidoPaterno.Size = new System.Drawing.Size(156, 23);
-            this.txtApellidoPaterno.TabIndex = 3;
+            this.txtApellidoPaterno.TabIndex = 2;
             this.txtApellidoPaterno.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
             // 
             // txtApellidoMaterno
@@ -191,7 +196,7 @@
             this.txtApellidoMaterno.Name = "txtApellidoMaterno";
             this.txtApellidoMaterno.ShortcutsEnabled = false;
             this.txtApellidoMaterno.Size = new System.Drawing.Size(156, 23);
-            this.txtApellidoMaterno.TabIndex = 4;
+            this.txtApellidoMaterno.TabIndex = 3;
             this.txtApellidoMaterno.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
             // 
             // txtNombre
@@ -208,7 +213,7 @@
             // 
             this.lblCelular.AutoSize = true;
             this.lblCelular.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lblCelular.Location = new System.Drawing.Point(295, 289);
+            this.lblCelular.Location = new System.Drawing.Point(295, 326);
             this.lblCelular.Name = "lblCelular";
             this.lblCelular.Size = new System.Drawing.Size(56, 17);
             this.lblCelular.TabIndex = 89;
@@ -228,7 +233,7 @@
             // 
             this.lblTelefono.AutoSize = true;
             this.lblTelefono.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lblTelefono.Location = new System.Drawing.Point(14, 286);
+            this.lblTelefono.Location = new System.Drawing.Point(14, 323);
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(68, 17);
             this.lblTelefono.TabIndex = 87;
@@ -301,7 +306,7 @@
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.ShortcutsEnabled = false;
             this.txtCorreo.Size = new System.Drawing.Size(390, 23);
-            this.txtCorreo.TabIndex = 5;
+            this.txtCorreo.TabIndex = 4;
             this.txtCorreo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCorreo_KeyPress);
             // 
             // txtBusqueda
@@ -396,7 +401,7 @@
             // 
             this.lblDescripcion.AutoSize = true;
             this.lblDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lblDescripcion.Location = new System.Drawing.Point(205, 324);
+            this.lblDescripcion.Location = new System.Drawing.Point(205, 352);
             this.lblDescripcion.Name = "lblDescripcion";
             this.lblDescripcion.Size = new System.Drawing.Size(132, 17);
             this.lblDescripcion.TabIndex = 105;
@@ -405,19 +410,63 @@
             // txtDescripcion
             // 
             this.txtDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtDescripcion.Location = new System.Drawing.Point(208, 344);
+            this.txtDescripcion.Location = new System.Drawing.Point(208, 372);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.ShortcutsEnabled = false;
             this.txtDescripcion.Size = new System.Drawing.Size(301, 62);
-            this.txtDescripcion.TabIndex = 12;
+            this.txtDescripcion.TabIndex = 10;
             this.txtDescripcion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCorreo_KeyPress);
+            // 
+            // txtCP
+            // 
+            this.txtCP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.txtCP.Location = new System.Drawing.Point(422, 278);
+            this.txtCP.MaxLength = 5;
+            this.txtCP.Name = "txtCP";
+            this.txtCP.ShortcutsEnabled = false;
+            this.txtCP.Size = new System.Drawing.Size(86, 23);
+            this.txtCP.TabIndex = 7;
+            // 
+            // txtColonia
+            // 
+            this.txtColonia.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.txtColonia.Location = new System.Drawing.Point(119, 278);
+            this.txtColonia.MaxLength = 20;
+            this.txtColonia.Name = "txtColonia";
+            this.txtColonia.ShortcutsEnabled = false;
+            this.txtColonia.Size = new System.Drawing.Size(261, 23);
+            this.txtColonia.TabIndex = 6;
+            // 
+            // lblCP
+            // 
+            this.lblCP.AutoSize = true;
+            this.lblCP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lblCP.Location = new System.Drawing.Point(386, 281);
+            this.lblCP.Name = "lblCP";
+            this.lblCP.Size = new System.Drawing.Size(30, 17);
+            this.lblCP.TabIndex = 109;
+            this.lblCP.Text = "CP:";
+            // 
+            // lblColonia
+            // 
+            this.lblColonia.AutoSize = true;
+            this.lblColonia.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lblColonia.Location = new System.Drawing.Point(15, 284);
+            this.lblColonia.Name = "lblColonia";
+            this.lblColonia.Size = new System.Drawing.Size(59, 17);
+            this.lblColonia.TabIndex = 108;
+            this.lblColonia.Text = "Colonia:";
             // 
             // uscCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.txtCP);
+            this.Controls.Add(this.txtColonia);
+            this.Controls.Add(this.lblCP);
+            this.Controls.Add(this.lblColonia);
             this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.lblDescripcion);
             this.Controls.Add(this.btnBusqueda);
@@ -489,5 +538,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RFC;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn apellido;
+        private System.Windows.Forms.TextBox txtCP;
+        private System.Windows.Forms.TextBox txtColonia;
+        private System.Windows.Forms.Label lblCP;
+        private System.Windows.Forms.Label lblColonia;
     }
 }

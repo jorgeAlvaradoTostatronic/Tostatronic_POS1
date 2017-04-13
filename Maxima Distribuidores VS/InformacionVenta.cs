@@ -101,6 +101,42 @@ namespace Maxima_Distribuidores_VS
         }
     }
 
+    public struct ClienteCompleto
+    {
+        public int tipo_cliente;
+        public string nombre, paterno, materno, rfc, telefono, domicilio, cp, colonia, correo;
+
+        public ClienteCompleto(string nombre, string paterno, string materno, string rfc, string telefono,
+            string domicilio,string cp, string colonia, string correo)
+        {
+            tipo_cliente = 0;
+            this.nombre = nombre;
+            this.paterno = paterno;
+            this.materno = materno;
+            this.rfc = rfc;
+            this.telefono = telefono;
+            this.domicilio = domicilio;
+            this.cp = cp;
+            this.colonia = colonia;
+            this.correo = correo;
+        }
+
+        public ClienteCompleto(int tipo_cliente, string nombre, string paterno, string materno, string rfc, string telefono,
+            string domicilio, string cp, string colonia, string correo)
+        {
+            this.tipo_cliente = tipo_cliente;
+            this.nombre = nombre;
+            this.paterno = paterno;
+            this.materno = materno;
+            this.rfc = rfc;
+            this.telefono = telefono;
+            this.domicilio = domicilio;
+            this.cp = cp;
+            this.colonia = colonia;
+            this.correo = correo;
+        }
+    }
+
     public struct Venta
     {
         public int Id_pedido;
