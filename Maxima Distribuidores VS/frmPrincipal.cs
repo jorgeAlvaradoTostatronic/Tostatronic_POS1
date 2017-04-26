@@ -445,5 +445,11 @@ namespace Maxima_Distribuidores_VS
             float total=float.Parse(p[0][0]);
             MessageBox.Show("Total mejorado: " + total.ToString("$0.00"));
         }
+
+        private void rbnBtnCredito_Click(object sender, EventArgs e)
+        {
+            uscCredito credito = new uscCredito();
+            Interfaz(credito);
+        }
     }
 }

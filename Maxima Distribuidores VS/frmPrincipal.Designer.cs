@@ -91,6 +91,9 @@
             this.rbnBtnNuevaCotizacion = new System.Windows.Forms.RibbonButton();
             this.rbnBtnVerCotizaciones = new System.Windows.Forms.RibbonButton();
             this.rbnPnlVerCotizacion = new System.Windows.Forms.RibbonButton();
+            this.rbnPnlInventario = new System.Windows.Forms.RibbonPanel();
+            this.rbnFormato = new System.Windows.Forms.RibbonButton();
+            this.rbnPnlTotalProductos = new System.Windows.Forms.RibbonButton();
             this.rbtClientes = new System.Windows.Forms.RibbonTab();
             this.rbnPnlClientes = new System.Windows.Forms.RibbonPanel();
             this.rbnBtnClientesBuscar = new System.Windows.Forms.RibbonButton();
@@ -107,9 +110,9 @@
             this.ribbonOrbMenuItem1 = new System.Windows.Forms.RibbonOrbMenuItem();
             this.rbnBtnAgregarPedido = new System.Windows.Forms.RibbonButton();
             this.rbnBtnAgregar = new System.Windows.Forms.RibbonButton();
-            this.rbnPnlInventario = new System.Windows.Forms.RibbonPanel();
-            this.rbnFormato = new System.Windows.Forms.RibbonButton();
-            this.rbnPnlTotalProductos = new System.Windows.Forms.RibbonButton();
+            this.rbnPnlCredito = new System.Windows.Forms.RibbonPanel();
+            this.ribbonButton5 = new System.Windows.Forms.RibbonButton();
+            this.rbnBtnCredito = new System.Windows.Forms.RibbonButton();
             rbnBtnClientesReActivar = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
@@ -543,10 +546,31 @@
             this.rbnPnlVerCotizacion.Text = "Ver";
             this.rbnPnlVerCotizacion.Click += new System.EventHandler(this.rbnPnlVerCotizacion_Click);
             // 
+            // rbnPnlInventario
+            // 
+            this.rbnPnlInventario.Items.Add(this.rbnFormato);
+            this.rbnPnlInventario.Items.Add(this.rbnPnlTotalProductos);
+            this.rbnPnlInventario.Text = "Inventario";
+            // 
+            // rbnFormato
+            // 
+            this.rbnFormato.Image = ((System.Drawing.Image)(resources.GetObject("rbnFormato.Image")));
+            this.rbnFormato.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnFormato.SmallImage")));
+            this.rbnFormato.Text = "Formato";
+            this.rbnFormato.Click += new System.EventHandler(this.rbnFormato_Click);
+            // 
+            // rbnPnlTotalProductos
+            // 
+            this.rbnPnlTotalProductos.Image = ((System.Drawing.Image)(resources.GetObject("rbnPnlTotalProductos.Image")));
+            this.rbnPnlTotalProductos.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnPnlTotalProductos.SmallImage")));
+            this.rbnPnlTotalProductos.Text = "$ Mercancia Total";
+            this.rbnPnlTotalProductos.Click += new System.EventHandler(this.rbnPnlTotalProductos_Click);
+            // 
             // rbtClientes
             // 
             this.rbtClientes.Panels.Add(this.rbnPnlClientes);
             this.rbtClientes.Panels.Add(this.rbnPnlDescuentosClientes);
+            this.rbtClientes.Panels.Add(this.rbnPnlCredito);
             this.rbtClientes.Text = "Clientes";
             // 
             // rbnPnlClientes
@@ -646,25 +670,23 @@
             this.rbnBtnAgregar.Tag = "";
             this.rbnBtnAgregar.Text = "Agregar";
             // 
-            // rbnPnlInventario
+            // rbnPnlCredito
             // 
-            this.rbnPnlInventario.Items.Add(this.rbnFormato);
-            this.rbnPnlInventario.Items.Add(this.rbnPnlTotalProductos);
-            this.rbnPnlInventario.Text = "Inventario";
+            this.rbnPnlCredito.Items.Add(this.rbnBtnCredito);
+            this.rbnPnlCredito.Text = "Credito";
             // 
-            // rbnFormato
+            // ribbonButton5
             // 
-            this.rbnFormato.Image = ((System.Drawing.Image)(resources.GetObject("rbnFormato.Image")));
-            this.rbnFormato.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnFormato.SmallImage")));
-            this.rbnFormato.Text = "Formato";
-            this.rbnFormato.Click += new System.EventHandler(this.rbnFormato_Click);
+            this.ribbonButton5.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton5.Image")));
+            this.ribbonButton5.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton5.SmallImage")));
+            this.ribbonButton5.Text = "Agregar";
             // 
-            // rbnPnlTotalProductos
+            // rbnBtnCredito
             // 
-            this.rbnPnlTotalProductos.Image = ((System.Drawing.Image)(resources.GetObject("rbnPnlTotalProductos.Image")));
-            this.rbnPnlTotalProductos.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnPnlTotalProductos.SmallImage")));
-            this.rbnPnlTotalProductos.Text = "$ Mercancia Total";
-            this.rbnPnlTotalProductos.Click += new System.EventHandler(this.rbnPnlTotalProductos_Click);
+            this.rbnBtnCredito.Image = ((System.Drawing.Image)(resources.GetObject("rbnBtnCredito.Image")));
+            this.rbnBtnCredito.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnBtnCredito.SmallImage")));
+            this.rbnBtnCredito.Text = "Credito";
+            this.rbnBtnCredito.Click += new System.EventHandler(this.rbnBtnCredito_Click);
             // 
             // frmPrincipal
             // 
@@ -767,6 +789,9 @@
         private System.Windows.Forms.RibbonPanel rbnPnlInventario;
         private System.Windows.Forms.RibbonButton rbnFormato;
         private System.Windows.Forms.RibbonButton rbnPnlTotalProductos;
+        private System.Windows.Forms.RibbonPanel rbnPnlCredito;
+        private System.Windows.Forms.RibbonButton rbnBtnCredito;
+        private System.Windows.Forms.RibbonButton ribbonButton5;
     }
 }
 

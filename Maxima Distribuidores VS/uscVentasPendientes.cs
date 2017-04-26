@@ -66,7 +66,7 @@ namespace Maxima_Distribuidores_VS
         {
             Buscador("SELECT venta.id_venta, clientes.nombres,clientes.apellido_paterno,clientes.apellido_materno, venta.fecha_de_venta," +
            "SUM(productos_de_venta.cantidad_comprada*productos_de_venta.precio_al_momento)-(SUM(productos_de_venta.cantidad_comprada*productos_de_venta.precio_al_momento*(productos_de_venta.descuento/100)))," +
-           " venta.cancelada FROM venta,clientes,productos_de_venta" +
+           " venta.cancelada, venta.impuesto FROM venta,clientes,productos_de_venta" +
            " WHERE (venta.cancelada=0 AND venta.fecha_de_venta LIKE '%" + dtpFecha.Value.ToString("yyyy-MM-dd") + "%') AND venta.pagada=0" +
            " AND (clientes.id_cliente=venta.id_cliente) AND (productos_de_venta.id_venta=venta.id_venta) " +
            "GROUP BY venta.id_venta ");

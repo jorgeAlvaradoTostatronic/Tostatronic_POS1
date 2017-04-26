@@ -217,6 +217,12 @@
     <Compile Include="uscCotizaciones.Designer.cs">
       <DependentUpon>uscCotizaciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="uscCredito.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscCredito.Designer.cs">
+      <DependentUpon>uscCredito.cs</DependentUpon>
+    </Compile>
     <Compile Include="uscDescuentoClientes.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -376,6 +382,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="uscCotizaciones.resx">
       <DependentUpon>uscCotizaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscCredito.resx">
+      <DependentUpon>uscCredito.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="uscDescuentoClientes.resx">
       <DependentUpon>uscDescuentoClientes.cs</DependentUpon>
