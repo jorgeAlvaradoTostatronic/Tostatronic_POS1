@@ -51,13 +51,13 @@ namespace Maxima_Distribuidores_VS
                 List<string[]> abonos = new List<string[]>();
                 try
                 {
-                    abonos = Sql.BuscarDatos("SELECT SUM(cantidad_abonada) FROM abonos WHERE id_venta='"+lista[i][0]+"' ");
+                    abonos = Sql.BuscarDatos("SELECT SUM(cantidad_abonada) FROM abonos WHERE id_venta='" + lista[i][0] + "' ");
                 }
                 catch (Exception) { }
                 float total = float.Parse(lista[i][5]) * float.Parse(lista[i][7]);
                 float faltante = total - float.Parse(abonos[0][0]);
-                dgvPendientes.Rows.Add(lista[i][0], lista[0][1] + " " + lista[0][2] + " " + lista[0][3],
-                    lista[i][4].Split(new char[] { ' ' })[0], total, abonos[0][0], faltante.ToString());
+                dgvPendientes.Rows.Add(lista[i][0], lista[i][1] + " " + lista[i][2] + " " + lista[i][3],
+                    lista[i][4].Split(new char[] { ' ' })[0], total.ToString("$0.00"), float.Parse(abonos[0][0]).ToString("$0.00"), faltante.ToString("$0.00"));
                 dgvPendientes.Rows[i].Cells["abonar"].Value = "Abonar";
             }
         }

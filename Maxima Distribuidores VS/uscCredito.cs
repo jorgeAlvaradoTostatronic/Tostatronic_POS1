@@ -54,25 +54,30 @@ namespace Maxima_Distribuidores_VS
 
         private void llenaData()
         {
-            string consulta = "SELECT venta.id_venta, venta.fecha_de_venta," +
+            string consulta = "SELECT  venta.id_venta, venta.fecha_de_venta," +
            "SUM(productos_de_venta.cantidad_comprada*productos_de_venta.precio_al_momento)-(SUM(productos_de_venta.cantidad_comprada*productos_de_venta.precio_al_momento*(productos_de_venta.descuento/100)))," +
-           " venta.impuesto, SUM(abonos.cantidad_abonada)" +
-           " FROM venta,productos_de_venta,abonos" +
+           " venta.impuesto" +
+           " FROM venta,productos_de_venta" +
            " WHERE (venta.cancelada=0  AND venta.pagada=0 AND venta.id_cliente="+id_cliente+")" +
            " AND (productos_de_venta.id_venta=venta.id_venta)" +
-           " AND (abonos.id_venta=venta.id_venta)" +
            "GROUP BY venta.id_venta ";
             List<string[]> datos = Sql.BuscarDatos(consulta);
             float total,totalDeuda=0;
             float impuesto;
             float restante;
+            List<string[]> abonos = new List<string[]>();
             foreach (string[] a in datos)
             {
+                try
+                {
+                    abonos = Sql.BuscarDatos("SELECT SUM(cantidad_abonada) FROM abonos WHERE id_venta='" + a[0] + "' ");
+                }
+                catch (Exception) { }
                 impuesto = (float.Parse(a[3]) - 1) * 100;
                 total = float.Parse(a[2]) * float.Parse(a[3]);
-                restante = total - float.Parse(a[4]);
+                restante = total - float.Parse(abonos[0][0]);
                 totalDeuda += restante;
-                dgvCredito.Rows.Add(a[0],a[1],a[2],impuesto.ToString(), total.ToString("$0.00"), float.Parse(a[4]).ToString("$0.00"), restante.ToString("$0.00"));
+                dgvCredito.Rows.Add(a[0],a[1],a[2],impuesto.ToString(), total.ToString("$0.00"), float.Parse(abonos[0][0]).ToString("$0.00"), restante.ToString("$0.00"));
             }
             txtTotal.Text = totalDeuda.ToString("$0.00");
         }
