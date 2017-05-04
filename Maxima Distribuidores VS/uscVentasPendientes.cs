@@ -57,7 +57,7 @@ namespace Maxima_Distribuidores_VS
                 float total = float.Parse(lista[i][5]) * float.Parse(lista[i][7]);
                 float faltante = total - float.Parse(abonos[0][0]);
                 dgvPendientes.Rows.Add(lista[i][0], lista[i][1] + " " + lista[i][2] + " " + lista[i][3],
-                    lista[i][4].Split(new char[] { ' ' })[0], total.ToString("$0.00"), float.Parse(abonos[0][0]).ToString("$0.00"), faltante.ToString("$0.00"));
+                    lista[i][4].Split(new char[] { ' ' })[0], total.ToString("0.00"), float.Parse(abonos[0][0]).ToString("0.00"), faltante.ToString("0.00"));
                 dgvPendientes.Rows[i].Cells["abonar"].Value = "Abonar";
             }
         }
@@ -86,7 +86,7 @@ namespace Maxima_Distribuidores_VS
                     {
                         Sql.InsertarDatos("INSERT INTO abonos VALUES ('NULL','" + ValorCelda(e.RowIndex, "id_pedido") + "','" + dgvPendientes.Rows[e.RowIndex].Cells["faltante"].Value.ToString() + "','" + fecha1 + "' )");
                         Sql.InsertarDatos("UPDATE venta SET pagada=1 WHERE id_venta='" + ValorCelda(e.RowIndex, "id_pedido") + "';");
-                        ImpresionTickets.ImprimeTicketPago(ValorCelda(e.RowIndex, "id_pedido"), dgAbonar.Abonado, 0, fecha1, dgvPendientes.Rows[e.RowIndex].Cells[1].Value.ToString());
+                        ImpresionTickets.ImprimeTicketPagoN(ValorCelda(e.RowIndex, "id_pedido"), dgAbonar.Abonado, 0, fecha1, dgvPendientes.Rows[e.RowIndex].Cells[1].Value.ToString());
                         dgvPendientes.Rows.RemoveAt(e.RowIndex);
                     }
                     else
@@ -95,7 +95,7 @@ namespace Maxima_Distribuidores_VS
                         dgvPendientes.Rows[e.RowIndex].Cells["abono"].Value = dgAbonar.Abono.ToString();
                         dgvPendientes.Rows[e.RowIndex].Cells["faltante"].Value = (float.Parse(ValorCelda(e.RowIndex, "total")) -
                             float.Parse(ValorCelda(e.RowIndex, "abono"))).ToString();
-                        ImpresionTickets.ImprimeTicketPago(ValorCelda(e.RowIndex, "id_pedido"), dgAbonar.Abonado, float.Parse(ValorCelda(e.RowIndex, "faltante")), fecha1, dgvPendientes.Rows[e.RowIndex].Cells[1].Value.ToString());
+                        ImpresionTickets.ImprimeTicketPagoN(ValorCelda(e.RowIndex, "id_pedido"), dgAbonar.Abonado, float.Parse(ValorCelda(e.RowIndex, "faltante")), fecha1, dgvPendientes.Rows[e.RowIndex].Cells[1].Value.ToString());
                     }
                     
                     //PDFFile.Ver(Application.StartupPath + "\\Pago.pdf");

@@ -388,8 +388,8 @@ namespace Maxima_Distribuidores_VS
                     string date=DateTime.Now.ToShortDateString() + " " +DateTime.Now.ToShortTimeString();
                     if (impuesto != 1)
                         totalParcial /= impuesto;
-                    ImpresionTickets.ImprimeTicket(folio, productos, pago, totalParcial,date,txtNombre.Text,txtApellidoPaterno.Text,impuesto);
-                    PDFFile.Ver(Application.StartupPath + "\\Ticket.pdf");
+                    ImpresionTickets.ImprimeTicketN(folio, productos, pago, totalParcial,date,txtNombre.Text,txtApellidoPaterno.Text,impuesto);
+                    //PDFFile.Ver(Application.StartupPath + "\\Ticket.pdf");
                     DesactivarVenta();
                     BorrarXML();
                     Limpiar();

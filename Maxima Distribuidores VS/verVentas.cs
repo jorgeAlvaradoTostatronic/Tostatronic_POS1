@@ -136,8 +136,8 @@ namespace Maxima_Distribuidores_VS
                     productos.Add(producto);
                     totalParcial += float.Parse(dgvVentas.Rows[i].Cells["subtotal"].Value.ToString());
                 }
-                ImpresionTickets.ImprimeTicket(fol, productos, totalParcial, totalParcial, fechaT, txtNombre.Text, txtApellidoPaterno.Text,impuesto);
-                PDFFile.Ver(Application.StartupPath + "\\Ticket.pdf");
+                ImpresionTickets.ImprimeTicketN(fol, productos, totalParcial, totalParcial, fechaT, txtNombre.Text, txtApellidoPaterno.Text,impuesto);
+            
             }
         }
     }

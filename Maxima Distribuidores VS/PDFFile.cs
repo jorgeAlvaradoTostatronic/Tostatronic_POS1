@@ -80,8 +80,12 @@ namespace Maxima_Distribuidores_VS
 
         public void CrearCabecera(string[,] datos)
         {
-            //Image img = Image.GetInstance(Application.StartupPath + "\\Resources\\tarjeta.png");
-            Image img = Image.GetInstance(Application.StartupPath + "\\tarjeta.png");
+            Image img;
+            if (File.Exists(Application.StartupPath + "\\tarjeta.png"))
+                img = Image.GetInstance(Application.StartupPath + "\\tarjeta.png");
+            else
+                img = Image.GetInstance(Application.StartupPath + "\\Resources\\tarjeta.png");
+            
             img.ScaleAbsolute(230, 100);
             img.Alignment = Image.TEXTWRAP | Image.ALIGN_LEFT;
             pdf.Add(img);

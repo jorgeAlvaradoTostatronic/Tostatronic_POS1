@@ -229,7 +229,7 @@ namespace Maxima_Distribuidores_VS
                 {
                     string[] datos = new string[lector.FieldCount];
                     for (int i = 0; i < lector.FieldCount; i++)
-                        datos[i] = lector.GetString(i);
+                        datos[i] = lector.GetString(i).ToString();
                     lista.Add(datos);
                 }
 
@@ -244,7 +244,7 @@ namespace Maxima_Distribuidores_VS
                     MessageBox.Show("Ha ocurrido un error en la consulta.\n" +
                         msql.Message, "Error de consulta", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch (Exception) { }
+            catch (Exception es) { MessageBox.Show(es.Message); }
             return lista;
         }
 

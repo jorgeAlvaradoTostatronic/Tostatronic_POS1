@@ -138,7 +138,7 @@ namespace Maxima_Distribuidores_VS
                 }
 
             }
-            catch (Exception) { }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
 
         }
         ClienteCompleto c;
@@ -150,11 +150,11 @@ namespace Maxima_Distribuidores_VS
                 "FROM productos_de_cotizacion, productos " +
                 "WHERE productos_de_cotizacion.id_cotizacion=" + folio + " AND productos.codigo=productos_de_cotizacion.id_producto;";
             productos = Sql.BuscarDatos(consulta);
-            consulta = "SELECT clientes.rfc, clientes.nombres,clientes.apellido_paterno, clientes.apellido_materno, clientes.telefono, clientes.domicilio, clientes.codigo_postal, clientes.colonia, clientes.correo_electronico " +
-                "FROM cotizacion, clientes " +
-                "WHERE (cotizacion.id_cotizacion=" + folio + ") " +
-                "AND clientes.id_cliente=cotizacion.id_cliente " +
-                "GROUP BY cotizacion.id_cotizacion;";
+            consulta = "SELECT clientes.rfc, clientes.nombres,clientes.apellido_paterno, clientes.apellido_materno, clientes.telefono, clientes.domicilio, clientes.codigo_postal, clientes.colonia, clientes.correo_electronico "+
+                        "FROM cotizacion, clientes "+
+                        "WHERE(cotizacion.id_cotizacion = "+folio+") "+
+                        "AND clientes.id_cliente = cotizacion.id_cliente "+
+                        "GROUP BY cotizacion.id_cotizacion; ";
             venta = Sql.BuscarDatos(consulta);
             c.rfc = venta[0][0];
             c.nombre = venta[0][1];
