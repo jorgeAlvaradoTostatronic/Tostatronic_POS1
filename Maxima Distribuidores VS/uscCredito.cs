@@ -54,13 +54,7 @@ namespace Maxima_Distribuidores_VS
 
         private void llenaData()
         {
-            string consulta = "SELECT  venta.id_venta, venta.fecha_de_venta," +
-           "SUM(productos_de_venta.cantidad_comprada*productos_de_venta.precio_al_momento)-(SUM(productos_de_venta.cantidad_comprada*productos_de_venta.precio_al_momento*(productos_de_venta.descuento/100)))," +
-           " venta.impuesto" +
-           " FROM venta,productos_de_venta" +
-           " WHERE (venta.cancelada=0  AND venta.pagada=0 AND venta.id_cliente="+id_cliente+")" +
-           " AND (productos_de_venta.id_venta=venta.id_venta)" +
-           "GROUP BY venta.id_venta ";
+            string consulta = "SELECT venta.id_venta as i, venta.fecha_de_venta, (SELECT SUM(productos_de_venta.cantidad_comprada*productos_de_venta.precio_al_momento) FROM productos_de_venta WHERE productos_de_venta.id_venta=i), venta.impuesto FROM venta WHERE venta.cancelada=0 AND venta.pagada=0 AND venta.id_cliente="+id_cliente+" ";
             List<string[]> datos = Sql.BuscarDatos(consulta);
             float total,totalDeuda=0;
             float impuesto;
