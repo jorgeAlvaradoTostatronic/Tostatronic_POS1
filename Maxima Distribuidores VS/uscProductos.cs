@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Maxima_Distribuidores_VS
 {
@@ -45,6 +46,9 @@ namespace Maxima_Distribuidores_VS
                     txtDistribuidor.Enabled = false;
                     btnAccion.Text = "Eliminar Producto";
                     btnAccion.Click += new EventHandler(btnAccionEliminar_Click);
+                    txtPrecioDeCompra.Enabled = false;
+                    txtCantidadMinima.Enabled = false;
+                    txtPrecioDeVentaMinimo.Enabled = false;
                     break;
             }
             lblTitulo.Text = btnAccion.Text;
@@ -56,8 +60,9 @@ namespace Maxima_Distribuidores_VS
             {
                 if (!Sql.Existe("SELECT codigo FROM productos WHERE codigo = '" + txtCodigo.Text + "'"))
                 {
+                    String name=CargaImagen();
                     Sql.InsertarDatos("Insert into productos VALUES('" + txtCodigo.Text + "','" + txtDescripcion.Text + "','" +
-                        nudCantidad.Value + "','"+txtCantidadMinima.Value+"','" + txtPublico.Text + "','" + txtDistribuidor.Text + "','"+txtPrecioDeVentaMinimo.Text+"',0)");
+                        nudCantidad.Value + "','" + txtCantidadMinima.Value + "','" + txtPrecioDeCompra.Text + "','" + txtPublico.Text + "','" + txtDistribuidor.Text + "','" + txtPrecioDeVentaMinimo.Text + "',0,'" + name + "')");
                     MessageBox.Show("Agregado con exito", "Agregado", MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
                     Limpiar();
@@ -80,9 +85,10 @@ namespace Maxima_Distribuidores_VS
             {
                 if (!Sql.Existe("SELECT codigo FROM productos WHERE codigo = '" + txtCodigo.Text + "'"))
                 {
+                    String name = CargaImagen();
                     Sql.InsertarDatos("UPDATE productos SET codigo='" + txtCodigo.Text + "', nombre='" + txtDescripcion.Text +
                         "', existencia= '" + nudCantidad.Value.ToString() + "', cantidad_minima='"+txtCantidadMinima.Value.ToString()+"', precio_publico='" + txtPublico.Text + "', precio_distribuidor='" +
-                        txtDistribuidor.Text + "', precio_minimo='" + txtPrecioDeVentaMinimo .Text+"' WHERE codigo = '" + id_Producto + "'");
+                        txtDistribuidor.Text + "', precio_minimo='" + txtPrecioDeVentaMinimo .Text+"', imagen='"+name+"' WHERE codigo = '" + id_Producto + "'");
                     MessageBox.Show("Modificado con exito", "Modificado", MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
                     Buscador("SELECT  codigo, nombre FROM productos " +
@@ -91,9 +97,10 @@ namespace Maxima_Distribuidores_VS
                 }
                 else
                 {
+                    String name = CargaImagen();
                     Sql.InsertarDatos("UPDATE productos SET nombre='" + txtDescripcion.Text +
                         "', existencia= '" + nudCantidad.Value.ToString() + "', cantidad_minima='" + txtCantidadMinima.Value.ToString() + "', precio_publico='" + txtPublico.Text + "', precio_distribuidor='" +
-                        txtDistribuidor.Text + "', precio_minimo='" + txtPrecioDeVentaMinimo.Text + "' WHERE codigo = '" + id_Producto + "'");
+                        txtDistribuidor.Text + "', precio_minimo='" + txtPrecioDeVentaMinimo.Text + "', precio_compra='"+txtPrecioDeCompra.Text+ "', imagen='" + name + "' WHERE codigo = '" + id_Producto + "'");
                     MessageBox.Show("Modificado con exito", "Modificado", MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
                     Buscador("SELECT  codigo, nombre FROM productos " +
@@ -103,6 +110,26 @@ namespace Maxima_Distribuidores_VS
             }
         }
 
+        private String CargaImagen()
+        {
+            String name = "No_image.png";
+            if (!txtImageName.Text.Equals("Seleccionar imagen..."))
+            {
+                try
+                {
+                    name = txtCodigo.Text;
+                    name += Path.GetExtension(txtImageName.Text);
+                    File.Copy(txtImageName.Text, @"Imagenes\" + name,true);
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("La imagen no pudo ser cargada al sistema", "Error al cargar imagen", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                    name = "No_image.png";
+                }
+            }
+            return name;
+        }
         private void btnAccionEliminar_Click(object sender, EventArgs e)
         {
             if (id_Producto.Equals(""))
@@ -125,7 +152,7 @@ namespace Maxima_Distribuidores_VS
 
         private bool Verificar()
         {
-            float precioMinimo, existenciaMinima;
+            float precioMinimo, precioCompra;
             if (!String.IsNullOrWhiteSpace(txtCodigo.Text))
             {
                 if (!String.IsNullOrWhiteSpace(txtDescripcion.Text))
@@ -146,39 +173,60 @@ namespace Maxima_Distribuidores_VS
                                         {
                                             if (precioDistribuidor >= 0)
                                             {
-                                                if (float.TryParse(txtPrecioDeVentaMinimo.Text, out precioMinimo))
+                                                if (float.TryParse(txtPrecioDeCompra.Text, out precioCompra))
                                                 {
-                                                    if (precioDistribuidor > precioMinimo)
+                                                    if (float.TryParse(txtPrecioDeVentaMinimo.Text, out precioMinimo))
                                                     {
-                                                        if (precioPublico > precioMinimo)
+                                                        if(precioMinimo>precioCompra)
                                                         {
-                                                            if (precioMinimo > 0)
+                                                            if (precioDistribuidor > precioMinimo)
                                                             {
-                                                                if (txtCantidadMinima.Value >= 0)
-                                                                    return true;
+                                                                if (precioPublico > precioMinimo)
+                                                                {
+                                                                    if (precioMinimo > 0)
+                                                                    {
+                                                                        if (txtCantidadMinima.Value >= 0)
+                                                                            return true;
+                                                                        else
+                                                                        {
+                                                                            MessageBox.Show(this, "La cantidad minima debe ser mayo o igual a 0", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                                            txtCantidadMinima.Focus();
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        MessageBox.Show(this, "El precio minimo debe de ser mayor a 0", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                                        txtPrecioDeVentaMinimo.Focus();
+                                                                    }
+                                                                }
                                                                 else
                                                                 {
-                                                                    MessageBox.Show(this, "La cantidad minima debe ser mayo o igual a 0", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                                                    txtCantidadMinima.Focus();
+                                                                    MessageBox.Show(this, "El precio publico debe ser mayor al precio minimo", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                                    txtPublico.Focus();
                                                                 }
                                                             }
                                                             else
                                                             {
-                                                                MessageBox.Show(this, "El precio minimo debe de ser mayor a 0", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                                                txtPrecioDeVentaMinimo.Focus();
+                                                                MessageBox.Show(this, "El precio distribuido debe ser mayor al precio minimo", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                                txtDistribuidor.Focus();
                                                             }
                                                         }
                                                         else
                                                         {
-                                                            MessageBox.Show(this, "El precio publico debe ser mayor al precio minimo", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                                            txtPublico.Focus();
+                                                            MessageBox.Show(this, "El precio minimo debe de ser mayor a al precio de compra", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                            txtPrecioDeVentaMinimo.Focus();
                                                         }
                                                     }
                                                     else
                                                     {
-                                                        MessageBox.Show(this, "El precio distribuido debe ser mayor al precio minimo", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                                        txtDistribuidor.Focus();
+                                                        MessageBox.Show(this, "El precio minimo debe ser un numero", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                        txtPrecioDeVentaMinimo.Focus();
                                                     }
+                                                }
+                                                else
+                                                {
+                                                    MessageBox.Show(this, "El precio de compra debe ser un numero", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                    txtPrecioDeCompra.Focus();
                                                 }
                                             }
                                             else
@@ -244,6 +292,10 @@ namespace Maxima_Distribuidores_VS
                     control.Text = "";
             nudCantidad.Value = 0;
             txtCantidadMinima.Value = 0;
+            txtImageName.Text = "Seleccionar imagen...";
+            pcbImage.Image.Dispose();
+            pcbImage.Image= Image.FromFile(@"Imagenes\No_image.png");
+            dgvProductos.Rows.Clear();
         }
 
         private void Buscador(string consulta)
@@ -278,16 +330,20 @@ namespace Maxima_Distribuidores_VS
             if (e.RowIndex >= 0)
             {
                 List<string[]> lista = Sql.BuscarDatos("SELECT codigo, nombre, " +
-                    "existencia,cantidad_minima, precio_publico, precio_distribuidor,precio_minimo FROM productos WHERE codigo = '" +
+                    "existencia,cantidad_minima, precio_compra, precio_publico, precio_distribuidor,precio_minimo, imagen FROM productos WHERE codigo = '" +
                     dgvProductos.Rows[e.RowIndex].Cells["codigo"].Value + "'");
                 id_Producto = lista[0][0];
                 txtCodigo.Text = lista[0][0];
                 txtDescripcion.Text = lista[0][1];
                 nudCantidad.Value = decimal.Parse(lista[0][2]);
                 txtCantidadMinima.Value = decimal.Parse(lista[0][3]);
-                txtPublico.Text = lista[0][4];
-                txtDistribuidor.Text = lista[0][5];
-                txtPrecioDeVentaMinimo.Text = lista[0][6];
+                txtPrecioDeCompra.Text = lista[0][4];
+                txtPublico.Text = lista[0][5];
+                txtDistribuidor.Text = lista[0][6];
+                txtPrecioDeVentaMinimo.Text = lista[0][7];
+                String imageName = lista[0][8];
+                pcbImage.Image.Dispose();
+                pcbImage.Image = Image.FromFile(@"Imagenes\" + imageName);
             }
         }
 
@@ -312,6 +368,24 @@ namespace Maxima_Distribuidores_VS
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string imagen = openFileDialog1.FileName;
+                    txtImageName.Text = imagen;
+                    pcbImage.Image.Dispose();
+                    pcbImage.Image = Image.FromFile(imagen);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("El archivo seleccionado no es un tipo de imagen válido");
+            }
         }
     }
 }

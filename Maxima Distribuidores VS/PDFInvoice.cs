@@ -52,8 +52,8 @@ namespace Maxima_Distribuidores_VS
 
             iTextSharp.text.Image logo;
             //Agregando la imagen
-            if (File.Exists(Application.StartupPath + "\\Resources\\ticket.png"))
-                 logo = iTextSharp.text.Image.GetInstance(Application.StartupPath + "\\Resources\\ticket.png");
+            if (File.Exists(Application.StartupPath + "\\Recursos\\ticket.png"))
+                 logo = iTextSharp.text.Image.GetInstance(Application.StartupPath + "\\Recursos\\ticket.png");
             else
                 logo = iTextSharp.text.Image.GetInstance(Application.StartupPath + "\\ticket.png");
 
@@ -326,7 +326,7 @@ namespace Maxima_Distribuidores_VS
 
 
             //Agregando la imagen
-            iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(Application.StartupPath + "\\ticket.png");
+            iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(Application.StartupPath + "\\Recursos\\ticket.png");
             float pos = document.PageSize.Width;
             pos -= logo.Width;
             pos /= 2;
@@ -436,7 +436,7 @@ namespace Maxima_Distribuidores_VS
 
 
             //Agregando la imagen
-            iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(Application.StartupPath + "\\ticket.png");
+            iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(Application.StartupPath + "\\Recursos\\ticket.png");
             float pos = document.PageSize.Width;
             pos -= logo.Width;
             pos /= 2;

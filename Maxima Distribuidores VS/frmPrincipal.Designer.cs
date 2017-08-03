@@ -50,6 +50,8 @@
             this.ribbonButton3 = new System.Windows.Forms.RibbonButton();
             this.ribbonButton4 = new System.Windows.Forms.RibbonButton();
             this.rbnDistribuidor = new System.Windows.Forms.RibbonButton();
+            this.rbnModificarImagen = new System.Windows.Forms.RibbonButton();
+            this.rbnBtnCatalogo = new System.Windows.Forms.RibbonButton();
             this.rbtUsuarios = new System.Windows.Forms.RibbonTab();
             this.rbnPnlUsuarios = new System.Windows.Forms.RibbonPanel();
             this.rbnBtnUsuariosVer = new System.Windows.Forms.RibbonButton();
@@ -80,6 +82,7 @@
             this.rbnBtnNormalScreen = new System.Windows.Forms.RibbonButton();
             this.ribbonPanel19 = new System.Windows.Forms.RibbonPanel();
             this.rbnPrincipal = new System.Windows.Forms.Ribbon();
+            this.ribbonButton6 = new System.Windows.Forms.RibbonButton();
             this.rbtVentas = new System.Windows.Forms.RibbonTab();
             this.rbnPnlVentaCotizacion = new System.Windows.Forms.RibbonPanel();
             this.rbnBtnVentaActual = new System.Windows.Forms.RibbonButton();
@@ -102,17 +105,17 @@
             this.rbnBtnClientesEliminar = new System.Windows.Forms.RibbonButton();
             this.rbnPnlDescuentosClientes = new System.Windows.Forms.RibbonPanel();
             this.rbnBtnClientesDescuento = new System.Windows.Forms.RibbonButton();
+            this.rbnPnlCredito = new System.Windows.Forms.RibbonPanel();
+            this.rbnBtnCredito = new System.Windows.Forms.RibbonButton();
             this.rbnBtnPedidos = new System.Windows.Forms.RibbonPanel();
             this.rbnBtnCotizciones = new System.Windows.Forms.RibbonPanel();
-            this.pnlContenedor = new System.Windows.Forms.Panel();
             this.ribbonButton1 = new System.Windows.Forms.RibbonButton();
             this.ribbonButton2 = new System.Windows.Forms.RibbonButton();
             this.ribbonOrbMenuItem1 = new System.Windows.Forms.RibbonOrbMenuItem();
             this.rbnBtnAgregarPedido = new System.Windows.Forms.RibbonButton();
             this.rbnBtnAgregar = new System.Windows.Forms.RibbonButton();
-            this.rbnPnlCredito = new System.Windows.Forms.RibbonPanel();
             this.ribbonButton5 = new System.Windows.Forms.RibbonButton();
-            this.rbnBtnCredito = new System.Windows.Forms.RibbonButton();
+            this.pnlContenedor = new System.Windows.Forms.Panel();
             rbnBtnClientesReActivar = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
@@ -182,6 +185,8 @@
             this.rbnPnlProductos.Items.Add(this.rbnBtnProductosReActivar);
             this.rbnPnlProductos.Items.Add(this.rbnBtnProductosImprimir);
             this.rbnPnlProductos.Items.Add(this.rbnDistribuidor);
+            this.rbnPnlProductos.Items.Add(this.rbnModificarImagen);
+            this.rbnPnlProductos.Items.Add(this.rbnBtnCatalogo);
             this.rbnPnlProductos.Text = "Productos";
             // 
             // rbnBtnProductosEdicion
@@ -246,6 +251,20 @@
             this.rbnDistribuidor.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnDistribuidor.SmallImage")));
             this.rbnDistribuidor.Text = "Precio Publico";
             this.rbnDistribuidor.Click += new System.EventHandler(this.rbnDistribuidor_Click);
+            // 
+            // rbnModificarImagen
+            // 
+            this.rbnModificarImagen.Image = ((System.Drawing.Image)(resources.GetObject("rbnModificarImagen.Image")));
+            this.rbnModificarImagen.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnModificarImagen.SmallImage")));
+            this.rbnModificarImagen.Text = "Modificar Imagen";
+            this.rbnModificarImagen.Click += new System.EventHandler(this.rbnModificarImagen_Click);
+            // 
+            // rbnBtnCatalogo
+            // 
+            this.rbnBtnCatalogo.Image = ((System.Drawing.Image)(resources.GetObject("rbnBtnCatalogo.Image")));
+            this.rbnBtnCatalogo.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnBtnCatalogo.SmallImage")));
+            this.rbnBtnCatalogo.Text = "Catalogo";
+            this.rbnBtnCatalogo.Click += new System.EventHandler(this.rbnBtnCatalogo_Click);
             // 
             // rbtUsuarios
             // 
@@ -454,6 +473,10 @@
             this.rbnPrincipal.OrbStyle = System.Windows.Forms.RibbonOrbStyle.Office_2013;
             this.rbnPrincipal.OrbText = "Inicio";
             this.rbnPrincipal.OrbVisible = false;
+            // 
+            // 
+            // 
+            this.rbnPrincipal.QuickAcessToolbar.Items.Add(this.ribbonButton6);
             this.rbnPrincipal.RibbonTabFont = new System.Drawing.Font("Trebuchet MS", 9F);
             this.rbnPrincipal.Size = new System.Drawing.Size(884, 140);
             this.rbnPrincipal.TabIndex = 0;
@@ -466,6 +489,13 @@
             this.rbnPrincipal.TabsMargin = new System.Windows.Forms.Padding(12, 26, 20, 0);
             this.rbnPrincipal.Text = "Inicio";
             this.rbnPrincipal.ThemeColor = System.Windows.Forms.RibbonTheme.Black;
+            // 
+            // ribbonButton6
+            // 
+            this.ribbonButton6.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton6.Image")));
+            this.ribbonButton6.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
+            this.ribbonButton6.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton6.SmallImage")));
+            this.ribbonButton6.Text = "ribbonButton6";
             // 
             // rbtVentas
             // 
@@ -623,6 +653,18 @@
             this.rbnBtnClientesDescuento.Text = "Agregar";
             this.rbnBtnClientesDescuento.Click += new System.EventHandler(this.rbnBtnClientesDescuento_Click);
             // 
+            // rbnPnlCredito
+            // 
+            this.rbnPnlCredito.Items.Add(this.rbnBtnCredito);
+            this.rbnPnlCredito.Text = "Credito";
+            // 
+            // rbnBtnCredito
+            // 
+            this.rbnBtnCredito.Image = ((System.Drawing.Image)(resources.GetObject("rbnBtnCredito.Image")));
+            this.rbnBtnCredito.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnBtnCredito.SmallImage")));
+            this.rbnBtnCredito.Text = "Credito";
+            this.rbnBtnCredito.Click += new System.EventHandler(this.rbnBtnCredito_Click);
+            // 
             // rbnBtnPedidos
             // 
             this.rbnBtnPedidos.Text = "Pedidos";
@@ -630,14 +672,6 @@
             // rbnBtnCotizciones
             // 
             this.rbnBtnCotizciones.Text = "Cotizaciones";
-            // 
-            // pnlContenedor
-            // 
-            this.pnlContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContenedor.Location = new System.Drawing.Point(0, 140);
-            this.pnlContenedor.Name = "pnlContenedor";
-            this.pnlContenedor.Size = new System.Drawing.Size(884, 504);
-            this.pnlContenedor.TabIndex = 1;
             // 
             // ribbonButton1
             // 
@@ -670,23 +704,19 @@
             this.rbnBtnAgregar.Tag = "";
             this.rbnBtnAgregar.Text = "Agregar";
             // 
-            // rbnPnlCredito
-            // 
-            this.rbnPnlCredito.Items.Add(this.rbnBtnCredito);
-            this.rbnPnlCredito.Text = "Credito";
-            // 
             // ribbonButton5
             // 
             this.ribbonButton5.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton5.Image")));
             this.ribbonButton5.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton5.SmallImage")));
             this.ribbonButton5.Text = "Agregar";
             // 
-            // rbnBtnCredito
+            // pnlContenedor
             // 
-            this.rbnBtnCredito.Image = ((System.Drawing.Image)(resources.GetObject("rbnBtnCredito.Image")));
-            this.rbnBtnCredito.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnBtnCredito.SmallImage")));
-            this.rbnBtnCredito.Text = "Credito";
-            this.rbnBtnCredito.Click += new System.EventHandler(this.rbnBtnCredito_Click);
+            this.pnlContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContenedor.Location = new System.Drawing.Point(0, 140);
+            this.pnlContenedor.Name = "pnlContenedor";
+            this.pnlContenedor.Size = new System.Drawing.Size(884, 504);
+            this.pnlContenedor.TabIndex = 1;
             // 
             // frmPrincipal
             // 
@@ -765,7 +795,6 @@
         private System.Windows.Forms.RibbonPanel rbnBtnCotizciones;
         private System.Windows.Forms.RibbonPanel rbnPnlVentaCotizacion;
         private System.Windows.Forms.RibbonButton rbnBtnVentaActual;
-        private System.Windows.Forms.Panel pnlContenedor;
         private System.Windows.Forms.RibbonButton rbnBtnAgregar;
         private System.Windows.Forms.RibbonPanel rbnPnlCotizacion;
         private System.Windows.Forms.RibbonButton rbnBtnVerCotizaciones;
@@ -792,6 +821,10 @@
         private System.Windows.Forms.RibbonPanel rbnPnlCredito;
         private System.Windows.Forms.RibbonButton rbnBtnCredito;
         private System.Windows.Forms.RibbonButton ribbonButton5;
+        private System.Windows.Forms.RibbonButton rbnModificarImagen;
+        private System.Windows.Forms.Panel pnlContenedor;
+        private System.Windows.Forms.RibbonButton rbnBtnCatalogo;
+        private System.Windows.Forms.RibbonButton ribbonButton6;
     }
 }
 

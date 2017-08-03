@@ -48,12 +48,12 @@ namespace Maxima_Distribuidores_VS
                 List<string[]> lista = Sql.BuscarDatos("SELECT * FROM productos WHERE codigo = '" +
                     ValorCelda(dgvProductos, e.RowIndex, "clmCodigo") + "'");
 
-                dialogCantidad frmCantidad = new dialogCantidad(lista[0][0] + " (" + lista[0][1] + ")", 1000, float.Parse(lista[0][6 - tipoCliente]), Descuento(lista[0][0]));
+                dialogCantidad frmCantidad = new dialogCantidad(lista[0][0] + " (" + lista[0][1] + ")", 1000, float.Parse(lista[0][7 - tipoCliente]), Descuento(lista[0][0]));
                 frmCantidad.ShowDialog();
                 if (frmCantidad.Cantidad > 0)
                 {
                     float subtotal;
-                    subtotal = (float)frmCantidad.Cantidad * float.Parse(lista[0][6 - tipoCliente]);
+                    subtotal = (float)frmCantidad.Cantidad * float.Parse(lista[0][7 - tipoCliente]);
                     subtotal -= subtotal * Descuento(lista[0][0]) / 100;
 
                     for (int i = 0; i < dgvCotizacion.RowCount; i++)
@@ -68,7 +68,7 @@ namespace Maxima_Distribuidores_VS
                             return;
                         }
                     dgvCotizacion.Rows.Add(new string[] { lista[0][0], lista[0][1], frmCantidad.Cantidad.ToString(), 
-                        lista[0][6 - tipoCliente], subtotal.ToString(), Descuento(lista[0][0]).ToString() });
+                        lista[0][7 - tipoCliente], subtotal.ToString(), Descuento(lista[0][0]).ToString() });
                     Total();
                     GuardarCotizacion.Guardar(Guardar());
                 }
@@ -442,10 +442,10 @@ namespace Maxima_Distribuidores_VS
                         List<string[]> lista = Sql.BuscarDatos("SELECT * FROM productos WHERE codigo = '" +
                             producto.Id_producto + "'");
                         float descuentoTemp = Descuento(lista[0][0]);
-                        float subTotalTemp = producto.Cantidad * float.Parse(lista[0][6 - tipoCliente]);
+                        float subTotalTemp = producto.Cantidad * float.Parse(lista[0][7 - tipoCliente]);
                         dgvCotizacion.Rows.Add(new string[] { lista[0][0], lista[0][1], 
-                            producto.Cantidad.ToString(), lista[0][6 - tipoCliente], 
-                            (subTotalTemp - subTotalTemp*descuentoTemp/100).ToString(),  lista[0][2], descuentoTemp.ToString() });
+                            producto.Cantidad.ToString(), lista[0][7 - tipoCliente], 
+                            (subTotalTemp - subTotalTemp*descuentoTemp/100).ToString(), descuentoTemp.ToString() });
                     }
                     Total();
                 }

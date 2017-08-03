@@ -108,7 +108,10 @@
       <DependentUpon>acercaDe.cs</DependentUpon>
     </Compile>
     <Compile Include="GuardarCotizacion.cs" />
+    <Compile Include="Imagenes.cs" />
     <Compile Include="ImpresionTickets.cs" />
+    <Compile Include="ITextEvents.cs" />
+    <Compile Include="PDFCatalogo.cs" />
     <Compile Include="PDFFile.cs" />
     <Compile Include="PDFInvoice.cs" />
     <Compile Include="ReActivarClientes.cs">
@@ -232,6 +235,12 @@
     </Compile>
     <Compile Include="uscDescuentoClientes.Designer.cs">
       <DependentUpon>uscDescuentoClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscImages.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscImages.Designer.cs">
+      <DependentUpon>uscImages.cs</DependentUpon>
     </Compile>
     <Compile Include="uscReActivarProductos.cs">
       <SubType>UserControl</SubType>
@@ -392,6 +401,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="uscDescuentoClientes.resx">
       <DependentUpon>uscDescuentoClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscImages.resx">
+      <DependentUpon>uscImages.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="uscReActivarProductos.resx">
       <DependentUpon>uscReActivarProductos.cs</DependentUpon>

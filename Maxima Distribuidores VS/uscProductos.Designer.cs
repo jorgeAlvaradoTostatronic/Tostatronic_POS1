@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uscProductos));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnBusqueda = new System.Windows.Forms.Button();
             this.txtBusqueda = new System.Windows.Forms.TextBox();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
@@ -53,9 +53,17 @@
             this.lblCantidadMinima = new System.Windows.Forms.Label();
             this.lblPrecioMinimo = new System.Windows.Forms.Label();
             this.txtPrecioDeVentaMinimo = new System.Windows.Forms.TextBox();
+            this.lblPrecioCompra = new System.Windows.Forms.Label();
+            this.txtPrecioDeCompra = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.lblImagen = new System.Windows.Forms.Label();
+            this.txtImageName = new System.Windows.Forms.TextBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.pcbImage = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCantidadMinima)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbImage)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBusqueda
@@ -84,25 +92,25 @@
             this.dgvProductos.AllowUserToResizeColumns = false;
             this.dgvProductos.AllowUserToResizeRows = false;
             this.dgvProductos.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.codigo,
             this.descripcion});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.GreenYellow;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProductos.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.GreenYellow;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProductos.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvProductos.Location = new System.Drawing.Point(527, 127);
             this.dgvProductos.MultiSelect = false;
             this.dgvProductos.Name = "dgvProductos";
@@ -132,17 +140,17 @@
             // txtDistribuidor
             // 
             this.txtDistribuidor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDistribuidor.Location = new System.Drawing.Point(156, 376);
+            this.txtDistribuidor.Location = new System.Drawing.Point(156, 368);
             this.txtDistribuidor.Name = "txtDistribuidor";
             this.txtDistribuidor.Size = new System.Drawing.Size(175, 22);
-            this.txtDistribuidor.TabIndex = 7;
+            this.txtDistribuidor.TabIndex = 8;
             this.txtDistribuidor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_KeyPress);
             // 
             // nudCantidad
             // 
             this.nudCantidad.DecimalPlaces = 1;
             this.nudCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudCantidad.Location = new System.Drawing.Point(157, 190);
+            this.nudCantidad.Location = new System.Drawing.Point(157, 163);
             this.nudCantidad.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -182,7 +190,7 @@
             // 
             this.lblCantidad.AutoSize = true;
             this.lblCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCantidad.Location = new System.Drawing.Point(22, 192);
+            this.lblCantidad.Location = new System.Drawing.Point(22, 165);
             this.lblCantidad.Name = "lblCantidad";
             this.lblCantidad.Size = new System.Drawing.Size(65, 16);
             this.lblCantidad.TabIndex = 62;
@@ -192,7 +200,7 @@
             // 
             this.lblPublico.AutoSize = true;
             this.lblPublico.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPublico.Location = new System.Drawing.Point(22, 339);
+            this.lblPublico.Location = new System.Drawing.Point(22, 331);
             this.lblPublico.Name = "lblPublico";
             this.lblPublico.Size = new System.Drawing.Size(98, 16);
             this.lblPublico.TabIndex = 63;
@@ -201,17 +209,17 @@
             // txtPublico
             // 
             this.txtPublico.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPublico.Location = new System.Drawing.Point(156, 336);
+            this.txtPublico.Location = new System.Drawing.Point(156, 328);
             this.txtPublico.Name = "txtPublico";
             this.txtPublico.Size = new System.Drawing.Size(175, 22);
-            this.txtPublico.TabIndex = 6;
+            this.txtPublico.TabIndex = 7;
             this.txtPublico.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_KeyPress);
             // 
             // lblDistribuidor
             // 
             this.lblDistribuidor.AutoSize = true;
             this.lblDistribuidor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDistribuidor.Location = new System.Drawing.Point(22, 379);
+            this.lblDistribuidor.Location = new System.Drawing.Point(22, 371);
             this.lblDistribuidor.Name = "lblDistribuidor";
             this.lblDistribuidor.Size = new System.Drawing.Size(121, 16);
             this.lblDistribuidor.TabIndex = 64;
@@ -239,7 +247,7 @@
             this.btnAccion.Location = new System.Drawing.Point(17, 439);
             this.btnAccion.Name = "btnAccion";
             this.btnAccion.Size = new System.Drawing.Size(161, 31);
-            this.btnAccion.TabIndex = 8;
+            this.btnAccion.TabIndex = 9;
             this.btnAccion.UseVisualStyleBackColor = true;
             // 
             // btnCancelar
@@ -250,7 +258,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(709, 439);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(161, 31);
-            this.btnCancelar.TabIndex = 7;
+            this.btnCancelar.TabIndex = 10;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -269,7 +277,7 @@
             // 
             this.txtCantidadMinima.DecimalPlaces = 1;
             this.txtCantidadMinima.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCantidadMinima.Location = new System.Drawing.Point(157, 239);
+            this.txtCantidadMinima.Location = new System.Drawing.Point(157, 212);
             this.txtCantidadMinima.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -289,7 +297,7 @@
             // 
             this.lblCantidadMinima.AutoSize = true;
             this.lblCantidadMinima.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCantidadMinima.Location = new System.Drawing.Point(22, 241);
+            this.lblCantidadMinima.Location = new System.Drawing.Point(22, 214);
             this.lblCantidadMinima.Name = "lblCantidadMinima";
             this.lblCantidadMinima.Size = new System.Drawing.Size(111, 16);
             this.lblCantidadMinima.TabIndex = 76;
@@ -299,7 +307,7 @@
             // 
             this.lblPrecioMinimo.AutoSize = true;
             this.lblPrecioMinimo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrecioMinimo.Location = new System.Drawing.Point(22, 294);
+            this.lblPrecioMinimo.Location = new System.Drawing.Point(22, 286);
             this.lblPrecioMinimo.Name = "lblPrecioMinimo";
             this.lblPrecioMinimo.Size = new System.Drawing.Size(151, 16);
             this.lblPrecioMinimo.TabIndex = 78;
@@ -308,17 +316,85 @@
             // txtPrecioDeVentaMinimo
             // 
             this.txtPrecioDeVentaMinimo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrecioDeVentaMinimo.Location = new System.Drawing.Point(188, 291);
+            this.txtPrecioDeVentaMinimo.Location = new System.Drawing.Point(188, 283);
             this.txtPrecioDeVentaMinimo.Name = "txtPrecioDeVentaMinimo";
             this.txtPrecioDeVentaMinimo.Size = new System.Drawing.Size(143, 22);
-            this.txtPrecioDeVentaMinimo.TabIndex = 5;
+            this.txtPrecioDeVentaMinimo.TabIndex = 6;
             this.txtPrecioDeVentaMinimo.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // lblPrecioCompra
+            // 
+            this.lblPrecioCompra.AutoSize = true;
+            this.lblPrecioCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrecioCompra.Location = new System.Drawing.Point(22, 258);
+            this.lblPrecioCompra.Name = "lblPrecioCompra";
+            this.lblPrecioCompra.Size = new System.Drawing.Size(118, 16);
+            this.lblPrecioCompra.TabIndex = 80;
+            this.lblPrecioCompra.Text = "Precio de compra:";
+            // 
+            // txtPrecioDeCompra
+            // 
+            this.txtPrecioDeCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrecioDeCompra.Location = new System.Drawing.Point(188, 252);
+            this.txtPrecioDeCompra.Name = "txtPrecioDeCompra";
+            this.txtPrecioDeCompra.Size = new System.Drawing.Size(143, 22);
+            this.txtPrecioDeCompra.TabIndex = 5;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(305, 405);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(89, 24);
+            this.button1.TabIndex = 81;
+            this.button1.Text = "Examinar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // lblImagen
+            // 
+            this.lblImagen.AutoSize = true;
+            this.lblImagen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblImagen.Location = new System.Drawing.Point(22, 409);
+            this.lblImagen.Name = "lblImagen";
+            this.lblImagen.Size = new System.Drawing.Size(56, 16);
+            this.lblImagen.TabIndex = 82;
+            this.lblImagen.Text = "Imagen:";
+            // 
+            // txtImageName
+            // 
+            this.txtImageName.Enabled = false;
+            this.txtImageName.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.txtImageName.Location = new System.Drawing.Point(84, 408);
+            this.txtImageName.Name = "txtImageName";
+            this.txtImageName.Size = new System.Drawing.Size(215, 20);
+            this.txtImageName.TabIndex = 83;
+            this.txtImageName.Text = "Seleccionar imagen...";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // pcbImage
+            // 
+            this.pcbImage.Image = ((System.Drawing.Image)(resources.GetObject("pcbImage.Image")));
+            this.pcbImage.Location = new System.Drawing.Point(347, 283);
+            this.pcbImage.Name = "pcbImage";
+            this.pcbImage.Size = new System.Drawing.Size(174, 104);
+            this.pcbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pcbImage.TabIndex = 84;
+            this.pcbImage.TabStop = false;
             // 
             // uscProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.pcbImage);
+            this.Controls.Add(this.txtImageName);
+            this.Controls.Add(this.lblImagen);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.lblPrecioCompra);
+            this.Controls.Add(this.txtPrecioDeCompra);
             this.Controls.Add(this.lblPrecioMinimo);
             this.Controls.Add(this.txtPrecioDeVentaMinimo);
             this.Controls.Add(this.txtCantidadMinima);
@@ -346,6 +422,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCantidadMinima)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -375,6 +452,12 @@
         private System.Windows.Forms.TextBox txtPrecioDeVentaMinimo;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
-
+        private System.Windows.Forms.Label lblPrecioCompra;
+        private System.Windows.Forms.TextBox txtPrecioDeCompra;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lblImagen;
+        private System.Windows.Forms.TextBox txtImageName;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.PictureBox pcbImage;
     }
 }

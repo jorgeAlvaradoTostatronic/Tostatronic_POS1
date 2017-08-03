@@ -451,5 +451,34 @@ namespace Maxima_Distribuidores_VS
             uscCredito credito = new uscCredito();
             Interfaz(credito);
         }
+
+        private void rbnModificarImagen_Click(object sender, EventArgs e)
+        {
+            uscImages images = new uscImages();
+            Interfaz(images);
+        }
+
+        private void rbnBtnCatalogo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<string[]> productos = Sql.BuscarDatos("SELECT codigo,nombre,precio_publico,precio_distribuidor, precio_minimo, imagen FROM productos WHERE eliminado=0 ORDER BY nombre ASC;");
+                ProductoCatalogo p = new ProductoCatalogo();
+                List<ProductoCatalogo> pr = new List<ProductoCatalogo>();
+                foreach (string[] a in productos)
+                {
+                    p.Codigo = a[0];
+                    p.Descripcion = a[1];
+                    p.PrecioPublico = float.Parse(a[2]);
+                    p.PrecioDistribuidor= float.Parse(a[3]);
+                    p.PrecioMinimo = float.Parse(a[4]);
+                    p.Imagen = a[5];
+                    pr.Add(p);
+                }
+                PDFCatalogo.Catalogo(pr);
+                PDFFile.Ver(Application.StartupPath + "\\Catalogo.pdf");
+            }
+            catch (Exception ae) { MessageBox.Show(ae.Message); }
+        }
     }
 }

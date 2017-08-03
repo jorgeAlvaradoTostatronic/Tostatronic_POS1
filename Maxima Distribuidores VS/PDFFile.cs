@@ -81,8 +81,8 @@ namespace Maxima_Distribuidores_VS
         public void CrearCabecera(string[,] datos)
         {
             Image img;
-            if (File.Exists(Application.StartupPath + "\\tarjeta.png"))
-                img = Image.GetInstance(Application.StartupPath + "\\tarjeta.png");
+            if (File.Exists(Application.StartupPath + "Recursos\\tarjeta.png"))
+                img = Image.GetInstance(Application.StartupPath + "Recursos\\tarjeta.png");
             else
                 img = Image.GetInstance(Application.StartupPath + "\\Resources\\tarjeta.png");
             

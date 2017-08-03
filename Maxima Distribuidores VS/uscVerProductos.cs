@@ -76,7 +76,7 @@ namespace Maxima_Distribuidores_VS
 
         private void dgvProductos_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            float publico,distribuidor,precioMinimo;
+            float publico,distribuidor,precioMinimo,precioCompra;
             try
             {
                 if (e.ColumnIndex == IndexColumna("seleccionador"))
@@ -88,29 +88,34 @@ namespace Maxima_Distribuidores_VS
                         float.TryParse(ValorCelda(e.RowIndex, "distribuidor"),out distribuidor);
                         float.TryParse(ValorCelda(e.RowIndex, "publico"),out publico);
                         float.TryParse(ValorCelda(e.RowIndex, "precioMinimo"),out precioMinimo);
-                        if (distribuidor >= precioMinimo)
+                        float.TryParse(ValorCelda(e.RowIndex, "precioCompra"), out precioCompra);
+                        if(precioMinimo>precioCompra)
                         {
-                            if (publico > precioMinimo)
+                            if (distribuidor >= precioMinimo)
                             {
-                                Sql.InsertarDatos("UPDATE productos SET codigo='" + ValorCelda(e.RowIndex, "codigo") +
-                                "', nombre='" + ValorCelda(e.RowIndex, "descripcion") +
-                                "', existencia='" + ValorCelda(e.RowIndex, "cantidad") +
-                                "', cantidad_minima='" + ValorCelda(e.RowIndex, "cantidadMinima") +
-                                "', precio_publico='" + ValorCelda(e.RowIndex, "publico") +
-                                "', precio_distribuidor='" + ValorCelda(e.RowIndex, "distribuidor") +
-                                "', precio_minimo='" + ValorCelda(e.RowIndex, "precioMinimo") +
-                                "' WHERE codigo = '" + ValorCelda(e.RowIndex, "codigo") + "'");
+                                if (publico > distribuidor)
+                                {
+                                    Sql.InsertarDatos("UPDATE productos SET codigo='" + ValorCelda(e.RowIndex, "codigo") +
+                                    "', nombre='" + ValorCelda(e.RowIndex, "descripcion") +
+                                    "', existencia='" + ValorCelda(e.RowIndex, "cantidad") +
+                                    "', cantidad_minima='" + ValorCelda(e.RowIndex, "cantidadMinima") +
+                                    "', precio_compra='" + ValorCelda(e.RowIndex, "precioCompra") +
+                                    "', precio_publico='" + ValorCelda(e.RowIndex, "publico") +
+                                    "', precio_distribuidor='" + ValorCelda(e.RowIndex, "distribuidor") +
+                                    "', precio_minimo='" + ValorCelda(e.RowIndex, "precioMinimo") +
+                                    "' WHERE codigo = '" + ValorCelda(e.RowIndex, "codigo") + "'");
+                                }
+                                else
+                                    dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = "Error: El precio publico debe ser mayor al precio de distribuidor.";
                             }
                             else
-                                dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = "Error: El precio publico debe ser mayor al precio minimo.";
+                                dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = "Error: El precio de distribuidor debe ser igual o mayor a precio minimo.";
                         }
                         else
-                            dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = "Error: El precio de distribuidor debe ser igual o mayor a precio minimo.";
+                            dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = "Error: El precio minimo debe ser mayor al precio de compra.";
                     }
                     else
-                    {
                         dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = "Error: El codigo no se puede modificar.";
-                    }
                 }
             }
             catch (Exception) { }
@@ -126,9 +131,11 @@ namespace Maxima_Distribuidores_VS
                     dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = "";
                 else
                 {
-                    float temp;
+                    float temp=0;
                     if ((e.ColumnIndex == IndexColumna("cantidad") || e.ColumnIndex == IndexColumna("publico") ||
-                        e.ColumnIndex == IndexColumna("distribuidor") || e.ColumnIndex == IndexColumna("cantidadMinima") || e.ColumnIndex == IndexColumna("precioMinimo")) && float.TryParse(e.FormattedValue.ToString(), out temp))
+                        e.ColumnIndex == IndexColumna("distribuidor") || e.ColumnIndex == IndexColumna("cantidadMinima") || 
+                        e.ColumnIndex == IndexColumna("precioMinimo")) || e.ColumnIndex == IndexColumna("precioCompra") && 
+                        float.TryParse(e.FormattedValue.ToString(), out temp))
                     {
                         if (temp < 0)
                             dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = "Error: Este dato debe ser mayor o igual a 0.";

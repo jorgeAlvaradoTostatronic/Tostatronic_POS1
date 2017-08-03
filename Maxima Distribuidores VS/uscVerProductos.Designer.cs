@@ -42,10 +42,12 @@
             this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidadMinima = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.publico = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.distribuidor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.precioMinimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seleccionador = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.image = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,10 +90,12 @@
             this.descripcion,
             this.cantidad,
             this.cantidadMinima,
+            this.precioCompra,
             this.publico,
             this.distribuidor,
             this.precioMinimo,
-            this.seleccionador});
+            this.seleccionador,
+            this.image});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -176,6 +180,11 @@
             this.cantidadMinima.HeaderText = "Cantidad Minima";
             this.cantidadMinima.Name = "cantidadMinima";
             // 
+            // precioCompra
+            // 
+            this.precioCompra.HeaderText = "Precio de Compra";
+            this.precioCompra.Name = "precioCompra";
+            // 
             // publico
             // 
             this.publico.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -203,6 +212,12 @@
             this.seleccionador.Name = "seleccionador";
             this.seleccionador.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.seleccionador.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // image
+            // 
+            this.image.HeaderText = "Imagen";
+            this.image.Name = "image";
+            this.image.Visible = false;
             // 
             // uscVerProductos
             // 
@@ -236,10 +251,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidadMinima;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precioCompra;
         private System.Windows.Forms.DataGridViewTextBoxColumn publico;
         private System.Windows.Forms.DataGridViewTextBoxColumn distribuidor;
         private System.Windows.Forms.DataGridViewTextBoxColumn precioMinimo;
         private System.Windows.Forms.DataGridViewCheckBoxColumn seleccionador;
-
+        private System.Windows.Forms.DataGridViewTextBoxColumn image;
     }
 }
