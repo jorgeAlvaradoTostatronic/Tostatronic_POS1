@@ -80,6 +80,8 @@
             this.rbnPnlVisibilidad = new System.Windows.Forms.RibbonPanel();
             this.rbnBtnFullScreen = new System.Windows.Forms.RibbonButton();
             this.rbnBtnNormalScreen = new System.Windows.Forms.RibbonButton();
+            this.rbnPnlWebService = new System.Windows.Forms.RibbonPanel();
+            this.rbnBtnActualizarExistencias = new System.Windows.Forms.RibbonButton();
             this.ribbonPanel19 = new System.Windows.Forms.RibbonPanel();
             this.rbnPrincipal = new System.Windows.Forms.Ribbon();
             this.ribbonButton6 = new System.Windows.Forms.RibbonButton();
@@ -377,6 +379,7 @@
             this.rbtConfiguracion.Panels.Add(this.rbnPnlServidor);
             this.rbtConfiguracion.Panels.Add(this.rbnPnlLicencia);
             this.rbtConfiguracion.Panels.Add(this.rbnPnlVisibilidad);
+            this.rbtConfiguracion.Panels.Add(this.rbnPnlWebService);
             this.rbtConfiguracion.Text = "Configuraciones";
             // 
             // rbnPnlBD
@@ -450,6 +453,17 @@
             this.rbnBtnNormalScreen.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnBtnNormalScreen.SmallImage")));
             this.rbnBtnNormalScreen.Text = "Normal";
             this.rbnBtnNormalScreen.Click += new System.EventHandler(this.rbnBtnNormalScreen_Click);
+            // 
+            // rbnPnlWebService
+            // 
+            this.rbnPnlWebService.Items.Add(this.rbnBtnActualizarExistencias);
+            this.rbnPnlWebService.Text = "WebService";
+            // 
+            // rbnBtnActualizarExistencias
+            // 
+            this.rbnBtnActualizarExistencias.Image = ((System.Drawing.Image)(resources.GetObject("rbnBtnActualizarExistencias.Image")));
+            this.rbnBtnActualizarExistencias.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnBtnActualizarExistencias.SmallImage")));
+            this.rbnBtnActualizarExistencias.Click += new System.EventHandler(this.rbnBtnActualizarExistencias_Click);
             // 
             // ribbonPanel19
             // 
@@ -825,6 +839,8 @@
         private System.Windows.Forms.Panel pnlContenedor;
         private System.Windows.Forms.RibbonButton rbnBtnCatalogo;
         private System.Windows.Forms.RibbonButton ribbonButton6;
+        private System.Windows.Forms.RibbonPanel rbnPnlWebService;
+        private System.Windows.Forms.RibbonButton rbnBtnActualizarExistencias;
     }
 }
 

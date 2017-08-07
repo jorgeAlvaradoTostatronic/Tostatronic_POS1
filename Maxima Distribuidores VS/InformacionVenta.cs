@@ -86,6 +86,19 @@ namespace Maxima_Distribuidores_VS
         }
     }
 
+    public struct ProductoWebService
+    {
+        public string Codigo;
+        public float PrecioPublico, Cantidad;
+
+        public ProductoWebService(string codigo, float precioPublico,float cantidad)
+        {
+            Codigo = codigo;
+            Cantidad = cantidad;
+            PrecioPublico = precioPublico;
+        }
+    }
+
     public struct Clientes
     {
         public int tipo_cliente;

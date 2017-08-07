@@ -26,7 +26,6 @@ namespace Maxima_Distribuidores_VS
         public uscAgregarCotizacion()
         {
             InitializeComponent();
-            chkImpuesto.Enabled = false;
             redimension = new Redimension(this);
             dgvCotizacion.Columns[IndexColumna(dgvCotizacion, "codigo")].DefaultCellStyle.BackColor = Color.LightGreen;
             dgvCotizacion.Columns[IndexColumna(dgvCotizacion, "subtotal")].DefaultCellStyle.BackColor = Color.LightGreen;
@@ -167,8 +166,6 @@ namespace Maxima_Distribuidores_VS
                 {
                     Cancelar();
                     Total();
-                    chkImpuesto.Enabled = false;
-                    btnCotizacion.Enabled = false;
                     btnBuscarCliente_Click(sender, new EventArgs());
                 }
             }
@@ -426,6 +423,7 @@ namespace Maxima_Distribuidores_VS
             {
                 try
                 {
+
                     InformacionVenta informacionVenta = GuardarCotizacion.Leer();
 
                     List<string[]> listaCliente = Sql.BuscarDatos("SELECT id_cliente, rfc, nombres, apellido_paterno, id_tipo_cliente FROM clientes WHERE id_cliente = '" +
@@ -448,6 +446,7 @@ namespace Maxima_Distribuidores_VS
                             (subTotalTemp - subTotalTemp*descuentoTemp/100).ToString(), descuentoTemp.ToString() });
                     }
                     Total();
+                    ActivarCotizacion();
                 }
                 catch (Exception) { }
             }

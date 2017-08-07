@@ -480,5 +480,10 @@ namespace Maxima_Distribuidores_VS
             }
             catch (Exception ae) { MessageBox.Show(ae.Message); }
         }
+
+        private void rbnBtnActualizarExistencias_Click(object sender, EventArgs e)
+        {
+           MessageBox.Show( WebService.ActualizaExistencias());
+        }
     }
 }

@@ -100,6 +100,7 @@ namespace Maxima_Distribuidores_VS
 
         private void dgvProductos_SelectionChanged(object sender, EventArgs e)
         {
+            txtImageName.Text = "Seleccionar imagen...";
             String imageName = dgvProductos.Rows[RowIndex()].Cells[2].Value.ToString();
             pcbImagen.Image.Dispose();
             pcbImagen.Image = Image.FromFile(@"Imagenes\" + imageName);
