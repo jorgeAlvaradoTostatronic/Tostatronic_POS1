@@ -82,6 +82,8 @@
             this.rbnBtnNormalScreen = new System.Windows.Forms.RibbonButton();
             this.rbnPnlWebService = new System.Windows.Forms.RibbonPanel();
             this.rbnBtnActualizarExistencias = new System.Windows.Forms.RibbonButton();
+            this.rbnPnlPrinter = new System.Windows.Forms.RibbonPanel();
+            this.rbnBtnPrinter = new System.Windows.Forms.RibbonButton();
             this.ribbonPanel19 = new System.Windows.Forms.RibbonPanel();
             this.rbnPrincipal = new System.Windows.Forms.Ribbon();
             this.ribbonButton6 = new System.Windows.Forms.RibbonButton();
@@ -118,6 +120,7 @@
             this.rbnBtnAgregar = new System.Windows.Forms.RibbonButton();
             this.ribbonButton5 = new System.Windows.Forms.RibbonButton();
             this.pnlContenedor = new System.Windows.Forms.Panel();
+            this.rbnOrder = new System.Windows.Forms.RibbonButton();
             rbnBtnClientesReActivar = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
@@ -189,6 +192,7 @@
             this.rbnPnlProductos.Items.Add(this.rbnDistribuidor);
             this.rbnPnlProductos.Items.Add(this.rbnModificarImagen);
             this.rbnPnlProductos.Items.Add(this.rbnBtnCatalogo);
+            this.rbnPnlProductos.Items.Add(this.rbnOrder);
             this.rbnPnlProductos.Text = "Productos";
             // 
             // rbnBtnProductosEdicion
@@ -380,6 +384,7 @@
             this.rbtConfiguracion.Panels.Add(this.rbnPnlLicencia);
             this.rbtConfiguracion.Panels.Add(this.rbnPnlVisibilidad);
             this.rbtConfiguracion.Panels.Add(this.rbnPnlWebService);
+            this.rbtConfiguracion.Panels.Add(this.rbnPnlPrinter);
             this.rbtConfiguracion.Text = "Configuraciones";
             // 
             // rbnPnlBD
@@ -464,6 +469,17 @@
             this.rbnBtnActualizarExistencias.Image = ((System.Drawing.Image)(resources.GetObject("rbnBtnActualizarExistencias.Image")));
             this.rbnBtnActualizarExistencias.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnBtnActualizarExistencias.SmallImage")));
             this.rbnBtnActualizarExistencias.Click += new System.EventHandler(this.rbnBtnActualizarExistencias_Click);
+            // 
+            // rbnPnlPrinter
+            // 
+            this.rbnPnlPrinter.Items.Add(this.rbnBtnPrinter);
+            this.rbnPnlPrinter.Text = "Configuracion de impresora";
+            // 
+            // rbnBtnPrinter
+            // 
+            this.rbnBtnPrinter.Image = ((System.Drawing.Image)(resources.GetObject("rbnBtnPrinter.Image")));
+            this.rbnBtnPrinter.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnBtnPrinter.SmallImage")));
+            this.rbnBtnPrinter.Click += new System.EventHandler(this.rbnBtnPrinter_Click);
             // 
             // ribbonPanel19
             // 
@@ -732,6 +748,13 @@
             this.pnlContenedor.Size = new System.Drawing.Size(884, 504);
             this.pnlContenedor.TabIndex = 1;
             // 
+            // rbnOrder
+            // 
+            this.rbnOrder.Image = ((System.Drawing.Image)(resources.GetObject("rbnOrder.Image")));
+            this.rbnOrder.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnOrder.SmallImage")));
+            this.rbnOrder.Text = "Nueva orden";
+            this.rbnOrder.Click += new System.EventHandler(this.rbnOrder_Click);
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -841,6 +864,9 @@
         private System.Windows.Forms.RibbonButton ribbonButton6;
         private System.Windows.Forms.RibbonPanel rbnPnlWebService;
         private System.Windows.Forms.RibbonButton rbnBtnActualizarExistencias;
+        private System.Windows.Forms.RibbonPanel rbnPnlPrinter;
+        private System.Windows.Forms.RibbonButton rbnBtnPrinter;
+        private System.Windows.Forms.RibbonButton rbnOrder;
     }
 }
 

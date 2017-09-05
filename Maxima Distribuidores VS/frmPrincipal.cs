@@ -470,7 +470,7 @@ namespace Maxima_Distribuidores_VS
                     p.Codigo = a[0];
                     p.Descripcion = a[1];
                     p.PrecioPublico = float.Parse(a[2]);
-                    p.PrecioDistribuidor= float.Parse(a[3]);
+                    p.PrecioDistribuidor = float.Parse(a[3]);
                     p.PrecioMinimo = float.Parse(a[4]);
                     p.Imagen = a[5];
                     pr.Add(p);
@@ -479,11 +479,37 @@ namespace Maxima_Distribuidores_VS
                 PDFFile.Ver(Application.StartupPath + "\\Catalogo.pdf");
             }
             catch (Exception ae) { MessageBox.Show(ae.Message); }
+            //tempClass.generaNombres();
         }
 
         private void rbnBtnActualizarExistencias_Click(object sender, EventArgs e)
         {
            MessageBox.Show( WebService.ActualizaExistencias());
+        }
+
+        private void rbnBtnPrinter_Click(object sender, EventArgs e)
+        {
+            uscPrinterConfig printer = new uscPrinterConfig();
+            Interfaz(printer);
+        }
+
+        private void rbnOrder_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<string[]> productos = Sql.BuscarDatos("SELECT codigo,nombre, imagen FROM productos WHERE eliminado=0 AND existencia=0 ORDER BY nombre ASC;");
+                ProductoCatalogo p = new ProductoCatalogo();
+                List<ProductoCatalogo> pr = new List<ProductoCatalogo>();
+                foreach (string[] a in productos)
+                {
+                    p.Codigo = a[0];
+                    p.Descripcion = a[1];
+                    p.Imagen = a[2];
+                    pr.Add(p);
+                }
+                ExportToExcel.DisplayInExcel(pr);
+            }
+            catch (Exception ae) { MessageBox.Show(ae.Message); }
         }
     }
 }

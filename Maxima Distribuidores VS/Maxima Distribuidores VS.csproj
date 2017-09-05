@@ -12,7 +12,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Jorge\Desktop\setUp\</PublishUrl>
+    <PublishUrl>C:\Users\Jorge\Desktop\TostatronicSETUP\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -28,8 +28,9 @@
     <PublisherName>Maxima Distribuidores</PublisherName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>15</ApplicationRevision>
-    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>21</ApplicationRevision>
+    <ApplicationVersion>3.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>false</BootstrapperEnabled>
@@ -77,6 +78,11 @@
     <Reference Include="LibPrintTicket">
       <HintPath>Librerias\LibPrintTicket\Release\LibPrintTicket.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -87,6 +93,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -110,19 +119,23 @@
     <Compile Include="acercaDe.Designer.cs">
       <DependentUpon>acercaDe.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExportToExcel.cs" />
     <Compile Include="GuardarCotizacion.cs" />
     <Compile Include="Imagenes.cs" />
     <Compile Include="ImpresionTickets.cs" />
+    <Compile Include="Impresora.cs" />
     <Compile Include="ITextEvents.cs" />
     <Compile Include="PDFCatalogo.cs" />
     <Compile Include="PDFFile.cs" />
     <Compile Include="PDFInvoice.cs" />
+    <Compile Include="PrinterConfig.cs" />
     <Compile Include="ReActivarClientes.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ReActivarClientes.Designer.cs">
       <DependentUpon>ReActivarClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="tempClass.cs" />
     <Compile Include="Ticket.cs" />
     <Compile Include="uscAgregarCotizacion.cs">
       <SubType>UserControl</SubType>
@@ -244,6 +257,12 @@
     </Compile>
     <Compile Include="uscImages.Designer.cs">
       <DependentUpon>uscImages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscPrinterConfig.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscPrinterConfig.Designer.cs">
+      <DependentUpon>uscPrinterConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="uscReActivarProductos.cs">
       <SubType>UserControl</SubType>
@@ -408,6 +427,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="uscImages.resx">
       <DependentUpon>uscImages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscPrinterConfig.resx">
+      <DependentUpon>uscPrinterConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="uscReActivarProductos.resx">
       <DependentUpon>uscReActivarProductos.cs</DependentUpon>

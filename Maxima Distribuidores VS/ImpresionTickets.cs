@@ -174,7 +174,7 @@ namespace Maxima_Distribuidores_VS
                 ticket.AddFooterLine("Informacion de tienda");
                 ticket.AddFooterLine("Cel o whatsapp: 3314575853");
 
-                ticket.PrintTicket("ZJ-58"); //Nombre de la impresora de tickets
+                ticket.PrintTicket(PrinterConfig.getPriterName()); //Nombre de la impresora de tickets
             }
             catch (Exception) { return false; }
             return true;
