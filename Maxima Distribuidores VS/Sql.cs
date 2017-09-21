@@ -111,12 +111,13 @@ namespace Maxima_Distribuidores_VS
             }
             catch (Exception) { }
         }
-        public static void InsertarVenta(List<ProductoCompleto> productos,string idUsuario,string idCliente,bool pagada, float impuesto)
+        public static long InsertarVenta(List<ProductoCompleto> productos,string idUsuario,string idCliente,bool pagada, float impuesto)
         {
             #region NuevaAccion
             MySqlConnection conexion;
             MySqlCommand cmd;
             MySqlTransaction transaccion = null;
+            long idVenta = 0;
             string consulta;
             string fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             conexion = ObtenerConexion();
@@ -134,7 +135,7 @@ namespace Maxima_Distribuidores_VS
                     consulta = "INSERT INTO `salepoint`.`venta` (`id_venta`, `id_usuario`, `id_cliente`, `pagada`, `fecha_de_venta`, `cancelada`,`impuesto`) VALUES (NULL, '" + idUsuario + "', '" + idCliente + "', '0', '" + fecha + "', '0', " + impuesto + ");";
                 cmd.CommandText = consulta;
                 cmd.ExecuteNonQuery();
-                long idVenta = cmd.LastInsertedId;
+                idVenta = cmd.LastInsertedId;
                 foreach (ProductoCompleto producto in productos)
                 {
                     cmd.Parameters.Clear();
@@ -163,6 +164,7 @@ namespace Maxima_Distribuidores_VS
             {
                 conexion.Close();
             }
+            return idVenta;
             #endregion
             #region AccionAntigua
             //MySqlConnection conexion;

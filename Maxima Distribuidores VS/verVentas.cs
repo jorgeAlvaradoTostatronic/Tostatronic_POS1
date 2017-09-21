@@ -110,7 +110,7 @@ namespace Maxima_Distribuidores_VS
                 dgvVentas.Rows.Clear();
                 fechaT = dgvVerVentas.Rows[e.RowIndex].Cells[2].Value.ToString();
                 fol = dgvVerVentas.Rows[e.RowIndex].Cells[0].Value.ToString();
-                LlenaVenta(dgvVerVentas.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
+                LlenaVenta(dgvVerVentas.Rows[e.RowIndex].Cells[0].Value.ToString());
             }
         }
         private void txtBusqueda_KeyDown(object sender, KeyEventArgs e)

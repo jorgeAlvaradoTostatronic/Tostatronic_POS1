@@ -375,10 +375,9 @@ namespace Maxima_Distribuidores_VS
                     totalParcial *= impuesto;
                     if (pago < totalParcial)
                     {
-                        Sql.InsertarVenta(productos, Usuario.Instancia().Id.ToString(), id_cliente, false,impuesto);
-                        List<string[]> idList = Sql.BuscarDatos("SELECT id_venta FROM venta;");
-                        string id = idList[idList.Count - 1][0];
-                        long idVenta = long.Parse(id);
+                        long idVenta=Sql.InsertarVenta(productos, Usuario.Instancia().Id.ToString(), id_cliente, false,impuesto);
+                        //List<string[]> idList = Sql.BuscarDatos("SELECT id_venta FROM venta;");
+                        //string id = 
                         string comando = "INSERT INTO `salepoint`.`abonos` (`id_abono`, `id_venta`, `cantidad_abonada`, `fecha_abono`) VALUES (NULL, '"+idVenta+"', '"+pago+"', '"+fecha+"');";
                         Sql.InsertarDatos(comando);
                     }
