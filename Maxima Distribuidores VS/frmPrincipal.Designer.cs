@@ -52,6 +52,8 @@
             this.rbnDistribuidor = new System.Windows.Forms.RibbonButton();
             this.rbnModificarImagen = new System.Windows.Forms.RibbonButton();
             this.rbnBtnCatalogo = new System.Windows.Forms.RibbonButton();
+            this.rbnOrder = new System.Windows.Forms.RibbonButton();
+            this.rbnGoogleSheet = new System.Windows.Forms.RibbonButton();
             this.rbtUsuarios = new System.Windows.Forms.RibbonTab();
             this.rbnPnlUsuarios = new System.Windows.Forms.RibbonPanel();
             this.rbnBtnUsuariosVer = new System.Windows.Forms.RibbonButton();
@@ -82,11 +84,15 @@
             this.rbnBtnNormalScreen = new System.Windows.Forms.RibbonButton();
             this.rbnPnlWebService = new System.Windows.Forms.RibbonPanel();
             this.rbnBtnActualizarExistencias = new System.Windows.Forms.RibbonButton();
+            this.rbnBtnPromoDistribuidor = new System.Windows.Forms.RibbonButton();
             this.rbnPnlPrinter = new System.Windows.Forms.RibbonPanel();
             this.rbnBtnPrinter = new System.Windows.Forms.RibbonButton();
+            this.rbnPnlNoWeb = new System.Windows.Forms.RibbonPanel();
+            this.rbnBtnGetData = new System.Windows.Forms.RibbonButton();
             this.ribbonPanel19 = new System.Windows.Forms.RibbonPanel();
             this.rbnPrincipal = new System.Windows.Forms.Ribbon();
             this.ribbonButton6 = new System.Windows.Forms.RibbonButton();
+            this.ribbonButton7 = new System.Windows.Forms.RibbonButton();
             this.rbtVentas = new System.Windows.Forms.RibbonTab();
             this.rbnPnlVentaCotizacion = new System.Windows.Forms.RibbonPanel();
             this.rbnBtnVentaActual = new System.Windows.Forms.RibbonButton();
@@ -101,6 +107,10 @@
             this.rbnPnlInventario = new System.Windows.Forms.RibbonPanel();
             this.rbnFormato = new System.Windows.Forms.RibbonButton();
             this.rbnPnlTotalProductos = new System.Windows.Forms.RibbonButton();
+            this.rbnBtnCorregirImagenes = new System.Windows.Forms.RibbonButton();
+            this.tbnAppProducts = new System.Windows.Forms.RibbonButton();
+            this.rbnUdtDes = new System.Windows.Forms.RibbonButton();
+            this.rbnBtnProductExcel = new System.Windows.Forms.RibbonButton();
             this.rbtClientes = new System.Windows.Forms.RibbonTab();
             this.rbnPnlClientes = new System.Windows.Forms.RibbonPanel();
             this.rbnBtnClientesBuscar = new System.Windows.Forms.RibbonButton();
@@ -120,7 +130,6 @@
             this.rbnBtnAgregar = new System.Windows.Forms.RibbonButton();
             this.ribbonButton5 = new System.Windows.Forms.RibbonButton();
             this.pnlContenedor = new System.Windows.Forms.Panel();
-            this.rbnOrder = new System.Windows.Forms.RibbonButton();
             rbnBtnClientesReActivar = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
@@ -193,6 +202,7 @@
             this.rbnPnlProductos.Items.Add(this.rbnModificarImagen);
             this.rbnPnlProductos.Items.Add(this.rbnBtnCatalogo);
             this.rbnPnlProductos.Items.Add(this.rbnOrder);
+            this.rbnPnlProductos.Items.Add(this.rbnGoogleSheet);
             this.rbnPnlProductos.Text = "Productos";
             // 
             // rbnBtnProductosEdicion
@@ -271,6 +281,20 @@
             this.rbnBtnCatalogo.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnBtnCatalogo.SmallImage")));
             this.rbnBtnCatalogo.Text = "Catalogo";
             this.rbnBtnCatalogo.Click += new System.EventHandler(this.rbnBtnCatalogo_Click);
+            // 
+            // rbnOrder
+            // 
+            this.rbnOrder.Image = ((System.Drawing.Image)(resources.GetObject("rbnOrder.Image")));
+            this.rbnOrder.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnOrder.SmallImage")));
+            this.rbnOrder.Text = "Nueva orden";
+            this.rbnOrder.Click += new System.EventHandler(this.rbnOrder_Click);
+            // 
+            // rbnGoogleSheet
+            // 
+            this.rbnGoogleSheet.Image = ((System.Drawing.Image)(resources.GetObject("rbnGoogleSheet.Image")));
+            this.rbnGoogleSheet.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnGoogleSheet.SmallImage")));
+            this.rbnGoogleSheet.Text = "Hoja de productos";
+            this.rbnGoogleSheet.Click += new System.EventHandler(this.rbnGoogleSheet_Click);
             // 
             // rbtUsuarios
             // 
@@ -385,6 +409,7 @@
             this.rbtConfiguracion.Panels.Add(this.rbnPnlVisibilidad);
             this.rbtConfiguracion.Panels.Add(this.rbnPnlWebService);
             this.rbtConfiguracion.Panels.Add(this.rbnPnlPrinter);
+            this.rbtConfiguracion.Panels.Add(this.rbnPnlNoWeb);
             this.rbtConfiguracion.Text = "Configuraciones";
             // 
             // rbnPnlBD
@@ -462,6 +487,7 @@
             // rbnPnlWebService
             // 
             this.rbnPnlWebService.Items.Add(this.rbnBtnActualizarExistencias);
+            this.rbnPnlWebService.Items.Add(this.rbnBtnPromoDistribuidor);
             this.rbnPnlWebService.Text = "WebService";
             // 
             // rbnBtnActualizarExistencias
@@ -469,6 +495,13 @@
             this.rbnBtnActualizarExistencias.Image = ((System.Drawing.Image)(resources.GetObject("rbnBtnActualizarExistencias.Image")));
             this.rbnBtnActualizarExistencias.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnBtnActualizarExistencias.SmallImage")));
             this.rbnBtnActualizarExistencias.Click += new System.EventHandler(this.rbnBtnActualizarExistencias_Click);
+            // 
+            // rbnBtnPromoDistribuidor
+            // 
+            this.rbnBtnPromoDistribuidor.Image = ((System.Drawing.Image)(resources.GetObject("rbnBtnPromoDistribuidor.Image")));
+            this.rbnBtnPromoDistribuidor.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnBtnPromoDistribuidor.SmallImage")));
+            this.rbnBtnPromoDistribuidor.Text = "Promocion Distribuidor";
+            this.rbnBtnPromoDistribuidor.Click += new System.EventHandler(this.rbnBtnPromoDistribuidor_Click);
             // 
             // rbnPnlPrinter
             // 
@@ -481,6 +514,18 @@
             this.rbnBtnPrinter.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnBtnPrinter.SmallImage")));
             this.rbnBtnPrinter.Click += new System.EventHandler(this.rbnBtnPrinter_Click);
             // 
+            // rbnPnlNoWeb
+            // 
+            this.rbnPnlNoWeb.Image = global::Maxima_Distribuidores_VS.Properties.Resources.web;
+            this.rbnPnlNoWeb.Items.Add(this.rbnBtnGetData);
+            this.rbnPnlNoWeb.Text = "No Web";
+            // 
+            // rbnBtnGetData
+            // 
+            this.rbnBtnGetData.Image = global::Maxima_Distribuidores_VS.Properties.Resources.web;
+            this.rbnBtnGetData.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnBtnGetData.SmallImage")));
+            this.rbnBtnGetData.Click += new System.EventHandler(this.rbnBtnGetData_Click);
+            // 
             // ribbonPanel19
             // 
             this.ribbonPanel19.Text = "Reporte Personalizado";
@@ -489,6 +534,7 @@
             // 
             this.rbnPrincipal.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.rbnPrincipal.Location = new System.Drawing.Point(0, 0);
+            this.rbnPrincipal.Margin = new System.Windows.Forms.Padding(4);
             this.rbnPrincipal.Minimized = false;
             this.rbnPrincipal.Name = "rbnPrincipal";
             // 
@@ -507,8 +553,9 @@
             // 
             // 
             this.rbnPrincipal.QuickAcessToolbar.Items.Add(this.ribbonButton6);
+            this.rbnPrincipal.QuickAcessToolbar.Items.Add(this.ribbonButton7);
             this.rbnPrincipal.RibbonTabFont = new System.Drawing.Font("Trebuchet MS", 9F);
-            this.rbnPrincipal.Size = new System.Drawing.Size(884, 140);
+            this.rbnPrincipal.Size = new System.Drawing.Size(1179, 172);
             this.rbnPrincipal.TabIndex = 0;
             this.rbnPrincipal.Tabs.Add(this.rbtVentas);
             this.rbnPrincipal.Tabs.Add(this.rbtProductos);
@@ -526,6 +573,13 @@
             this.ribbonButton6.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
             this.ribbonButton6.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton6.SmallImage")));
             this.ribbonButton6.Text = "ribbonButton6";
+            // 
+            // ribbonButton7
+            // 
+            this.ribbonButton7.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButton7.Image")));
+            this.ribbonButton7.MaxSizeMode = System.Windows.Forms.RibbonElementSizeMode.Compact;
+            this.ribbonButton7.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton7.SmallImage")));
+            this.ribbonButton7.Text = "ribbonButton7";
             // 
             // rbtVentas
             // 
@@ -610,6 +664,10 @@
             // 
             this.rbnPnlInventario.Items.Add(this.rbnFormato);
             this.rbnPnlInventario.Items.Add(this.rbnPnlTotalProductos);
+            this.rbnPnlInventario.Items.Add(this.rbnBtnCorregirImagenes);
+            this.rbnPnlInventario.Items.Add(this.tbnAppProducts);
+            this.rbnPnlInventario.Items.Add(this.rbnUdtDes);
+            this.rbnPnlInventario.Items.Add(this.rbnBtnProductExcel);
             this.rbnPnlInventario.Text = "Inventario";
             // 
             // rbnFormato
@@ -625,6 +683,34 @@
             this.rbnPnlTotalProductos.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnPnlTotalProductos.SmallImage")));
             this.rbnPnlTotalProductos.Text = "$ Mercancia Total";
             this.rbnPnlTotalProductos.Click += new System.EventHandler(this.rbnPnlTotalProductos_Click);
+            // 
+            // rbnBtnCorregirImagenes
+            // 
+            this.rbnBtnCorregirImagenes.Image = ((System.Drawing.Image)(resources.GetObject("rbnBtnCorregirImagenes.Image")));
+            this.rbnBtnCorregirImagenes.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnBtnCorregirImagenes.SmallImage")));
+            this.rbnBtnCorregirImagenes.Text = "Corregir imagenes";
+            this.rbnBtnCorregirImagenes.Click += new System.EventHandler(this.rbnBtnCorregirImagenes_Click);
+            // 
+            // tbnAppProducts
+            // 
+            this.tbnAppProducts.Image = ((System.Drawing.Image)(resources.GetObject("tbnAppProducts.Image")));
+            this.tbnAppProducts.SmallImage = ((System.Drawing.Image)(resources.GetObject("tbnAppProducts.SmallImage")));
+            this.tbnAppProducts.Text = "Add Producto";
+            this.tbnAppProducts.Click += new System.EventHandler(this.tbnAppProducts_Click);
+            // 
+            // rbnUdtDes
+            // 
+            this.rbnUdtDes.Image = ((System.Drawing.Image)(resources.GetObject("rbnUdtDes.Image")));
+            this.rbnUdtDes.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnUdtDes.SmallImage")));
+            this.rbnUdtDes.Text = "Precio Promo";
+            this.rbnUdtDes.Click += new System.EventHandler(this.rbnUdtDes_Click);
+            // 
+            // rbnBtnProductExcel
+            // 
+            this.rbnBtnProductExcel.Image = ((System.Drawing.Image)(resources.GetObject("rbnBtnProductExcel.Image")));
+            this.rbnBtnProductExcel.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnBtnProductExcel.SmallImage")));
+            this.rbnBtnProductExcel.Text = "Lista de precios";
+            this.rbnBtnProductExcel.Click += new System.EventHandler(this.rbnBtnProductExcel_Click);
             // 
             // rbtClientes
             // 
@@ -743,27 +829,22 @@
             // pnlContenedor
             // 
             this.pnlContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContenedor.Location = new System.Drawing.Point(0, 140);
+            this.pnlContenedor.Location = new System.Drawing.Point(0, 172);
+            this.pnlContenedor.Margin = new System.Windows.Forms.Padding(4);
             this.pnlContenedor.Name = "pnlContenedor";
-            this.pnlContenedor.Size = new System.Drawing.Size(884, 504);
+            this.pnlContenedor.Size = new System.Drawing.Size(1179, 621);
             this.pnlContenedor.TabIndex = 1;
-            // 
-            // rbnOrder
-            // 
-            this.rbnOrder.Image = ((System.Drawing.Image)(resources.GetObject("rbnOrder.Image")));
-            this.rbnOrder.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnOrder.SmallImage")));
-            this.rbnOrder.Text = "Nueva orden";
-            this.rbnOrder.Click += new System.EventHandler(this.rbnOrder_Click);
             // 
             // frmPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 644);
+            this.ClientSize = new System.Drawing.Size(1179, 793);
             this.Controls.Add(this.pnlContenedor);
             this.Controls.Add(this.rbnPrincipal);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(900, 680);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(1194, 826);
             this.Name = "frmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Punto de Venta";
@@ -867,6 +948,15 @@
         private System.Windows.Forms.RibbonPanel rbnPnlPrinter;
         private System.Windows.Forms.RibbonButton rbnBtnPrinter;
         private System.Windows.Forms.RibbonButton rbnOrder;
+        private System.Windows.Forms.RibbonPanel rbnPnlNoWeb;
+        private System.Windows.Forms.RibbonButton rbnBtnGetData;
+        private System.Windows.Forms.RibbonButton rbnGoogleSheet;
+        private System.Windows.Forms.RibbonButton ribbonButton7;
+        private System.Windows.Forms.RibbonButton rbnBtnPromoDistribuidor;
+        private System.Windows.Forms.RibbonButton rbnBtnCorregirImagenes;
+        private System.Windows.Forms.RibbonButton tbnAppProducts;
+        private System.Windows.Forms.RibbonButton rbnUdtDes;
+        private System.Windows.Forms.RibbonButton rbnBtnProductExcel;
     }
 }
 

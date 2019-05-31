@@ -364,13 +364,21 @@ namespace Maxima_Distribuidores_VS
                     conexion.Open();
                 cmd.Connection = conexion;
                 MySqlDataReader lector = cmd.ExecuteReader();
-
+                bool isNotNull = true;
                 while (lector.Read())
                 {
                     string[] datos = new string[lector.FieldCount];
                     for (int i = 0; i < lector.FieldCount; i++)
-                        datos[i] = lector.GetString(i).ToString();
-                    lista.Add(datos);
+                    {
+                        if (!lector.IsDBNull(i))
+                            datos[i] = lector.GetString(i).ToString();
+                        else
+                            isNotNull = false;
+                    }
+                    if (isNotNull)
+                        lista.Add(datos);
+                    else
+                        isNotNull = true;
                 }
 
                 lector.Close();

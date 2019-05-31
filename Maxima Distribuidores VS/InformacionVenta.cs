@@ -99,6 +99,47 @@ namespace Maxima_Distribuidores_VS
         }
     }
 
+    public struct ProductoWebServiceApp
+    {
+        public string Codigo, Imagen, Nombre;
+        public float PrecioPublico, Cantidad;
+
+        public ProductoWebServiceApp(string codigo, float precioPublico, float cantidad, string nombre, string imagen)
+        {
+            Codigo = codigo;
+            Cantidad = cantidad;
+            PrecioPublico = precioPublico;
+            Nombre = nombre;
+            Imagen = imagen;
+        }
+    }
+
+    public struct ProductoNoInWebPage
+    {
+        public string Codigo,Nombre;
+
+        public ProductoNoInWebPage(string codigo, string nombre)
+        {
+            Codigo = codigo;
+            Nombre = nombre;
+        }
+    }
+    public struct ProductoGoogle
+    {
+        public string Codigo, Nombre, Descripcion, Estado, Precio, Enlace, EnlaceImagen;
+
+        public ProductoGoogle(string codigo, string nombre, string decripcion, string estado, string precio, string enlace, string enlaceImagen)
+        {
+            Codigo = codigo;
+            Nombre = nombre;
+            Descripcion = decripcion;
+            Estado = estado;
+            Precio = precio;
+            Enlace = enlace;
+            EnlaceImagen = enlaceImagen;
+        }
+    }
+
     public struct Clientes
     {
         public int tipo_cliente;

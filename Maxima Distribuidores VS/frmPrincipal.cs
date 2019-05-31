@@ -442,8 +442,9 @@ namespace Maxima_Distribuidores_VS
         private void rbnPnlTotalProductos_Click(object sender, EventArgs e)
         {
             List<string[]> p = Sql.BuscarDatos("SELECT SUM(precio_minimo*existencia) FROM productos ORDER BY codigo");
-            float total=float.Parse(p[0][0]);
+            float total = float.Parse(p[0][0]);
             MessageBox.Show("Total mejorado: " + total.ToString("$0.00"));
+
         }
 
         private void rbnBtnCredito_Click(object sender, EventArgs e)
@@ -484,7 +485,20 @@ namespace Maxima_Distribuidores_VS
 
         private void rbnBtnActualizarExistencias_Click(object sender, EventArgs e)
         {
-           MessageBox.Show( WebService.ActualizaExistencias());
+            string message=WebService.ActualizaExistencias();
+            List<string[]> productos = Sql.BuscarDatos("SELECT codigo, precio_publico, existencia FROM productos WHERE eliminado=0 ORDER BY nombre ASC;");
+            ProductoCompleto p = new ProductoCompleto();
+            List<ProductoCompleto> pr = new List<ProductoCompleto>();
+            foreach (string[] a in productos)
+            {
+                p.Codigo = a[0];
+                p.Precio = float.Parse(a[1]);
+                p.Cantidad = float.Parse(a[2]);
+
+                pr.Add(p);
+            }
+            message += "\n";
+            MessageBox.Show(message + WebService.UpdatePriceApp(pr));
         }
 
         private void rbnBtnPrinter_Click(object sender, EventArgs e)
@@ -508,6 +522,181 @@ namespace Maxima_Distribuidores_VS
                     pr.Add(p);
                 }
                 ExportToExcel.DisplayInExcel(pr);
+            }
+            catch (Exception ae) { MessageBox.Show(ae.Message); }
+        }
+
+        private void rbnBtnGetData_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(@"noEstan.txt"))
+                File.Delete(@"noEstan.txt");
+            using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(@"noEstan.txt", true))
+            {
+                string[] data = WebService.GetNoInWebPage();
+                foreach (string s in data)
+                {
+                    file.WriteLine(s);
+                }
+                file.Close();
+            }
+        }
+
+        private void rbnGoogleSheet_Click(object sender, EventArgs e)
+        {
+            List<string[]> productos = Sql.BuscarDatos("SELECT codigo,nombre,existencia,precio_publico, imagen FROM productos WHERE eliminado=0 ORDER BY nombre ASC;");
+            string[] data = WebService.GetGoogleSheet();
+            string[] aux;
+            string[] stringSeparators = new string[] { " && " };
+            List<ProductoGoogle> listaGoogle = new List<ProductoGoogle>();
+            ProductoGoogle p;
+            foreach (string s in data)
+            {
+                aux = s.Split(stringSeparators,
+                           StringSplitOptions.RemoveEmptyEntries);
+                foreach (string[] a in productos)
+                {
+                    if(a[0]==aux[0])
+                    {
+                        p.Codigo = a[0];
+                        p.Nombre = a[1];
+                        if (int.Parse(a[2]) != 0)
+                            p.Estado = "en stock";
+                        else
+                            p.Estado = "agotado";
+                        p.Precio = a[3];
+                        p.EnlaceImagen = "https://tostatronic.com/Imagenes/" + a[4];
+                        p.Enlace = aux[1];
+                        if (aux.Length == 3)
+                            p.Descripcion = aux[2];
+                        else
+                            p.Descripcion = "Por describir";
+                        listaGoogle.Add(p);
+                    }
+                }
+            }
+            ExportToExcel.GoogleSheet(listaGoogle);
+        }
+
+        private void rbnBtnPromoDistribuidor_Click(object sender, EventArgs e)
+        {
+            String message=WebService.PromocionDistribuidor();
+            List<string[]> productos = Sql.BuscarDatos("SELECT codigo, precio_distribuidor, existencia FROM productos WHERE eliminado=0 ORDER BY nombre ASC;");
+            ProductoCompleto p = new ProductoCompleto();
+            List<ProductoCompleto> pr = new List<ProductoCompleto>();
+            foreach (string[] a in productos)
+            {
+                p.Codigo = a[0];
+                p.Precio = float.Parse(a[1]);
+                p.Cantidad = float.Parse(a[2]);
+
+                pr.Add(p);
+            }
+            message += "\n";
+            MessageBox.Show(message + WebService.UpdatePriceApp(pr));
+        }
+
+        private void rbnBtnCorregirImagenes_Click(object sender, EventArgs e)
+        {
+            string newName;
+            List<string[]> productos = Sql.BuscarDatos("SELECT codigo, imagen FROM productos WHERE eliminado=0 ORDER BY nombre ASC;");
+            string[] stringSeparators = new string[] { "." };
+            string[] aux;
+            foreach (string[] a in productos)
+            {
+                aux = a[1].Split(stringSeparators,
+                           StringSplitOptions.RemoveEmptyEntries);
+                newName = aux[0];
+                newName += ".png";
+                Sql.InsertarDatos("UPDATE productos SET imagen='" + newName + "' WHERE codigo='" + a[0] + "'");
+            }
+            MessageBox.Show("Coreccion correcta");
+        }
+
+        private void tbnAppProducts_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(WebService.ActualizaProductosApp());
+          
+
+
+            //De aqui en adelante no se requiere mas
+            //List<string[]> productos = Sql.BuscarDatos("SELECT codigo, precio_publico, existencia FROM productos WHERE eliminado=0 ORDER BY nombre ASC;");
+            //ProductoCompleto p = new ProductoCompleto();
+            //List<ProductoCompleto> pr = new List<ProductoCompleto>();
+            //foreach (string[] a in productos)
+            //{
+            //    p.Codigo = a[0];
+            //    p.Precio = float.Parse(a[1]);
+            //    p.Cantidad = float.Parse(a[2]);
+
+            //    pr.Add(p);
+            //}
+            //MessageBox.Show(WebService.UpdatePriceApp(pr));
+        }
+
+        private void rbnUdtDes_Click(object sender, EventArgs e)
+        {
+            List<string[]> productos = Sql.BuscarDatos("SELECT codigo, precio_distribuidor, existencia FROM productos WHERE eliminado=0 ORDER BY nombre ASC;");
+            ProductoCompleto p = new ProductoCompleto();
+            List<ProductoCompleto> pr = new List<ProductoCompleto>();
+            foreach (string[] a in productos)
+            {
+                p.Codigo = a[0];
+                p.Precio = float.Parse(a[1]);
+                p.Cantidad = float.Parse(a[2]);
+
+                pr.Add(p);
+            }
+            MessageBox.Show(WebService.UpdatePriceApp(pr));
+            //string[] data = WebService.UpdateDescriptionApp();
+            //string[] stringSeparators = new string[] { " && " };
+            //string[] aux;
+            //List<ProductoCompleto> lista = new List<ProductoCompleto>();
+            //List<string[]> productos = Sql.BuscarDatos("SELECT codigo FROM productos WHERE eliminado=0 ORDER BY nombre ASC;");
+            //ProductoCompleto p;
+            //foreach (string[] a in productos)
+            //{
+            //    foreach (string s in data)
+            //    {
+            //        p = new ProductoCompleto();
+            //        aux = s.Split(stringSeparators,
+            //                   StringSplitOptions.RemoveEmptyEntries);
+            //        if(aux[0].Equals(a[0]))
+            //        {
+            //            p.Codigo = aux[0];
+            //            p.Cantidad = int.Parse(aux[1]);
+            //            if (aux.Length > 2)
+            //                p.Descripcion = aux[2];
+            //            else
+            //                p.Descripcion = " Sin descripción.";
+            //            byte[] bytes = Encoding.Default.GetBytes(p.Descripcion);
+            //            p.Descripcion = Encoding.UTF8.GetString(bytes);
+            //            p.Descripcion = p.Descripcion.Replace("'", " ");
+            //            lista.Add(p);
+            //        }
+            //    }
+            //}
+            //MessageBox.Show(WebService.UpdateDescriptionApp2(lista),"Exito");
+        }
+
+        private void rbnBtnProductExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<string[]> productos = Sql.BuscarDatos("SELECT codigo,nombre, imagen, precio_publico,precio_distribuidor,precio_minimo FROM productos WHERE eliminado=0  ORDER BY nombre ASC;");
+                ProductoCatalogo p = new ProductoCatalogo();
+                List<ProductoCatalogo> pr = new List<ProductoCatalogo>();
+                foreach (string[] a in productos)
+                {
+                    p.Codigo = a[0];
+                    p.Descripcion = a[1];
+                    p.Imagen = a[2];
+                    p.PrecioPublico = float.Parse(a[3]);
+                    p.PrecioDistribuidor = float.Parse(a[4]);
+                    p.PrecioMinimo = float.Parse(a[5]);
+                    pr.Add(p);
+                }
+                ExportToExcel.ProductListPrices(pr);
             }
             catch (Exception ae) { MessageBox.Show(ae.Message); }
         }
