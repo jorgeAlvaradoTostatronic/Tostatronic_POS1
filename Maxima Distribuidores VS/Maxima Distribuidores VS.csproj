@@ -29,7 +29,7 @@
     <PublisherName>Maxima Distribuidores</PublisherName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>27</ApplicationRevision>
+    <ApplicationRevision>29</ApplicationRevision>
     <ApplicationVersion>3.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -107,6 +107,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms.Ribbon35">
       <HintPath>Librerias\System.Windows.Forms.Ribbon35.dll</HintPath>
     </Reference>
@@ -127,7 +130,22 @@
       <DependentUpon>acercaDe.cs</DependentUpon>
     </Compile>
     <Compile Include="cfdv33_tdCFDI_catCFDI.cs" />
+    <Compile Include="Connected Services\ServiceReferenceFC\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="ExportToExcel.cs" />
+    <Compile Include="Facturacion1.cs" />
+    <Compile Include="Facturacion\opensslkey.cs" />
+    <Compile Include="Facturacion\SelloDigital.cs" />
+    <Compile Include="Facturacion\StringWriterWithEncoding.cs" />
+    <Compile Include="frmPrincipal.Designer.cs">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrincipal1.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GuardarCotizacion.cs" />
     <Compile Include="Imagenes.cs" />
     <Compile Include="ImpresionTickets.cs" />
@@ -207,12 +225,6 @@
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPrincipal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmPrincipal.Designer.cs">
-      <DependentUpon>frmPrincipal.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmSplash.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +254,12 @@
     <Compile Include="uscCliente.Designer.cs">
       <DependentUpon>uscCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="uscCodigoSat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscCodigoSat.Designer.cs">
+      <DependentUpon>uscCodigoSat.cs</DependentUpon>
+    </Compile>
     <Compile Include="uscCotizaciones.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -260,6 +278,12 @@
     <Compile Include="uscDescuentoClientes.Designer.cs">
       <DependentUpon>uscDescuentoClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="uscFacturacion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscFacturacion.Designer.cs">
+      <DependentUpon>uscFacturacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="uscImages.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -277,6 +301,12 @@
     </Compile>
     <Compile Include="uscReActivarProductos.Designer.cs">
       <DependentUpon>uscReActivarProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uscRecuperaFactura.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uscRecuperaFactura.Designer.cs">
+      <DependentUpon>uscRecuperaFactura.cs</DependentUpon>
     </Compile>
     <Compile Include="uscVentasPendientes.cs">
       <SubType>UserControl</SubType>
@@ -368,6 +398,9 @@
       <DependentUpon>acercaDe.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPrincipal1.resx">
+      <DependentUpon>frmPrincipal1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReActivarClientes.resx">
       <DependentUpon>ReActivarClientes.cs</DependentUpon>
     </EmbeddedResource>
@@ -401,9 +434,6 @@
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPrincipal.resx">
-      <DependentUpon>frmPrincipal.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmSplash.resx">
       <DependentUpon>frmSplash.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -424,6 +454,9 @@
     <EmbeddedResource Include="uscCliente.resx">
       <DependentUpon>uscCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="uscCodigoSat.resx">
+      <DependentUpon>uscCodigoSat.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="uscCotizaciones.resx">
       <DependentUpon>uscCotizaciones.cs</DependentUpon>
     </EmbeddedResource>
@@ -433,6 +466,9 @@
     <EmbeddedResource Include="uscDescuentoClientes.resx">
       <DependentUpon>uscDescuentoClientes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="uscFacturacion.resx">
+      <DependentUpon>uscFacturacion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="uscImages.resx">
       <DependentUpon>uscImages.cs</DependentUpon>
     </EmbeddedResource>
@@ -441,6 +477,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="uscReActivarProductos.resx">
       <DependentUpon>uscReActivarProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uscRecuperaFactura.resx">
+      <DependentUpon>uscRecuperaFactura.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="uscVentasPendientes.resx">
       <DependentUpon>uscVentasPendientes.cs</DependentUpon>
@@ -484,6 +523,22 @@
     <EmbeddedResource Include="verVentas.resx">
       <DependentUpon>verVentas.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Connected Services\ServiceReferenceFC\Maxima_Distribuidores_VS.ServiceReferenceFC.RespuestaCFDi.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReferenceFC\svcTimbrado.wsdl" />
+    <None Include="Connected Services\ServiceReferenceFC\Timbrado.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceFC\Timbrado1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceFC\Timbrado2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReferenceFC\Timbrado3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Maxima Distribuidores VS_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
@@ -500,9 +555,17 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\tarjeta.bmp" />
+    <None Include="Connected Services\ServiceReferenceFC\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceFC\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceReferenceFC\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Resources\tarjeta.png" />
     <Content Include="Resources\tarjeta.bmp" />
     <Content Include="Resources\tarjetamx.bmp" />
@@ -554,6 +617,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServiceReferenceFC\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

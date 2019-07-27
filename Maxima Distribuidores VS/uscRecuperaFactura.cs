@@ -10,12 +10,15 @@ using System.Windows.Forms;
 
 namespace Maxima_Distribuidores_VS
 {
-    public partial class verVentas : UserControl
+    public partial class uscRecuperaFactura : UserControl
     {
-        string fechaT="";
-        string fol="";
+        string fechaT = "";
+        string fol = "";
         float impuesto = 1;
-        public verVentas()
+        float bigTotal = 0;
+        string folAux = "0";
+        List<ProductoSat> articulos = new List<ProductoSat>();
+        public uscRecuperaFactura()
         {
             InitializeComponent();
         }
@@ -26,40 +29,43 @@ namespace Maxima_Distribuidores_VS
             //consulta = "SELECT id_venta,id_cliente,fecha_de_venta FROM venta WHERE fecha_de_venta LIKE '%" + dtpFecha.Value.ToString("yyyy-MM-dd") + "%';";
             lista = Sql.BuscarDatos(consulta);
             for (int i = 0; i < lista.Count; i++)
-                dgvVerVentas.Rows.Add(lista[i][0], lista[i][1],lista[i][2]);
+                dgvVerVentas.Rows.Add(lista[i][0], lista[i][1], lista[i][2]);
         }
-
         private void LlenaVenta(string folio)
         {
             dgvVerVentas.Rows.Clear();
             List<string[]> productos;
             List<string[]> venta;
             string consulta = "SELECT productos_de_venta.id_producto, productos.nombre, productos_de_venta.cantidad_comprada, productos_de_venta.precio_al_momento, productos_de_venta.descuento " +
-                "FROM productos_de_venta, productos "+
+                "FROM productos_de_venta, productos " +
                 "WHERE productos_de_venta.id_venta=" + folio + " AND productos.codigo=productos_de_venta.id_producto;";
             productos = Sql.BuscarDatos(consulta);
-            consulta = "SELECT clientes.rfc, clientes.nombres,clientes.apellido_paterno, clientes.id_cliente "+
-                "FROM venta, clientes "+
-                "WHERE (venta.id_venta=" + folio + " AND venta.cancelada=0) "+
-                "AND clientes.id_cliente=venta.id_cliente "+
+            consulta = "SELECT clientes.rfc, clientes.nombres,clientes.apellido_paterno, clientes.id_cliente,clientes.apellido_materno, clientes.correo_electronico " +
+                "FROM venta, clientes " +
+                "WHERE (venta.id_venta=" + folio + " AND venta.cancelada=0) " +
+                "AND clientes.id_cliente=venta.id_cliente " +
                 "GROUP BY venta.id_venta;";
             venta = Sql.BuscarDatos(consulta);
-            consulta = "SELECT impuesto FROM venta WHERE id_venta="+folio+";";
+            consulta = "SELECT impuesto FROM venta WHERE id_venta=" + folio + ";";
             impuesto = float.Parse(Sql.BuscarDatos(consulta)[0][0]);
             txtRfc.Text = venta[0][0];
-            txtNombre.Text = venta[0][1];
-            txtApellidoPaterno.Text = venta[0][2];
+            txtNombre.Text = venta[0][1] + " " + venta[0][2] + " " + venta[0][4];
+            txtMail.Text = venta[0][5];
             float sub;
+            articulos = new List<ProductoSat>();
             for (int i = 0; i < productos.Count; i++)
             {
                 sub = float.Parse(productos[i][3]);
                 sub *= float.Parse(productos[i][2]);
                 sub -= sub * Descuento(productos[i][0], venta[0][3]) / 100;
+                articulos.Add(new ProductoSat(productos[i][1], Sql.GetCodigoSATProducto(productos[i][0]), float.Parse(productos[i][2]), float.Parse(productos[i][3]), sub));
                 dgvVentas.Rows.Add(productos[i][0], productos[i][1], productos[i][2], productos[i][3], sub.ToString(), productos[i][4]);
+
             }
             Total();
+            ActivaCamposDeTexto();
         }
-        private float Descuento(string id_producto,string id_cliente)
+        private float Descuento(string id_producto, string id_cliente)
         {
             try
             {
@@ -77,113 +83,81 @@ namespace Maxima_Distribuidores_VS
             for (int i = 0; i < dgvVentas.RowCount; i++)
                 total += float.Parse(ValorCelda(i, "subtotal"));
             txtSubTotal.Text = total.ToString("$0.00");
-            yxyIva.Text = (total * (impuesto-1)).ToString("$0.00");
-            total *= impuesto;
+            yxyIva.Text = (total * (0.16)).ToString("$0.00");
+            bigTotal = total;
+            total *= 1.16f;
             txtTotal.Text = total.ToString("$0.00");
+
         }
         private string ValorCelda(int fila, string columna)
         {
             return dgvVentas.Rows[fila].Cells[columna].Value.ToString();
         }
-        private void btnBusqueda_Click(object sender, EventArgs e)
+
+        private void BtnBusqueda_Click(object sender, EventArgs e)
         {
             Buscador("SELECT venta.id_venta, clientes.rfc, venta.fecha_de_venta" +
-           " FROM venta, clientes"+
-           " WHERE (venta.cancelada=0 AND (venta.id_venta LIKE '%" + txtBusqueda.Text + "%'))" +
+           " FROM venta, clientes" +
+           " WHERE (venta.cancelada=0 AND venta.facturada=1 AND (venta.id_venta LIKE '%" + txtBusqueda.Text + "%'))" +
            " AND (clientes.id_cliente=venta.id_cliente) " +
            "GROUP BY venta.id_venta ");
         }
 
-        private void dtpFecha_ValueChanged(object sender, EventArgs e)
+        private void DtpFecha_ValueChanged(object sender, EventArgs e)
         {
             Buscador("SELECT venta.id_venta, clientes.rfc, venta.fecha_de_venta " +
            " FROM venta, clientes" +
-           " WHERE (venta.cancelada=0 AND (venta.fecha_de_venta LIKE '%" + dtpFecha.Value.ToString("yyyy-MM-dd") + "%' )) " +
+           " WHERE (venta.cancelada=0 AND venta.facturada=1 AND (venta.fecha_de_venta LIKE '%" + dtpFecha.Value.ToString("yyyy-MM-dd") + "%' )) " +
            " AND (clientes.id_cliente=venta.id_cliente) " +
            "GROUP BY venta.id_venta ");
         }
 
-        private void dgvVerVentas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvVerVentas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvVerVentas.RowCount > 0)
             {
                 dgvVentas.Rows.Clear();
                 fechaT = dgvVerVentas.Rows[e.RowIndex].Cells[2].Value.ToString();
                 fol = dgvVerVentas.Rows[e.RowIndex].Cells[0].Value.ToString();
+                folAux = dgvVerVentas.Rows[e.RowIndex].Cells[0].Value.ToString();
                 LlenaVenta(dgvVerVentas.Rows[e.RowIndex].Cells[0].Value.ToString());
+
             }
         }
-        private void txtBusqueda_KeyDown(object sender, KeyEventArgs e)
+
+        private void TxtBusqueda_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                btnBusqueda_Click(sender, new EventArgs());
+                BtnBusqueda_Click(sender, new EventArgs());
         }
 
-        private void btnImprimir_Click(object sender, EventArgs e)
+        private void ActivaCamposDeTexto()
         {
-            if (dgvVentas.RowCount > 1)
-            {
-                string id_cliente = Sql.BuscarDatos("SELECT id_cliente FROM clientes WHERE rfc = '" + txtRfc.Text + "'")[0][0];
-                string fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                float totalParcial = 0;
-                List<ProductoCompleto> productos = new List<ProductoCompleto>();
-                ProductoCompleto producto;
-                for (int i = 0; i < dgvVentas.RowCount; i++)
-                {
-                    producto = new ProductoCompleto(dgvVentas.Rows[i].Cells["codigo"].Value.ToString(), dgvVentas.Rows[i].Cells["descripcion"].Value.ToString(),
-                        float.Parse(dgvVentas.Rows[i].Cells["cantidad"].Value.ToString()), int.Parse(dgvVentas.Rows[i].Cells["descuentoPro"].Value.ToString()),
-                        float.Parse(dgvVentas.Rows[i].Cells["subtotal"].Value.ToString()));
-                    productos.Add(producto);
-                    totalParcial += float.Parse(dgvVentas.Rows[i].Cells["subtotal"].Value.ToString());
-                }
-                ImpresionTickets.ImprimeTicketN(fol, productos, totalParcial, totalParcial, fechaT, txtNombre.Text, txtApellidoPaterno.Text,impuesto);
-            
-            }
+            txtNombre.Enabled = true;
+            txtRfc.Enabled = true;
+            txtMail.Enabled = true;
         }
 
-        private void VerVentas_Load(object sender, EventArgs e)
+        void DesactivaCampos()
         {
+            txtNombre.Text = "";
+            txtRfc.Text = "";
+            txtNombre.Enabled = false;
+            txtRfc.Enabled = false;
+            txtMail.Enabled = false;
 
-        }
+            txtSubTotal.Text = "$0.00";
+            txtTotal.Text = "$0.00";
+            yxyIva.Text = "$0.00";
 
-        private void DgvVerVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+            dgvVerVentas.Rows.Clear();
+            dgvVentas.Rows.Clear();
 
-        }
+            bigTotal = 0;
 
-        private void DgvVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+            folAux = "0";
 
-        }
-
-        private void LblTotal_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LblIva_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LblSubTotal_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TxtSubTotal_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void YxyIva_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TxtTotal_TextChanged(object sender, EventArgs e)
-        {
-
+            txtMail.Text = "";
         }
     }
 }

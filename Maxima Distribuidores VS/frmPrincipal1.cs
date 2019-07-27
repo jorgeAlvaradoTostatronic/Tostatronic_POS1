@@ -710,7 +710,24 @@ namespace Maxima_Distribuidores_VS
 
         private void RbnBtnCertificado_Click(object sender, EventArgs e)
         {
+            if (Facturacion.Certificado())
+                MessageBox.Show(this, "Archivo copiado correctamente", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show(this, "Error al copiar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
+        private void RbnBtnKey_Click(object sender, EventArgs e)
+        {
+            if (Facturacion.Llave())
+                MessageBox.Show(this, "Archivo copiado correctamente", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show(this, "Error al copiar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void RbnPnlFacturacion_Click(object sender, EventArgs e)
+        {
+            uscFacturacion facturacion = new uscFacturacion();
+            Interfaz(facturacion);
         }
     }
 }

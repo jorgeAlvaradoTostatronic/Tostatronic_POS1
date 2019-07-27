@@ -1,6 +1,6 @@
 ﻿namespace Maxima_Distribuidores_VS
 {
-    partial class frmPrincipal
+    partial class frmPrincipal1
     {
         /// <summary>
         /// Variable del diseñador requerida.
@@ -135,8 +135,6 @@
             this.rbnBtnAgregar = new System.Windows.Forms.RibbonButton();
             this.ribbonButton5 = new System.Windows.Forms.RibbonButton();
             this.pnlContenedor = new System.Windows.Forms.Panel();
-            this.rbnPnlFacturacion = new System.Windows.Forms.RibbonPanel();
-            this.rbnBtnFactura = new System.Windows.Forms.RibbonButton();
             rbnBtnClientesReActivar = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
@@ -800,7 +798,6 @@
             // rbnFacturacion
             // 
             this.rbnFacturacion.Panels.Add(this.rbnPnlCertificados);
-            this.rbnFacturacion.Panels.Add(this.rbnPnlFacturacion);
             this.rbnFacturacion.Text = "Facturacion";
             // 
             // rbnPnlCertificados
@@ -876,18 +873,6 @@
             this.pnlContenedor.Name = "pnlContenedor";
             this.pnlContenedor.Size = new System.Drawing.Size(1179, 621);
             this.pnlContenedor.TabIndex = 1;
-            // 
-            // rbnPnlFacturacion
-            // 
-            this.rbnPnlFacturacion.Items.Add(this.rbnBtnFactura);
-            this.rbnPnlFacturacion.Text = "Facturacion";
-            this.rbnPnlFacturacion.Click += new System.EventHandler(this.RbnPnlFacturacion_Click);
-            // 
-            // rbnBtnFactura
-            // 
-            this.rbnBtnFactura.Image = ((System.Drawing.Image)(resources.GetObject("rbnBtnFactura.Image")));
-            this.rbnBtnFactura.SmallImage = ((System.Drawing.Image)(resources.GetObject("rbnBtnFactura.SmallImage")));
-            this.rbnBtnFactura.Text = "Factura";
             // 
             // frmPrincipal
             // 
@@ -1016,8 +1001,6 @@
         private System.Windows.Forms.RibbonPanel rbnPnlCertificados;
         private System.Windows.Forms.RibbonButton rbnBtnCertificado;
         private System.Windows.Forms.RibbonButton rbnBtnKey;
-        private System.Windows.Forms.RibbonPanel rbnPnlFacturacion;
-        private System.Windows.Forms.RibbonButton rbnBtnFactura;
     }
 }
 

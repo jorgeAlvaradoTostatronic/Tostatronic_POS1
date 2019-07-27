@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,12 +36,16 @@ namespace Maxima_Distribuidores_VS
                 oRange = (Microsoft.Office.Interop.Excel.Range)workSheet.Cells[row, 4];
                 left = (float)((double)oRange.Left);
                 top = (float)((double)oRange.Top);
-                workSheet.Shapes.AddPicture(Application.StartupPath + "\\Imagenes\\" + producto.Imagen, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoCTrue, left+5, top+5, 32, 32);
-                workSheet.Rows.RowHeight = 40;
-                workSheet.Columns[1].AutoFit();
-                workSheet.Columns[2].AutoFit();
-                workSheet.Columns[3].AutoFit();
+                if(File.Exists(Application.StartupPath + "\\Imagenes\\" + producto.Imagen))
+                    workSheet.Shapes.AddPicture(Application.StartupPath + "\\Imagenes\\" + producto.Imagen, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoCTrue, left+5, top+5, 60, 60);
+                else
+                    workSheet.Shapes.AddPicture(Application.StartupPath + "\\Imagenes\\no_image.png", Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoCTrue, left + 5, top + 5, 60, 60);
             }
+            workSheet.Rows.RowHeight = 70;
+            workSheet.Columns[1].AutoFit();
+            workSheet.Columns[2].AutoFit();
+            workSheet.Columns[3].AutoFit();
+            workSheet.Columns[4].Width = 70;
         }
         public static void ProductListPrices(IEnumerable<ProductoCatalogo> productos)
         {

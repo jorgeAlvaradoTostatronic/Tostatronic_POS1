@@ -111,6 +111,41 @@ namespace Maxima_Distribuidores_VS
             }
             catch (Exception) { }
         }
+
+        public static void InsertarFactura(string folio, byte[] xml)
+        {
+            MySqlConnection conexion;
+            MySqlCommand cmd;
+            try
+            {
+                cmd = new MySqlCommand();
+                conexion = ObtenerConexion();
+                if (conexion.State == ConnectionState.Closed)
+                    conexion.Open();
+                cmd.Connection = conexion;
+                cmd.CommandText = "INSERT INTO `ventas_facturadas`(`folio`, `xml`) VALUES (?folio,?xml)";
+                MySqlParameter folioParametro = new MySqlParameter("?folio", MySqlDbType.Int16, 11);
+                MySqlParameter xmlParametro = new MySqlParameter("?xml", MySqlDbType.Blob, xml.Length);
+
+                folioParametro.Value = folio;
+                xmlParametro.Value = xml;
+                cmd.Parameters.Add(folioParametro);
+                cmd.Parameters.Add(xmlParametro);
+
+                cmd.ExecuteNonQuery();
+
+                conexion.Close();
+            }
+            catch (MySqlException msql)
+            {
+                if (!Sql.ConectaServidor())
+                    new dialogServidor().ShowDialog();
+                else
+                    MessageBox.Show("Ha ocurrido un error en la consulta.\n" +
+                        msql.Message, "Error de consulta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception) { }
+        }
         public static long InsertarVenta(List<ProductoCompleto> productos,string idUsuario,string idCliente,bool pagada, float impuesto)
         {
             #region NuevaAccion
@@ -481,6 +516,40 @@ namespace Maxima_Distribuidores_VS
                 else
                     MessageBox.Show("Ha ocurrido un error en la consulta.\n" +
                         msql.Message, "Error de consulta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception) { }
+            return folio;
+        }
+
+        public static string GetCodigoSATProducto(string codigo)
+        {
+            string folio = "";
+            MySqlConnection conexion;
+            MySqlCommand cmd;
+
+            try
+            {
+                cmd = new MySqlCommand("SELECT codigo_pro FROM codigo_producto WHERE codigo='"+codigo+"'");
+                conexion = ObtenerConexion();
+                if (conexion.State == ConnectionState.Closed)
+                    conexion.Open();
+                cmd.Connection = conexion;
+                MySqlDataReader lector = cmd.ExecuteReader();
+                lector.Read();
+                folio = lector.GetString(0);
+
+                lector.Close();
+                conexion.Close();
+            }
+            catch (MySqlException msql)
+            {
+                if (!Sql.ConectaServidor())
+                    new dialogServidor().ShowDialog();
+                else
+                {
+                    folio = "01010101";
+                }
+                    
             }
             catch (Exception) { }
             return folio;

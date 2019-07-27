@@ -86,6 +86,21 @@ namespace Maxima_Distribuidores_VS
         }
     }
 
+    public struct ProductoSat
+    {
+        public string Descripcion, CodigoSAT;
+        public float Cantidad, Precio, Subtotal;
+
+        public ProductoSat(string descripcion, string codigoSAT, float cantidad, float precio, float subtotal)
+        {
+            Descripcion = descripcion;
+            Precio = precio;
+            Cantidad = cantidad;
+            CodigoSAT = codigoSAT;
+            Subtotal = subtotal;
+        }
+    }
+
     public struct ProductoWebService
     {
         public string Codigo;
